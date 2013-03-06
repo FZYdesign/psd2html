@@ -1,0 +1,56 @@
+<!DOCTYPE html>  <html> <head>   <title>WindowUI Class</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="ControlUI.class.html">                 ControlUI.class.coffee               </a>                                           <a class="source" href="DialogUI.class.html">                 DialogUI.class.coffee               </a>                                           <a class="source" href="WindowUI.class.html">                 WindowUI.class.coffee               </a>                                           <a class="source" href="core.html">                 core.coffee               </a>                                           <a class="source" href="include_libraries.html">                 include_libraries.coffee               </a>                                           <a class="source" href="main.html">                 main.coffee               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               WindowUI Class             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="k">class</span> <span class="nx">WindowUI</span>
+  <span class="nv">constructor: </span><span class="nf">(@type, @name = &#39;ダイアログボックス&#39;, @width = 100, @height = 100, options, callback) -&gt;</span>
+    <span class="vi">@window = </span><span class="k">new</span> <span class="nx">Window</span> <span class="nx">@type</span><span class="p">,</span> <span class="nx">@name</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">@width</span><span class="p">,</span> <span class="nx">@height</span><span class="p">],</span> <span class="nx">options</span>
+    <span class="nx">@</span><span class="nb">window</span><span class="p">.</span><span class="nx">center</span><span class="p">()</span>
+    <span class="vi">@controls = </span><span class="p">[]</span>
+    <span class="vi">@onOK = </span><span class="nf">-&gt;</span>
+    <span class="vi">@onCancel = </span><span class="nf">-&gt;</span>
+    <span class="nv">BUTTON_WIDTH = </span><span class="mi">100</span>
+    <span class="nv">BUTTON_HEIGHT = </span><span class="mi">20</span>
+    <span class="nv">BUTTON_MARGIN = </span><span class="mi">10</span>
+    <span class="nx">@addButton</span> <span class="s">&#39;OK&#39;</span><span class="p">,</span> <span class="nx">BUTTON_WIDTH</span><span class="p">,</span> <span class="nx">BUTTON_HEIGHT</span><span class="p">,</span> <span class="nx">@width</span> <span class="o">-</span> <span class="nx">BUTTON_WIDTH</span> <span class="o">-</span> <span class="nx">BUTTON_MARGIN</span><span class="p">,</span> <span class="nx">@height</span> <span class="o">-</span> <span class="nx">BUTTON_HEIGHT</span> <span class="o">-</span> <span class="nx">BUTTON_MARGIN</span><span class="p">,</span>
+      <span class="nv">click: </span><span class="nf">-&gt;</span>
+        <span class="nx">@$window</span><span class="p">.</span><span class="nx">onOK</span><span class="p">.</span><span class="nx">apply</span> <span class="nx">@</span><span class="p">,</span> <span class="nx">arguments</span>
+    <span class="nx">@addButton</span> <span class="s">&#39;キャンセル&#39;</span><span class="p">,</span> <span class="nx">BUTTON_WIDTH</span><span class="p">,</span> <span class="nx">BUTTON_HEIGHT</span><span class="p">,</span> <span class="nx">@width</span> <span class="o">-</span> <span class="nx">BUTTON_WIDTH</span> <span class="o">-</span> <span class="nx">BUTTON_MARGIN</span> <span class="o">-</span> <span class="nx">BUTTON_WIDTH</span> <span class="o">-</span> <span class="nx">BUTTON_MARGIN</span><span class="p">,</span> <span class="nx">@height</span> <span class="o">-</span> <span class="nx">BUTTON_HEIGHT</span> <span class="o">-</span> <span class="nx">BUTTON_MARGIN</span><span class="p">,</span>
+      <span class="nv">click: </span><span class="nf">-&gt;</span>
+        <span class="nx">@$window</span><span class="p">.</span><span class="nx">onCancel</span><span class="p">.</span><span class="nx">apply</span> <span class="nx">@</span><span class="p">,</span> <span class="nx">arguments</span>
+        <span class="nx">@close</span><span class="p">()</span>
+    <span class="nv">stop = </span><span class="nx">callback</span><span class="o">?</span><span class="p">.</span><span class="nx">call</span> <span class="nx">@</span>
+    <span class="k">unless</span> <span class="nx">stop</span> <span class="o">is</span> <span class="kc">false</span>
+      <span class="nx">@show</span><span class="p">()</span>
+  <span class="nv">close: </span><span class="nf">(value) -&gt;</span>
+    <span class="nx">@</span><span class="nb">window</span><span class="p">.</span><span class="nx">close</span> <span class="nx">value</span>
+  <span class="nv">show: </span><span class="nf">-&gt;</span>
+    <span class="nx">@</span><span class="nb">window</span><span class="p">.</span><span class="nx">show</span><span class="p">()</span>
+    <span class="nx">@</span>
+  <span class="nv">hide: </span><span class="nf">-&gt;</span>
+    <span class="nx">@</span><span class="nb">window</span><span class="p">.</span><span class="nx">hide</span><span class="p">()</span>
+    <span class="nx">@</span>
+  <span class="nv">center: </span><span class="nf">-&gt;</span>
+    <span class="nx">@</span><span class="nb">window</span><span class="p">.</span><span class="nx">center</span><span class="p">()</span>
+    <span class="nx">@</span>
+  <span class="nv">addControl: </span><span class="nf">(type, width, height, left, top, options, events) -&gt;</span>
+    <span class="nv">$ctrl = </span><span class="k">new</span> <span class="nx">ControlUI</span> <span class="nx">@</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">top</span><span class="p">,</span> <span class="nx">options</span>
+    <span class="k">if</span> <span class="nx">events</span><span class="o">?</span>
+      <span class="k">for</span> <span class="k">own</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span> <span class="k">of</span> <span class="nx">events</span>
+        <span class="nx">$ctrl</span><span class="p">.</span><span class="nx">on</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span>
+    <span class="nx">@controls</span><span class="p">.</span><span class="nx">push</span> <span class="nx">$ctrl</span>
+    <span class="nx">$ctrl</span>
+  <span class="nv">addTextbox: </span><span class="nf">(width, height, left, top, defaultText = &#39;&#39;, events) -&gt;</span>
+    <span class="nx">@addControl</span> <span class="s">&#39;edittext&#39;</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">top</span><span class="p">,</span> <span class="p">[</span><span class="nx">defaultText</span><span class="p">],</span> <span class="nx">events</span>
+  <span class="nv">addText: </span><span class="nf">(text = &#39;&#39;, width, height, left, top, events) -&gt;</span>
+    <span class="nx">@addControl</span> <span class="s">&#39;statictext&#39;</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">top</span><span class="p">,</span> <span class="p">[</span><span class="nx">text</span><span class="p">],</span> <span class="nx">events</span>
+  <span class="nv">addButton: </span><span class="nf">(label, width, height, left, top, events) -&gt;</span>
+    <span class="nx">@addControl</span> <span class="s">&#39;button&#39;</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">top</span><span class="p">,</span> <span class="p">[</span><span class="nx">label</span><span class="p">],</span> <span class="nx">events</span>
+  <span class="nv">addRadio: </span><span class="nf">(label, width, height, left, top, events) -&gt;</span>
+    <span class="nx">@addControl</span> <span class="s">&#39;radiobutton&#39;</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">top</span><span class="p">,</span> <span class="p">[</span><span class="nx">label</span><span class="p">],</span> <span class="nx">events</span>
+  <span class="nv">addCheckbox: </span><span class="nf">(label, width, height, left, top, events) -&gt;</span>
+    <span class="nx">@addControl</span> <span class="s">&#39;checkbox&#39;</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">top</span><span class="p">,</span> <span class="p">[</span><span class="nx">label</span><span class="p">],</span> <span class="nx">events</span>
+  <span class="nv">ok: </span><span class="nf">(callback = -&gt;) -&gt;</span>
+    <span class="vi">@onOK = </span><span class="nx">callback</span>
+    <span class="nx">@</span>
+  <span class="nv">cancel: </span><span class="nf">(callback = -&gt;) -&gt;</span>
+    <span class="vi">@onCancel = </span><span class="nx">callback</span>
+    <span class="nx">@</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

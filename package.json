@@ -1,0 +1,24 @@
+{
+  "name": "psd2html",
+  "version": "1.0.0",
+  "revision": 13,
+  "description": "HTML&CSS, JSON form PSD",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YusukeHirao/psd2html"
+  },
+  "keywords": [
+    "photoshop",
+    "jsx",
+    "adobe"
+  ],
+  "author": "Yusuke Hirao",
+  "website": "http://www.yusukehirao.com",
+  "license": "MIT",
+  "include_libraries": [
+    {
+      "name": "Sugar Library vedge",
+      "license": "Freely distributable and licensed under the MIT-style license.\nCopyright (c) 2013 Andrew Plummer\nhttp://sugarjs.com/"
+    }
+  ]
+}
