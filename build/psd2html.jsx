@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r14
+ * psd2html.js - v@1.0.0 r15
  * update: 2013-03-06
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -17,7 +17,7 @@
 
 "use strict";
 
-var $dialog, ControlUI, DialogUI, Math, NAMESPACE, VERSION, WindowUI, clearInterval, clearTimeout, close, copy, createDocument, currentHeight, currentWidth, enlargeForSelect, exec, extract, fileNameCounter, fileNames, getBounds, getLayerPath, getMetrics, global, isNaN, isSelect, layerVisible, nameCounter, offsetX, offsetY, originalHeight, originalWidth, output, outputCSS, outputJSON, outputLESS, paste, restoreDimension, saveFolder, saveGIF, saveJPEG, savePNG, selectAllLayers, setInterval, setTimeout, structures, varDump, __hasProp = {}.hasOwnProperty, __extends = function(e, t) {
+var $dialog, ControlUI, DialogUI, Math, NAMESPACE, VERSION, WindowUI, clearInterval, clearTimeout, close, copy, createDocument, currentHeight, currentWidth, enlargeForSelect, exec, extract, fileNameCounter, fileNames, getBounds, getLayerPath, getMetrics, global, hideLayerWithoutSelf, isNaN, isSelect, nameCounter, offsetX, offsetY, originalHeight, originalWidth, output, outputCSS, outputJSON, outputLESS, paste, restoreDimension, saveFolder, saveGIF, saveJPEG, savePNG, selectAllLayers, setInterval, setTimeout, showLayer, structures, varDump, __hasProp = {}.hasOwnProperty, __extends = function(e, t) {
     function n() {
         this.constructor = e;
     }
@@ -29,10 +29,10 @@ var $dialog, ControlUI, DialogUI, Math, NAMESPACE, VERSION, WindowUI, clearInter
 NAMESPACE = "psd2html", VERSION = "1.0.0", global = this, Math = global.Math, setTimeout = global.setTimeout, 
 clearTimeout = global.clearTimeout, setInterval = global.setInterval, clearInterval = global.clearInterval, 
 isNaN = global.isNaN, ControlUI = function() {
-    function e(e, t, n, i, o, r, l) {
+    function e(e, t, n, i, o, r, a) {
         this.$window = e, this.type = t, this.width = null != n ? n : 100, this.height = null != i ? i : 20, 
-        this.left = null != o ? o : 0, this.top = null != r ? r : 0, null == l && (l = []), 
-        this.window = this.$window.window, this.context = this.window.add.apply(this.window, [ this.type, [ this.left, this.top, this.width + this.left, this.height + this.top ] ].concat(l));
+        this.left = null != o ? o : 0, this.top = null != r ? r : 0, null == a && (a = []), 
+        this.window = this.$window.window, this.context = this.window.add.apply(this.window, [ this.type, [ this.left, this.top, this.width + this.left, this.height + this.top ] ].concat(a));
     }
     return e.prototype.close = function(e) {
         return this.window.close(e);
@@ -58,15 +58,15 @@ isNaN = global.isNaN, ControlUI = function() {
     }, e;
 }(), WindowUI = function() {
     function e(e, t, n, i, o, r) {
-        var l, a, s, c;
+        var a, s, l, c;
         this.type = e, this.name = null != t ? t : "ダイアログボックス", this.width = null != n ? n : 100, 
         this.height = null != i ? i : 100, this.window = new Window(this.type, this.name, [ 0, 0, this.width, this.height ], o), 
         this.window.center(), this.controls = [], this.onOK = function() {}, this.onCancel = function() {}, 
-        s = 100, l = 20, a = 10, this.addButton("OK", s, l, this.width - s - a, this.height - l - a, {
+        l = 100, a = 20, s = 10, this.addButton("OK", l, a, this.width - l - s, this.height - a - s, {
             click: function() {
                 return this.$window.onOK.apply(this, arguments);
             }
-        }), this.addButton("キャンセル", s, l, this.width - s - a - s - a, this.height - l - a, {
+        }), this.addButton("キャンセル", l, a, this.width - l - s - l - s, this.height - a - s, {
             click: function() {
                 return this.$window.onCancel.apply(this, arguments), this.close();
             }
@@ -80,11 +80,11 @@ isNaN = global.isNaN, ControlUI = function() {
         return this.window.hide(), this;
     }, e.prototype.center = function() {
         return this.window.center(), this;
-    }, e.prototype.addControl = function(e, t, n, i, o, r, l) {
-        var a, s, c;
-        if (a = new ControlUI(this, e, t, n, i, o, r), null != l) for (c in l) __hasProp.call(l, c) && (s = l[c], 
-        a.on(c, s));
-        return this.controls.push(a), a;
+    }, e.prototype.addControl = function(e, t, n, i, o, r, a) {
+        var s, l, c;
+        if (s = new ControlUI(this, e, t, n, i, o, r), null != a) for (c in a) __hasProp.call(a, c) && (l = a[c], 
+        s.on(c, l));
+        return this.controls.push(s), s;
     }, e.prototype.addTextbox = function(e, t, n, i, o, r) {
         return null == o && (o = ""), this.addControl("edittext", e, t, n, i, [ o ], r);
     }, e.prototype.addText = function(e, t, n, i, o, r) {
@@ -124,11 +124,11 @@ Number.prototype.fillZero = function(e) {
         n.push(e.name), e.parent && t(e.parent);
     }, t(e), n.shift(), n.pop(), n.pop(), n.reverse(), encodeURI("/" + n.join("/"));
 }, saveJPEG = function(e, t, n) {
-    var i, o, r, l;
+    var i, o, r, a;
     return null == t && (t = ""), null == n && (n = 80), r = new Folder(saveFolder + t + "/"), 
-    r.exists || r.create(), o = r + "/" + e + ".jpg", i = new File(o), l = new JPEGSaveOptions(), 
-    l.embedColorProfile = !1, l.quality = parseInt(12 * (n / 100), 10), l.formatOptions = FormatOptions.OPTIMIZEDBASELINE, 
-    l.scans = 3, l.matte = MatteType.NONE, activeDocument.saveAs(i, l, !0, Extension.LOWERCASE), 
+    r.exists || r.create(), o = r + "/" + e + ".jpg", i = new File(o), a = new JPEGSaveOptions(), 
+    a.embedColorProfile = !1, a.quality = parseInt(12 * (n / 100), 10), a.formatOptions = FormatOptions.OPTIMIZEDBASELINE, 
+    a.scans = 3, a.matte = MatteType.NONE, activeDocument.saveAs(i, a, !0, Extension.LOWERCASE), 
     i.getRelativeURI(saveFolder);
 }, saveGIF = function(e, t) {
     var n, i, o, r;
@@ -202,75 +202,60 @@ Number.prototype.fillZero = function(e) {
 }, createDocument = function(e, t, n) {
     return documents.add(e, t, 72, n, NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
 }, outputCSS = function(e) {
-    var t, n, i, o, r, l, a, s, c, u, h, d, p, v;
-    for (i = [], a = h = 0, p = e.length; p > h; a = ++h) s = e[a], u = 10 * a, t = s.url.replace(/\//g, "_").replace(/\.[a-z]+$/i, ""), 
-    c = "." + t + " {\n	position: absolute;\n	top: " + s.y + "px;\n	left: " + s.x + "px;\n	z-index: " + u + ";\n	width: " + s.width + "px;\n	height: " + s.height + "px;\n	background: url(" + s.url + ") no-repeat scroll 0 0;\n}", 
+    var t, n, i, o, r, a, s, l, c, u, h, d, p, v;
+    for (i = [], s = h = 0, p = e.length; p > h; s = ++h) l = e[s], u = 10 * s, t = l.url.replace(/\//g, "_").replace(/\.[a-z]+$/i, ""), 
+    c = "." + t + " {\n	position: absolute;\n	top: " + l.y + "px;\n	left: " + l.x + "px;\n	z-index: " + u + ";\n	width: " + l.width + "px;\n	height: " + l.height + "px;\n	background: url(" + l.url + ") no-repeat scroll 0 0;\n}", 
     i.push(c);
     for (n = new File(saveFolder + "/" + "style.css"), n.open("w"), n.encoding = "utf-8", 
-    n.write(i.join("\n")), n.close(), i = null, n = null, $.gc(), l = [], a = d = 0, 
-    v = e.length; v > d; a = ++d) s = e[a], u = 10 * a, t = s.url.replace(/\//g, "_").replace(/\.[a-z]+$/i, ""), 
-    c = '<div class="' + t + '">\n	<!-- <img class="' + t + '" src="' + s.url + '" alt="' + s.name + '" width="' + s.width + '" height="' + s.height + '"> -->\n	<!-- <div class="' + t + '" data-src="' + s.url + '" data-width="' + s.width + '" data-height="' + s.height + '" data-x="' + s.x + '" data-y="' + s.y + '" data-z="' + u + '">' + s.name + "<div> -->\n</div>", 
-    l.push(c);
+    n.write(i.join("\n")), n.close(), i = null, n = null, $.gc(), a = [], s = d = 0, 
+    v = e.length; v > d; s = ++d) l = e[s], u = 10 * s, t = l.url.replace(/\//g, "_").replace(/\.[a-z]+$/i, ""), 
+    c = '<div class="' + t + '">\n	<!-- <img class="' + t + '" src="' + l.url + '" alt="' + l.name + '" width="' + l.width + '" height="' + l.height + '"> -->\n	<!-- <div class="' + t + '" data-src="' + l.url + '" data-width="' + l.width + '" data-height="' + l.height + '" data-x="' + l.x + '" data-y="' + l.y + '" data-z="' + u + '">' + l.name + "<div> -->\n</div>", 
+    a.push(c);
     o = '<!doctype html>\n<html>\n<head>\n	<meta charset="utf-8">\n	<link rel="stylesheet" href="style.css">\n$\n</haed>\n<body>\n</body>\n</html>', 
     r = new File(saveFolder + "/" + "index.html"), r.open("w"), r.encoding = "utf-8", 
-    r.write(o.replace("$", l.join("\n"))), r.close(), l = null, o = null, r = null, 
+    r.write(o.replace("$", a.join("\n"))), r.close(), a = null, o = null, r = null, 
     $.gc();
 }, outputLESS = function() {
     alert("LESSはまだつくってない");
 }, outputJSON = function(e) {
-    var t, n, i, o, r, l, a, s;
-    for (o = [], t = a = 0, s = e.length; s > a; t = ++a) n = e[t], l = 1e4 - 10 * t, 
-    r = '{\n	"name": "' + n.name + '",\n	"className": "' + n.name + '",\n	"x": ' + n.x + ',\n	"y": ' + n.y + ',\n	"z": ' + l + ',\n	"width": ' + n.width + ',\n	"height": ' + n.height + ',\n	"url": "' + n.url + '"\n}', 
+    var t, n, i, o, r, a, s, l;
+    for (o = [], t = s = 0, l = e.length; l > s; t = ++s) n = e[t], a = 1e4 - 10 * t, 
+    r = '{\n	"name": "' + n.name + '",\n	"className": "' + n.name + '",\n	"x": ' + n.x + ',\n	"y": ' + n.y + ',\n	"z": ' + a + ',\n	"width": ' + n.width + ',\n	"height": ' + n.height + ',\n	"url": "' + n.url + '"\n}', 
     o.push(r);
     i = new File(saveFolder + "/" + "structures.json"), i.open("w"), i.encoding = "utf-8", 
     i.write("[" + o.join(",\n") + "]"), i.close();
-}, layerVisible = function(e, t, n) {
-    var i, o, r, l, a, s, c, u, h, d, p, v, f;
-    if (null == n && (n = !1), i = e.parent) {
-        for (d = i.layers, l = 0, c = d.length; c > l; l++) o = d[l], o._v = o.visible, 
-        o.visible = t ? o._v : !1;
-        layerVisible(i, t, !0), t && (i.visible = !0);
+}, hideLayerWithoutSelf = function(e) {
+    var t, n, i, o, r;
+    if (t = e.parent, t && t.layers) {
+        for (r = t.layers, i = 0, o = r.length; o > i; i++) n = r[i], n._v = n.visible, 
+        n.visible = !1;
+        hideWithoutSelf(t);
     }
-    if (!n && t && (e.visible = !0), i = e.parent) {
-        for (p = i.layers, a = 0, u = p.length; u > a; a++) o = p[a], o.visible = o._v;
-        if (i.parent) {
-            for (v = i.parent.layers, f = [], s = 0, h = v.length; h > s; s++) r = v[s], f.push(r.visible = r._v);
-            return f;
-        }
+    return e.visible = !0;
+}, showLayer = function(e) {
+    var t, n, i, o, r;
+    if (t = e.parent, t && t.layers) {
+        for (r = t.layers, i = 0, o = r.length; o > i; i++) n = r[i], n.visible = n._v;
+        return showLayer(t);
     }
 }, extract = function(e, t, n) {
-    var i, o, r, l, a, s, c, u, h, d, p, v, f, g, y, m, w, x, D, I, C, S, T;
-    if (s = e.name, (r = s.match(/(\.(?:jpe?g|gif|png))$/i)) && (r = r[0], s = s.replace(r, "")), 
-    n && (r = "." + n), !t) {
-        if (u = e.parent) {
-            for (I = u.layers, v = 0, m = I.length; m > v; v++) h = I[v], h._v = h.visible, 
-            h.visible = !1;
-            if (u.parent) for (C = u.parent.layers, f = 0, w = C.length; w > f; f++) d = C[f], 
-            d._v = d.visible, d.visible = !1;
-            u.visible = !0;
-        }
-        e.visible = !0;
-    }
-    if (o = getLayerPath(e), s = s.replace(/^[0-9]/, "image$0").replace(/[^a-z0-9_\.:-]/gi, ""), 
-    "image" === s && (s = "image_" + nameCounter++), fileNames[o + s] && (s += fileNameCounter++), 
-    fileNames[o + s] = !0, l = copy(e), a = getMetrics(e), c = createDocument(a.width, a.height, e.name), 
-    paste(c, l), p = ".jpeg" === r || ".jpg" === r ? saveJPEG(s, o) : ".gif" === r ? saveGIF(s, o) : savePNG(s, o), 
-    c.close(SaveOptions.DONOTSAVECHANGES), i = a, i.name = s, i.url = p, structures.push(i), 
-    !t && (u = e.parent)) {
-        for (S = u.layers, g = 0, x = S.length; x > g; g++) h = S[g], h.visible = h._v;
-        if (u.parent) for (T = u.parent.layers, y = 0, D = T.length; D > y; y++) d = T[y], 
-        d.visible = d._v;
-    }
-    u = null, h = null, d = null, $.gc();
+    var i, o, r, a, s, l, c, u, h, d, p;
+    l = e.name, (r = l.match(/(\.(?:jpe?g|gif|png))$/i)) && (r = r[0], l = l.replace(r, "")), 
+    n && (r = "." + n), t || hideLayerWithoutSelf(e), o = getLayerPath(e), l = l.replace(/^[0-9]/, "image$0").replace(/[^a-z0-9_\.:-]/gi, ""), 
+    "image" === l && (l = "image_" + nameCounter++), fileNames[o + l] && (l += fileNameCounter++), 
+    fileNames[o + l] = !0, a = copy(e), s = getMetrics(e), c = createDocument(s.width, s.height, e.name), 
+    paste(c, a), p = ".jpeg" === r || ".jpg" === r ? saveJPEG(l, o) : ".gif" === r ? saveGIF(l, o) : savePNG(l, o), 
+    c.close(SaveOptions.DONOTSAVECHANGES), i = s, i.name = l, i.url = p, structures.push(i), 
+    t || showLayer(e), u = null, h = null, d = null, $.gc();
 }, output = function(e, t, n) {
     var i, o, r;
     for (o = 0, r = e.length; r > o; o++) i = e[o], "LayerSet" === i.typename && i.visible ? output(i.layers, t, n) : i.visible && i.kind === LayerKind.SMARTOBJECT && extract(i, t, n);
 }, exec = function(e, t, n, i) {
-    var o, r, l, a;
+    var o, r, a, s;
     null == n && (n = "~/"), null == i && (i = !1), originalWidth = activeDocument.width, 
     originalHeight = activeDocument.height, currentWidth = originalWidth, currentHeight = originalHeight, 
-    saveFolder = new Folder(n), a = activeDocument.layers, output(a, i, t), restoreDimension(), 
-    fileNames = null, a = null, $.gc(), structures.reverse(), o = 1, l = 2, r = 4, e & o && outputCSS(structures), 
+    saveFolder = new Folder(n), s = activeDocument.layers, output(s, i, t), restoreDimension(), 
+    fileNames = null, s = null, $.gc(), structures.reverse(), o = 1, a = 2, r = 4, e & o && outputCSS(structures), 
     e & r && outputJSON(structures), structures = null, saveFolder = null, $.gc(), alert("Complete!!");
 }, $dialog = new DialogUI("PSD to PNG", 700, 400, null, function() {
     var e, t, n, i, o;
@@ -284,9 +269,9 @@ Number.prototype.fillZero = function(e) {
     this.addText("オプション", 120, 20, 10, 230), t = this.addCheckbox("背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。", 600, 20, 10, 260), 
     n = this.addRadio("全ての画像を強制的にPNGで書き出す。", 600, 20, 10, 290), e = this.addRadio("全ての画像を強制的にGIFで書き出す。", 600, 20, 10, 320), 
     this.ok(function() {
-        var r, l, a, s, c, u, h;
-        for (s = encodeURI(i.val()), c = 0, a = u = 0, h = o.length; h > u; a = ++u) r = o[a], 
-        r.val() && (c += Math.pow(2, a));
-        return n.val() && (l = "png"), e.val() && (l = "gif"), this.close(), exec(c, l, s, t.val());
+        var r, a, s, l, c, u, h;
+        for (l = encodeURI(i.val()), c = 0, s = u = 0, h = o.length; h > u; s = ++u) r = o[s], 
+        r.val() && (c += Math.pow(2, s));
+        return n.val() && (a = "png"), e.val() && (a = "gif"), this.close(), exec(c, a, l, t.val());
     });
 });

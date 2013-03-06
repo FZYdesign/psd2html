@@ -327,20 +327,22 @@ outputJSON = (structures) ->
 
 	return
 
-layerVisible = (layer, visiblity, all = off) ->
+hideLayerWithoutSelf = (layer) ->
 	parent = layer.parent
-	if parent
+	if parent and parent.layers
 		for sub in parent.layers
 			sub._v = sub.visible
-			if visiblity
-				sub.visible = sub._v
-			else
-				sub.visible = off
-		layerVisible parent, visiblity, on
-		if visiblity
-			parent.visible = on
-	if not all and visiblity
-		layer.visible = on
+			sub.visible = off
+		hideWithoutSelf parent
+	layer.visible = on
+
+showLayer = (layer) ->
+	# 表示状態を元に戻す
+	parent = layer.parent
+	if parent and parent.layers
+		for sub in parent.layers
+			sub.visible = sub._v
+		showLayer parent
 
 # 抽出
 extract = (layer, mix, extFlag) ->
@@ -355,17 +357,7 @@ extract = (layer, mix, extFlag) ->
 
 	unless mix
 		# 自分以外を隠す
-		parent = layer.parent
-		if parent
-			for sub in parent.layers
-				sub._v = sub.visible
-				sub.visible = off
-			if parent.parent
-				for uncle in parent.parent.layers
-					uncle._v = uncle.visible
-					uncle.visible = off
-			parent.visible = on
-		layer.visible = on
+		hideLayerWithoutSelf layer
 
 	dir = getLayerPath layer
 
@@ -401,13 +393,8 @@ extract = (layer, mix, extFlag) ->
 
 	unless mix
 		# 表示状態を元に戻す
-		parent = layer.parent
-		if parent
-			for sub in parent.layers
-				sub.visible = sub._v
-			if parent.parent
-				for uncle in parent.parent.layers
-					uncle.visible = uncle._v
+		showLayer layer
+
 	parent = null
 	sub = null
 	uncle = null
