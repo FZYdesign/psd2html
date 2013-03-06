@@ -341,7 +341,7 @@ showLayer = (layer) ->
 	parent = layer.parent
 	if parent and parent.layers
 		for sub in parent.layers
-			sub.visible = sub._v
+			sub.visible = sub._v or off
 		showLayer parent
 
 # 抽出
