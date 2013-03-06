@@ -305,9 +305,9 @@
 
   <span class="k">return</span>
 
-<span class="nv">layerVisible = </span><span class="nf">(layer, visiblity, all) -&gt;</span>
+<span class="nv">layerVisible = </span><span class="nf">(layer, visiblity, all = off) -&gt;</span>
   <span class="nv">parent = </span><span class="nx">layer</span><span class="p">.</span><span class="nx">parent</span>
-  <span class="k">if</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">layers</span>
+  <span class="k">if</span> <span class="nx">parent</span>
     <span class="k">for</span> <span class="nx">sub</span> <span class="k">in</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">layers</span>
       <span class="nv">sub._v = </span><span class="nx">sub</span><span class="p">.</span><span class="nx">visible</span>
       <span class="k">if</span> <span class="nx">visiblity</span>
@@ -315,8 +315,9 @@
       <span class="k">else</span>
         <span class="nv">sub.visible = </span><span class="kc">off</span>
     <span class="nx">layerVisible</span> <span class="nx">parent</span><span class="p">,</span> <span class="nx">visiblity</span><span class="p">,</span> <span class="kc">on</span>
-    <span class="nv">parent.visible = </span><span class="kc">on</span>
-  <span class="k">unless</span> <span class="nx">all</span>
+    <span class="k">if</span> <span class="nx">visiblity</span>
+      <span class="nv">parent.visible = </span><span class="kc">on</span>
+  <span class="k">if</span> <span class="o">not</span> <span class="nx">all</span> <span class="o">and</span> <span class="nx">visiblity</span>
     <span class="nv">layer.visible = </span><span class="kc">on</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>抽出</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nv">extract = </span><span class="nf">(layer, mix, extFlag) -&gt;</span>
   <span class="nv">name = </span><span class="nx">layer</span><span class="p">.</span><span class="nx">name</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>拡張子の分離</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">if</span> <span class="nv">ext = </span><span class="nx">name</span><span class="p">.</span><span class="nx">match</span> <span class="sr">/(\.(?:jpe?g|gif|png))$/i</span>
     <span class="nv">ext = </span><span class="nx">ext</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -324,7 +325,17 @@
 
   <span class="nv">ext = </span><span class="s">&#39;.&#39;</span> <span class="o">+</span> <span class="nx">extFlag</span> <span class="k">if</span> <span class="nx">extFlag</span>
 
-  <span class="k">unless</span> <span class="nx">mix</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>自分以外を隠す</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">layerVisible</span> <span class="nx">layer</span><span class="p">,</span> <span class="kc">off</span>
+  <span class="k">unless</span> <span class="nx">mix</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>自分以外を隠す</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">parent = </span><span class="nx">layer</span><span class="p">.</span><span class="nx">parent</span>
+    <span class="k">if</span> <span class="nx">parent</span>
+      <span class="k">for</span> <span class="nx">sub</span> <span class="k">in</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">layers</span>
+        <span class="nv">sub._v = </span><span class="nx">sub</span><span class="p">.</span><span class="nx">visible</span>
+        <span class="nv">sub.visible = </span><span class="kc">off</span>
+      <span class="k">if</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">parent</span>
+        <span class="k">for</span> <span class="nx">uncle</span> <span class="k">in</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">layers</span>
+          <span class="nv">uncle._v = </span><span class="nx">uncle</span><span class="p">.</span><span class="nx">visible</span>
+          <span class="nv">uncle.visible = </span><span class="kc">off</span>
+      <span class="nv">parent.visible = </span><span class="kc">on</span>
+    <span class="nv">layer.visible = </span><span class="kc">on</span>
 
   <span class="nv">dir = </span><span class="nx">getLayerPath</span> <span class="nx">layer</span>
 
@@ -358,7 +369,13 @@
 
   <span class="nx">structures</span><span class="p">.</span><span class="nx">push</span> <span class="nx">data</span>
 
-  <span class="k">unless</span> <span class="nx">mix</span></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>表示状態を元に戻す</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">layerVisible</span> <span class="nx">layer</span><span class="p">,</span> <span class="kc">on</span>
+  <span class="k">unless</span> <span class="nx">mix</span></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>表示状態を元に戻す</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">parent = </span><span class="nx">layer</span><span class="p">.</span><span class="nx">parent</span>
+    <span class="k">if</span> <span class="nx">parent</span>
+      <span class="k">for</span> <span class="nx">sub</span> <span class="k">in</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">layers</span>
+        <span class="nv">sub.visible = </span><span class="nx">sub</span><span class="p">.</span><span class="nx">_v</span>
+      <span class="k">if</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">parent</span>
+        <span class="k">for</span> <span class="nx">uncle</span> <span class="k">in</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">layers</span>
+          <span class="nv">uncle.visible = </span><span class="nx">uncle</span><span class="p">.</span><span class="nx">_v</span>
   <span class="nv">parent = </span><span class="kc">null</span>
   <span class="nv">sub = </span><span class="kc">null</span>
   <span class="nv">uncle = </span><span class="kc">null</span>
