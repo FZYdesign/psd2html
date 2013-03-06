@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r15
+ * psd2html.js - v@1.0.0 r16
  * update: 2013-03-06
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -229,7 +229,7 @@ Number.prototype.fillZero = function(e) {
     if (t = e.parent, t && t.layers) {
         for (r = t.layers, i = 0, o = r.length; o > i; i++) n = r[i], n._v = n.visible, 
         n.visible = !1;
-        hideWithoutSelf(t);
+        hideLayerWithoutSelf(t);
     }
     return e.visible = !0;
 }, showLayer = function(e) {

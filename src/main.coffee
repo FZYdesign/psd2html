@@ -333,7 +333,7 @@ hideLayerWithoutSelf = (layer) ->
 		for sub in parent.layers
 			sub._v = sub.visible
 			sub.visible = off
-		hideWithoutSelf parent
+		hideLayerWithoutSelf parent
 	layer.visible = on
 
 showLayer = (layer) ->
