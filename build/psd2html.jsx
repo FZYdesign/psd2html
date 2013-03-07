@@ -1,6 +1,6 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r18
- * update: 2013-03-06
+ * psd2html.js - v@1.0.0 r19
+ * update: 2013-03-07
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
  * License: Licensed under the MIT License
@@ -14,6 +14,7 @@
 	http://sugarjs.com/
 
  * ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
+
 
 "use strict";
 
@@ -209,7 +210,7 @@ Number.prototype.fillZero = function(e) {
     for (n = new File(saveFolder + "/" + "style.css"), n.open("w"), n.encoding = "utf-8", 
     n.write(i.join("\n")), n.close(), i = null, n = null, $.gc(), a = [], l = d = 0, 
     v = e.length; v > d; l = ++d) s = e[l], u = 10 * l, t = s.url.replace(/\//g, "_").replace(/\.[a-z]+$/i, ""), 
-    c = '<div class="' + t + '">\n	<!-- <img class="' + t + '" src="' + s.url + '" alt="' + s.name + '" width="' + s.width + '" height="' + s.height + '"> -->\n	<!-- <div class="' + t + '" data-src="' + s.url + '" data-width="' + s.width + '" data-height="' + s.height + '" data-x="' + s.x + '" data-y="' + s.y + '" data-z="' + u + '">' + s.name + "<div> -->\n</div>", 
+    c = '<div class="' + t + '">\n	<!-- <img class="' + t + '" src="' + s.url + '" alt="' + s.name + '" width="' + s.width + '" height="' + s.height + '"> -->\n	<!-- <div class="' + t + '" data-src="' + s.url + '" data-width="' + s.width + '" data-height="' + s.height + '" data-x="' + s.x + '" data-y="' + s.y + '" data-z="' + u + '">' + s.name + "</div> -->\n</div>", 
     a.push(c);
     o = '<!doctype html>\n<html>\n<head>\n	<meta charset="utf-8">\n	<link rel="stylesheet" href="style.css">\n$\n</haed>\n<body>\n</body>\n</html>', 
     r = new File(saveFolder + "/" + "index.html"), r.open("w"), r.encoding = "utf-8", 
@@ -226,16 +227,15 @@ Number.prototype.fillZero = function(e) {
     i.write("[" + o.join(",\n") + "]"), i.close();
 }, hideLayerWithoutSelf = function(e) {
     var t, n, i, o, r;
-    if (t = e.parent, t && t.layers) {
+    if (e.visible = !0, t = e.parent, t && t.layers) {
         for (r = t.layers, i = 0, o = r.length; o > i; i++) n = r[i], n._v = n.visible, 
         n.visible = !1;
-        hideLayerWithoutSelf(t);
+        return hideLayerWithoutSelf(t);
     }
-    return e.visible = !0;
 }, showLayer = function(e) {
     var t, n, i, o, r;
     if (t = e.parent, t && t.layers) {
-        for (r = t.layers, i = 0, o = r.length; o > i; i++) n = r[i], null != n._v && (n.visible = n._v);
+        for (r = t.layers, i = 0, o = r.length; o > i; i++) n = r[i], $.writeln(n._v), n.visible = n._v;
         return showLayer(t);
     }
 }, extract = function(e, t, n) {

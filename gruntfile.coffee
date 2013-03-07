@@ -14,7 +14,7 @@ module.exports = (grunt) ->
 				 * Author: <%= pkg.author %> [<%= pkg.website %>]
 				 * Github: <%= pkg.repository.url %>
 				 * License: Licensed under the <%= pkg.license %> License
-				 */
+				 */<% if (pkg.include_libraries && pkg.include_libraries.length) { %>
 
 				/* Included Libraries * -- ----- ----- ----- ----- ----- ----- *
 				<% for (var i = 0, l = pkg.include_libraries.length; i < l; i++) { %>
@@ -22,6 +22,7 @@ module.exports = (grunt) ->
 				<%= pkg.include_libraries[i].license.replace(new RegExp("^(.)"), "\\t$1").replace(new RegExp("\\n([^\\n])", "g"), "\\n\\t$1") %>
 				<% } %>
 				 * ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
+				<% } %>
 			'''
 		coffee:
 			dist:
@@ -36,7 +37,7 @@ module.exports = (grunt) ->
 				]
 		uglify:
 			options:
-				banner: '\uFEFF' + '<%= meta.banner %>' + '\n\n'
+				banner: '\uFEFF' + '<%= meta.banner %>' + '\n\n' # add BOM for Photoshop JSX
 				beautify: on
 			dist:
 				src: [
@@ -51,8 +52,6 @@ module.exports = (grunt) ->
 		clean:
 			temp:
 				'<%= coffee.dist.dest %>'
-		addBOM:
-			files: '<%= uglify.dist.dest %>'
 		watch:
 			scripts:
 				files: '<%= coffee.dist.src %>'
@@ -69,7 +68,6 @@ module.exports = (grunt) ->
 		'uglify'
 		'update'
 		'docco'
-		# 'clean'
 		'gitcommit'
 		'notifyDone'
 	]
@@ -109,5 +107,3 @@ module.exports = (grunt) ->
 
 	grunt.registerTask 'notifyDone', 'done', ->
 		exec "/usr/local/bin/growlnotify -t 'grunt.js - <#{pkg.name}> Project' -m '#{pkg.name} v@#{pkg.version} r#{pkg.revision}\nTasks are completed!'"
-
-

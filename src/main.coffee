@@ -263,16 +263,14 @@ outputCSS = (structures) ->
 		# z = 10000 - i * 10
 		z = i * 10
 		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
-		text =
-			"""
-				<div class="#{className}">
-					<!-- <img class="#{className}" src="#{layer.url}" alt="#{layer.name}" width="#{layer.width}" height="#{layer.height}"> -->
-					<!-- <div class="#{className}" data-src="#{layer.url}" data-width="#{layer.width}" data-height="#{layer.height}" data-x="#{layer.x}" data-y="#{layer.y}" data-z="#{z}">#{layer.name}<div> -->
-				</div>
-			"""
-		htmlTags.push text
-	html =
+		text = """
+			<div class="#{className}">
+				<!-- <img class="#{className}" src="#{layer.url}" alt="#{layer.name}" width="#{layer.width}" height="#{layer.height}"> -->
+				<!-- <div class="#{className}" data-src="#{layer.url}" data-width="#{layer.width}" data-height="#{layer.height}" data-x="#{layer.x}" data-y="#{layer.y}" data-z="#{z}">#{layer.name}</div> -->
+			</div>
 		"""
+		htmlTags.push text
+	html = """
 		<!doctype html>
 		<html>
 		<head>
@@ -283,7 +281,7 @@ outputCSS = (structures) ->
 		<body>
 		</body>
 		</html>
-		"""
+	"""
 	htmlFile = new File saveFolder + '/' + 'index.html'
 	htmlFile.open 'w'
 	htmlFile.encoding = 'utf-8'
@@ -305,8 +303,7 @@ outputJSON = (structures) ->
 	outputText = []
 	for layer, i in structures
 		z = 10000 - i * 10
-		text =
-			"""
+		text = """
 			\{
 				"name": "#{layer.name}",
 				"className": "#{layer.name}",
@@ -317,7 +314,7 @@ outputJSON = (structures) ->
 				"height": #{layer.height},
 				"url": "#{layer.url}"
 			\}
-			"""
+		"""
 		outputText.push text
 	outputFile = new File saveFolder + '/' + 'structures.json'
 	outputFile.open 'w'
@@ -328,20 +325,20 @@ outputJSON = (structures) ->
 	return
 
 hideLayerWithoutSelf = (layer) ->
+	layer.visible = on
 	parent = layer.parent
 	if parent and parent.layers
 		for sub in parent.layers
 			sub._v = sub.visible
 			sub.visible = off
 		hideLayerWithoutSelf parent
-	layer.visible = on
 
 showLayer = (layer) ->
-	# 表示状態を元に戻す
 	parent = layer.parent
 	if parent and parent.layers
 		for sub in parent.layers
-			sub.visible = sub._v if sub._v?
+			$.writeln sub._v
+			sub.visible = sub._v
 		showLayer parent
 
 # 抽出
