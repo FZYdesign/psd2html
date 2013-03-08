@@ -41,8 +41,8 @@ clearInterval = global.clearInterval;
 isNaN = global.isNaN;
 
 newSave = function() {
-  var desc3, desc4, idsave;
-  idsave = desc3 = new ActionDescriptor();
+  var desc3, desc4;
+  desc3 = new ActionDescriptor();
   desc4 = new ActionDescriptor();
   desc4.putBoolean(stringIDToTypeID("maximizeCompatibility"), true);
   desc3.putObject(charIDToTypeID("As  "), charIDToTypeID("Pht3"), desc4);

@@ -19,7 +19,6 @@ isNaN = global.isNaN
 # ### 別名で保存
 
 newSave = ->
-	idsave = 
 	desc3 = new ActionDescriptor()
 	desc4 = new ActionDescriptor()
 	desc4.putBoolean( stringIDToTypeID( "maximizeCompatibility" ), true )
