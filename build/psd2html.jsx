@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r40
+ * psd2html.js - v@1.0.0 r41
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -455,7 +455,6 @@ copy = function(layer) {
     dot.remove();
   }
   dot = null;
-  $.gc();
   return fillTransparent;
 };
 
@@ -470,7 +469,6 @@ paste = function(doc, fillTransparent) {
   }
   activeDocument.selection.deselect();
   doc = null;
-  $.gc();
 };
 
 getMetrics = function(layer) {
@@ -505,7 +503,6 @@ outputCSS = function(structures) {
   cssFile.close();
   cssText = null;
   cssFile = null;
-  $.gc();
   htmlTags = [];
   for (i = _j = 0, _len1 = structures.length; _j < _len1; i = ++_j) {
     layer = structures[i];
@@ -523,7 +520,6 @@ outputCSS = function(structures) {
   htmlTags = null;
   html = null;
   htmlFile = null;
-  $.gc();
 };
 
 outputLESS = function(structures) {
@@ -624,7 +620,6 @@ extract = function(layer, mix, extFlag) {
   parent = null;
   sub = null;
   uncle = null;
-  $.gc();
 };
 
 output = function(layers, ext, mix) {
@@ -659,7 +654,6 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   restoreDimension();
   fileNames = null;
   layers = null;
-  $.gc();
   structures.reverse();
   FLAG_CSS = 1;
   FLAG_LESS = 2;
@@ -672,7 +666,6 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   }
   structures = null;
   saveFolder = null;
-  $.gc();
   alert('Complete!!');
 };
 

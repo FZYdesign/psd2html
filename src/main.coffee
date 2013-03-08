@@ -194,7 +194,6 @@ copy = (layer) ->
 		dot.remove()
 
 	dot = null
-	$.gc()
 
 	fillTransparent
 
@@ -214,7 +213,6 @@ paste = (doc, fillTransparent) ->
 	activeDocument.selection.deselect();
 
 	doc = null
-	$.gc()
 	return
 
 getMetrics = (layer) ->
@@ -256,7 +254,6 @@ outputCSS = (structures) ->
 
 	cssText = null
 	cssFile = null
-	$.gc()
 
 	htmlTags = []
 	for layer, i in structures
@@ -291,7 +288,6 @@ outputCSS = (structures) ->
 	htmlTags = null
 	html = null
 	htmlFile = null
-	$.gc()
 
 	return
 
@@ -400,7 +396,6 @@ extract = (layer, mix, extFlag) ->
 	parent = null
 	sub = null
 	uncle = null
-	$.gc()
 
 	return
 
@@ -448,7 +443,6 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	# ### ガーベッジコレクション
 	fileNames = null
 	layers = null
-	$.gc()
 
 	# **ここまでが画像の出力**
 	# * * *
@@ -468,7 +462,6 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	# ### ガーベッジコレクション
 	structures = null
 	saveFolder = null
-	$.gc()
 
 	# ### 完了
 	alert 'Complete!!'
