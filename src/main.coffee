@@ -511,6 +511,7 @@ if documents.length
 				activeDocument.save()
 				input()
 			catch err
+				alert @filePutDialog
 				saved = !!@filePutDialog 'ドキュメントの保存', 'document.psd', 'Egg psd'
 			$.level = _level
 		else
