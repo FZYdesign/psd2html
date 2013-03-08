@@ -723,11 +723,10 @@ if (documents.length) {
   } else {
     if (confirm('ドキュメントが保存されていません。\n保存しますか？')) {
       try {
-        activeDocument.save();
+        activeDocument.fullName;
       } catch (err) {
-        filePutDialog('ドキュメントの保存', 'new_document.psd', 'Egg psd');
+
       }
-      input();
     } else {
       alert('保存してください\nドキュメントを保存後に再実行してください。');
     }

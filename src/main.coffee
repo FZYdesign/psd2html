@@ -505,11 +505,10 @@ if documents.length
 		input()
 	else
 		if confirm 'ドキュメントが保存されていません。\n保存しますか？'
-			try # 一度も保存されていない場合はエラーが投げられる
-				activeDocument.save()
-			catch err # 一度も保存されていない場合は保存ダイアログを表示
-				filePutDialog 'ドキュメントの保存', 'new_document.psd', 'Egg psd'
-			input()
+			try
+				activeDocument.fullName
+			catch err
+				
 		else
 			alert '保存してください\nドキュメントを保存後に再実行してください。'
 else
