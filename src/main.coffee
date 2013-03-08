@@ -504,7 +504,7 @@ if documents.length
 	unless activeDocument.saved
 		input()
 	else
-		if prompt 'ドキュメントが保存されていません。\n保存しますか？'
+		if confirm 'ドキュメントが保存されていません。\n保存しますか？'
 			activeDocument.save()
 			input()
 		else
