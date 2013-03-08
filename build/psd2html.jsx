@@ -18,7 +18,7 @@
 
 "use strict";
 
-var $dialog, ControlUI, DialogUI, Math, NAMESPACE, VERSION, WindowUI, clearInterval, clearTimeout, close, copy, createDocument, currentHeight, currentWidth, enlargeForSelect, exec, extract, fileNameCounter, fileNames, getBounds, getLayerPath, getMetrics, global, hideLayerWithoutSelf, isNaN, isSelect, nameCounter, offsetX, offsetY, originalHeight, originalWidth, output, outputCSS, outputJSON, outputLESS, paste, restoreDimension, saveFolder, saveGIF, saveJPEG, savePNG, selectAllLayers, setInterval, setTimeout, showLayer, structures, varDump, __hasProp = {}.hasOwnProperty, __extends = function(e, t) {
+var ControlUI, DialogUI, Math, NAMESPACE, VERSION, WindowUI, clearInterval, clearTimeout, close, copy, createDocument, currentHeight, currentWidth, enlargeForSelect, exec, extract, fileNameCounter, fileNames, getBounds, getLayerPath, getMetrics, global, hideLayerWithoutSelf, input, isNaN, isSelect, nameCounter, offsetX, offsetY, originalHeight, originalWidth, output, outputCSS, outputJSON, outputLESS, paste, restoreDimension, saveFolder, saveGIF, saveJPEG, savePNG, selectAllLayers, setInterval, setTimeout, showLayer, structures, varDump, __hasProp = {}.hasOwnProperty, __extends = function(e, t) {
     function n() {
         this.constructor = e;
     }
@@ -257,22 +257,25 @@ Number.prototype.fillZero = function(e) {
     saveFolder = new Folder(n), l = activeDocument.layers, output(l, i, t), restoreDimension(), 
     fileNames = null, l = null, $.gc(), structures.reverse(), o = 1, a = 2, r = 4, e & o && outputCSS(structures), 
     e & r && outputJSON(structures), structures = null, saveFolder = null, $.gc(), alert("Complete!!");
-}, documents.length ? $dialog = new DialogUI("PSD to PNG", 700, 400, null, function() {
-    var e, t, n, i, o;
-    return this.addText("書き出しフォルダ", 120, 20, 10, 50), i = this.addTextbox(540, 20, 60, 70), 
-    activeDocument.path && i.val(activeDocument.path + "/" + activeDocument.name.replace(/\.[a-z0-9_]+$/i, "") + "/"), 
-    this.addButton("選択", 80, 20, 610, 70, {
-        click: function() {
-            return saveFolder = Folder.selectDialog("保存先のフォルダを選択してください"), saveFolder ? i.val(decodeURI(saveFolder.getRelativeURI("/"))) : void 0;
-        }
-    }), this.addText("書き出し形式", 120, 20, 10, 160), o = [], o.push(this.addCheckbox("HTML&CSS", 220, 20, 10, 190)), 
-    o.push(this.addCheckbox("LESS", 220, 20, 230, 190)), o.push(this.addCheckbox("JSON", 220, 20, 450, 190)), 
-    this.addText("オプション", 120, 20, 10, 230), t = this.addCheckbox("背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。", 600, 20, 10, 260), 
-    n = this.addRadio("全ての画像を強制的にPNGで書き出す。", 600, 20, 10, 290), e = this.addRadio("全ての画像を強制的にGIFで書き出す。", 600, 20, 10, 320), 
-    this.ok(function() {
-        var r, a, l, s, c, u, h;
-        for (s = encodeURI(i.val()), c = 0, l = u = 0, h = o.length; h > u; l = ++u) r = o[l], 
-        r.val() && (c += Math.pow(2, l));
-        return n.val() && (a = "png"), e.val() && (a = "gif"), this.close(), exec(c, a, s, t.val());
+}, input = function() {
+    var e;
+    return e = new DialogUI("PSD to PNG", 700, 400, null, function() {
+        var e, t, n, i, o;
+        return this.addText("書き出しフォルダ", 120, 20, 10, 50), i = this.addTextbox(540, 20, 60, 70), 
+        i.val(activeDocument.path + "/" + activeDocument.name.replace(/\.[a-z0-9_]+$/i, "") + "/"), 
+        this.addButton("選択", 80, 20, 610, 70, {
+            click: function() {
+                return saveFolder = Folder.selectDialog("保存先のフォルダを選択してください"), saveFolder ? i.val(decodeURI(saveFolder.getRelativeURI("/"))) : void 0;
+            }
+        }), this.addText("書き出し形式", 120, 20, 10, 160), o = [], o.push(this.addCheckbox("HTML&CSS", 220, 20, 10, 190)), 
+        o.push(this.addCheckbox("LESS", 220, 20, 230, 190)), o.push(this.addCheckbox("JSON", 220, 20, 450, 190)), 
+        this.addText("オプション", 120, 20, 10, 230), t = this.addCheckbox("背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。", 600, 20, 10, 260), 
+        n = this.addRadio("全ての画像を強制的にPNGで書き出す。", 600, 20, 10, 290), e = this.addRadio("全ての画像を強制的にGIFで書き出す。", 600, 20, 10, 320), 
+        this.ok(function() {
+            var r, a, l, s, c, u, h;
+            for (s = encodeURI(i.val()), c = 0, l = u = 0, h = o.length; h > u; l = ++u) r = o[l], 
+            r.val() && (c += Math.pow(2, l));
+            return n.val() && (a = "png"), e.val() && (a = "gif"), this.close(), exec(c, a, s, t.val());
+        });
     });
-}) : alert("ドキュメントが開かれていません。\nドキュメントが開かれていないので、この処理は中止されました。");
+}, documents.length ? activeDocument.saved || alert("ドキュメントが保存されていません。\n保存しますか？") : alert("ドキュメントが開かれていません。\nドキュメントが開かれていないので、この処理は中止されました。");

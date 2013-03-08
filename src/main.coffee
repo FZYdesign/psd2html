@@ -471,12 +471,11 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	return
 
 # ## 入力ダイアログの表示
-if documents.length
+input = ->
 	$dialog = new DialogUI 'PSD to PNG', 700, 400, null, ->
 		@addText '書き出しフォルダ', 120, 20, 10, 50
 		$saveFolder = @addTextbox 540, 20, 60, 70
-		if activeDocument.path
-			$saveFolder.val activeDocument.path + '/' + activeDocument.name.replace(/\.[a-z0-9_]+$/i, '') + '/'
+		$saveFolder.val activeDocument.path + '/' + activeDocument.name.replace(/\.[a-z0-9_]+$/i, '') + '/'
 		@addButton '選択', 80, 20, 610, 70,
 			click: ->
 				saveFolder = Folder.selectDialog '保存先のフォルダを選択してください'
@@ -500,6 +499,12 @@ if documents.length
 			ext = 'gif' if $gif.val()
 			@close()
 			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
+
+if documents.length
+	if activeDocument.saved
+		
+	else
+		alert 'ドキュメントが保存されていません。\n保存しますか？'
 else
 	alert 'ドキュメントが開かれていません。\nドキュメントが開かれていないので、この処理は中止されました。'
 
