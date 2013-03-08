@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r53
+ * psd2html.js - v@1.0.0 r54
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -687,9 +687,9 @@ input = function() {
     $png = this.addRadio('全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290);
     $gif = this.addRadio('全ての画像を強制的にGIFで書き出す。', 600, 20, 10, 320);
     this.addText('ドキュメントの原点のオフセットX', 300, 20, 10, 350);
-    $offsetX = this.addTextbox(40, 20, 260, 350);
+    $offsetX = this.addTextbox(40, 20, 180, 350);
     this.addText('ドキュメントの原点のオフセットX', 300, 20, 310, 350);
-    $offsetY = this.addTextbox(40, 20, 560, 350);
+    $offsetY = this.addTextbox(40, 20, 480, 350);
     return this.ok(function() {
       var $type, ext, i, saveFolderPath, typeFlag, _i, _len;
       saveFolderPath = encodeURI($saveFolder.val());
