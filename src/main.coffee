@@ -511,7 +511,7 @@ if documents.length
 				activeDocument.save()
 				input()
 			catch err
-				saved = !!@filePutDialog 'ドキュメントの保存', 'document.psd', 'Egg psd'
+				newSave()
 			$.level = _level
 		else
 			alert '保存してください\nドキュメントを保存後に再実行してください。'
