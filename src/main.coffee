@@ -297,7 +297,7 @@ outputLESS = (structures) ->
 outputJSON = (structures) ->
 	outputText = []
 	for layer, i in structures
-		z = 10000 - i * 10
+		z = i * 10
 		text = """
 			\{
 				"name": "#{layer.name}",
