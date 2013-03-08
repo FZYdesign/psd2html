@@ -57,6 +57,7 @@ module.exports = (grunt) ->
 				tasks: [
 					'coffee'
 					'concat'
+					'update'
 					'gitcommit'
 					'notifyDone'
 				]
