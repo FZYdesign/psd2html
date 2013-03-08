@@ -23,6 +23,6 @@ newSave = ->
 	desc4 = new ActionDescriptor()
 	desc4.putBoolean( stringIDToTypeID( "maximizeCompatibility" ), true )
 	desc3.putObject( charIDToTypeID( "As  " ), charIDToTypeID( "Pht3" ), desc4 )
-	desc3.putPath( charIDToTypeID( "In  " ), new File( "/Users/hanada/Desktop" ) )
-	desc3.putBoolean( charIDToTypeID( "LwCs" ), true )
+	# desc3.putPath( charIDToTypeID( "In  " ), new File( "/Users/hanada/Desktop" ) )
+	# desc3.putBoolean( charIDToTypeID( "LwCs" ), true )
 	executeAction( charIDToTypeID( "save" ), desc3, DialogModes.NO )
