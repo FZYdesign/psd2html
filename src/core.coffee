@@ -16,17 +16,3 @@ isNaN = global.isNaN
 # ## Variables
 
 # ## Functions
-# ### 別名で保存
-
-newSave = ->
-	a = []
-	for k, v of DialogModes
-		a.push k + ': ' + v
-	alert a
-	# desc3 = new ActionDescriptor()
-	# desc4 = new ActionDescriptor()
-	# desc4.putBoolean( stringIDToTypeID( "maximizeCompatibility" ), true )
-	# desc3.putObject( charIDToTypeID( "As  " ), charIDToTypeID( "Pht3" ), desc4 )
-	# desc3.putPath( charIDToTypeID( "In  " ), new File( "/Users/hanada/Desktop" ) )
-	# desc3.putBoolean( charIDToTypeID( "LwCs" ), true )
-	# executeAction( charIDToTypeID( "save" ), null, DialogModes.YES )
