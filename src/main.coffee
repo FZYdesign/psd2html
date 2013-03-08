@@ -488,6 +488,8 @@ input = ->
 					typeFlag += Math.pow 2, i
 			ext = 'png' if $png.val()
 			ext = 'gif' if $gif.val()
+			offsetX = $offsetX.val()
+			offsetY = $offsetY.val()
 			@close()
 			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
 
