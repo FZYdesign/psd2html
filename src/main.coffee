@@ -257,7 +257,6 @@ outputCSS = (structures) ->
 
 	htmlTags = []
 	for layer, i in structures
-		# z = 10000 - i * 10
 		z = i * 10
 		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
 		text = """
@@ -450,7 +449,7 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 		outputJSON structures
 
 	# ### 完了
-	alert 'Complete!!'
+	alert 'Complete!!\nお待たせしました。終了です。'
 
 	return
 

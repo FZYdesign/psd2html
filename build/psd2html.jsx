@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r48
+ * psd2html.js - v@1.0.0 r49
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -659,7 +659,7 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   if (typeFlag & FLAG_JSON) {
     outputJSON(structures);
   }
-  alert('Complete!!');
+  alert('Complete!!\nお待たせしました。終了です。');
 };
 
 input = function() {
