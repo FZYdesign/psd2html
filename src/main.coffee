@@ -505,10 +505,13 @@ if documents.length
 		input()
 	else
 		if confirm 'ドキュメントが保存されていません。\n保存しますか？'
+			_level = $.level
+			$.level = 0
 			try
 				activeDocument.fullName
 			catch err
-				
+
+			$.level = _level
 		else
 			alert '保存してください\nドキュメントを保存後に再実行してください。'
 else
