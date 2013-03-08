@@ -36,10 +36,10 @@ class WindowUI
 				$ctrl.on event, callback
 		@controls.push $ctrl
 		$ctrl
+	addText: (text = '', width, height, left, top, events) ->
+		@addControl 'statictext', width, height, left, top + 2, [text], events
 	addTextbox: (width, height, left, top, defaultText = '', events) ->
 		@addControl 'edittext', width, height, left, top, [defaultText], events
-	addText: (text = '', width, height, left, top, events) ->
-		@addControl 'statictext', width, height, left, top, [text], events
 	addButton: (label, width, height, left, top, events) ->
 		@addControl 'button', width, height, left, top, [label], events
 	addRadio: (label, width, height, left, top, events) ->

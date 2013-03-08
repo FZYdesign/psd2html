@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r58
+ * psd2html.js - v@1.0.0 r59
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -161,18 +161,18 @@ WindowUI = (function() {
     return $ctrl;
   };
 
+  WindowUI.prototype.addText = function(text, width, height, left, top, events) {
+    if (text == null) {
+      text = '';
+    }
+    return this.addControl('statictext', width, height, left, top + 2, [text], events);
+  };
+
   WindowUI.prototype.addTextbox = function(width, height, left, top, defaultText, events) {
     if (defaultText == null) {
       defaultText = '';
     }
     return this.addControl('edittext', width, height, left, top, [defaultText], events);
-  };
-
-  WindowUI.prototype.addText = function(text, width, height, left, top, events) {
-    if (text == null) {
-      text = '';
-    }
-    return this.addControl('statictext', width, height, left, top, [text], events);
   };
 
   WindowUI.prototype.addButton = function(label, width, height, left, top, events) {
