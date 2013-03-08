@@ -474,8 +474,10 @@ input = ->
 		$gif = @addRadio '全ての画像を強制的にGIFで書き出す。', 600, 20, 10, 320
 		@addText 'ドキュメントの原点のオフセットX', 300, 20, 10, 350
 		$offsetX = @addTextbox 40, 20, 190, 350
+		@addText 'px', 300, 20, 235, 350
 		@addText 'ドキュメントの原点のオフセットY', 300, 20, 310, 350
 		$offsetY = @addTextbox 40, 20, 490, 350
+		@addText 'px', 300, 20, 535, 350
 		@ok ->
 			saveFolderPath = encodeURI $saveFolder.val()
 			typeFlag = 0
