@@ -260,7 +260,7 @@ Number.prototype.fillZero = function(e) {
 }, documents.length ? $dialog = new DialogUI("PSD to PNG", 700, 400, null, function() {
     var e, t, n, i, o;
     return this.addText("書き出しフォルダ", 120, 20, 10, 50), i = this.addTextbox(540, 20, 60, 70), 
-    i.val(activeDocument.path + "/" + activeDocument.name.replace(/\.[a-z0-9_]+$/i, "") + "/"), 
+    activeDocument.path && i.val(activeDocument.path + "/" + activeDocument.name.replace(/\.[a-z0-9_]+$/i, "") + "/"), 
     this.addButton("選択", 80, 20, 610, 70, {
         click: function() {
             return saveFolder = Folder.selectDialog("保存先のフォルダを選択してください"), saveFolder ? i.val(decodeURI(saveFolder.getRelativeURI("/"))) : void 0;
