@@ -278,7 +278,7 @@ outputCSS = (structures) ->
 		<body>
 
 		$
-		
+
 		</body>
 		</html>
 	"""
