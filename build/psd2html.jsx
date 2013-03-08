@@ -257,7 +257,7 @@ Number.prototype.fillZero = function(e) {
     saveFolder = new Folder(n), l = activeDocument.layers, output(l, i, t), restoreDimension(), 
     fileNames = null, l = null, $.gc(), structures.reverse(), o = 1, a = 2, r = 4, e & o && outputCSS(structures), 
     e & r && outputJSON(structures), structures = null, saveFolder = null, $.gc(), alert("Complete!!");
-}, $dialog = new DialogUI("PSD to PNG", 700, 400, null, function() {
+}, documents.length ? $dialog = new DialogUI("PSD to PNG", 700, 400, null, function() {
     var e, t, n, i, o;
     return this.addText("書き出しフォルダ", 120, 20, 10, 50), i = this.addTextbox(540, 20, 60, 70), 
     i.val(activeDocument.path + "/"), this.addButton("選択", 80, 20, 610, 70, {
@@ -274,4 +274,4 @@ Number.prototype.fillZero = function(e) {
         r.val() && (c += Math.pow(2, l));
         return n.val() && (a = "png"), e.val() && (a = "gif"), this.close(), exec(c, a, s, t.val());
     });
-});
+}) : alert("ドキュメントが開かれていません。");

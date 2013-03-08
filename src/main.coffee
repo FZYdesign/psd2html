@@ -471,33 +471,36 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	return
 
 # ## 入力ダイアログの表示
-$dialog = new DialogUI 'PSD to PNG', 700, 400, null, ->
-	@addText '書き出しフォルダ', 120, 20, 10, 50
-	$saveFolder = @addTextbox 540, 20, 60, 70
-	$saveFolder.val activeDocument.path + '/'
-	@addButton '選択', 80, 20, 610, 70,
-		click: ->
-			saveFolder = Folder.selectDialog '保存先のフォルダを選択してください'
-			$saveFolder.val decodeURI saveFolder.getRelativeURI '/' if saveFolder
-	@addText '書き出し形式', 120, 20, 10, 160
-	$types = []
-	$types.push @addCheckbox 'HTML&CSS', 220, 20, 10, 190
-	$types.push @addCheckbox 'LESS', 220, 20, 230, 190
-	$types.push @addCheckbox 'JSON', 220, 20, 450, 190
-	@addText 'オプション', 120, 20, 10, 230
-	$mix = @addCheckbox '背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。', 600, 20, 10, 260
-	$png = @addRadio '全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290
-	$gif = @addRadio '全ての画像を強制的にGIFで書き出す。', 600, 20, 10, 320
-	@ok ->
-		saveFolderPath = encodeURI $saveFolder.val()
-		typeFlag = 0
-		for $type, i in $types
-			if $type.val()
-				typeFlag += Math.pow 2, i
-		ext = 'png' if $png.val()
-		ext = 'gif' if $gif.val()
-		@close()
-		exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
+if documents.length
+	$dialog = new DialogUI 'PSD to PNG', 700, 400, null, ->
+		@addText '書き出しフォルダ', 120, 20, 10, 50
+		$saveFolder = @addTextbox 540, 20, 60, 70
+		$saveFolder.val activeDocument.path + '/'
+		@addButton '選択', 80, 20, 610, 70,
+			click: ->
+				saveFolder = Folder.selectDialog '保存先のフォルダを選択してください'
+				$saveFolder.val decodeURI saveFolder.getRelativeURI '/' if saveFolder
+		@addText '書き出し形式', 120, 20, 10, 160
+		$types = []
+		$types.push @addCheckbox 'HTML&CSS', 220, 20, 10, 190
+		$types.push @addCheckbox 'LESS', 220, 20, 230, 190
+		$types.push @addCheckbox 'JSON', 220, 20, 450, 190
+		@addText 'オプション', 120, 20, 10, 230
+		$mix = @addCheckbox '背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。', 600, 20, 10, 260
+		$png = @addRadio '全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290
+		$gif = @addRadio '全ての画像を強制的にGIFで書き出す。', 600, 20, 10, 320
+		@ok ->
+			saveFolderPath = encodeURI $saveFolder.val()
+			typeFlag = 0
+			for $type, i in $types
+				if $type.val()
+					typeFlag += Math.pow 2, i
+			ext = 'png' if $png.val()
+			ext = 'gif' if $gif.val()
+			@close()
+			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
+else
+	alert 'ドキュメントが開かれていません。'
 
 
 
