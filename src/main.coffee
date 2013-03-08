@@ -508,7 +508,8 @@ if documents.length
 			_level = $.level
 			$.level = 0
 			try
-				activeDocument.fullName
+				activeDocument.save()
+				input()
 			catch err
 
 			$.level = _level
