@@ -501,7 +501,7 @@ input = ->
 			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
 
 if documents.length
-	if activeDocument.saved
+	unless activeDocument.saved
 		input()
 	else
 		if prompt 'ドキュメントが保存されていません。\n保存しますか？'
