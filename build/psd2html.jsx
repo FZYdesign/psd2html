@@ -56,9 +56,7 @@ idPhtthree = charIDToTypeID("Pht3");
 
 desc3.putObject(idAs, idPhtthree, desc4);
 
-idIn = charIDToTypeID("In  ");
-
-desc3.putPath(idIn, new File("/Users/hanada/Desktop"));
+idIn = desc3.putPath(charIDToTypeID("In  "), new File("/Users/hanada/Desktop"));
 
 desc3.putBoolean(charIDToTypeID("LwCs"), true);
 
