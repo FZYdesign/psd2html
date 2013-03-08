@@ -500,7 +500,7 @@ if documents.length
 			@close()
 			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
 else
-	alert 'ドキュメントが開かれていません。'
+	alert 'ドキュメントが開かれていません。\nドキュメントが開かれていないので、この処理は中止されました。'
 
 
 

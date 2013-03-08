@@ -274,4 +274,4 @@ Number.prototype.fillZero = function(e) {
         r.val() && (c += Math.pow(2, l));
         return n.val() && (a = "png"), e.val() && (a = "gif"), this.close(), exec(c, a, s, t.val());
     });
-}) : alert("ドキュメントが開かれていません。");
+}) : alert("ドキュメントが開かれていません。\nドキュメントが開かれていないので、この処理は中止されました。");
