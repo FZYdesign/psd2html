@@ -329,7 +329,7 @@ hideLayerWithoutSelf = (layer) ->
 	if parent and parent.layers # 親の子（自分も含めて兄弟要素）を一度全部隠す
 		for sub in parent.layers
 			sub._v = sub.visible
-			$.writeln "#{sub.name}: visible = #{sub.visible}"
+			$.writeln "#{sub.name}._v = #{sub.visible}"
 			sub.visible = off
 		hideLayerWithoutSelf parent
 	layer.visible = on # 自分だけ表示させる
@@ -338,7 +338,7 @@ showLayer = (layer) ->
 	parent = layer.parent
 	if parent and parent.layers
 		for sub in parent.layers
-			$.writeln "#{sub.name}: visible = #{sub.visible}"
+			# $.writeln "#{sub.name}: visible = #{sub.visible}"
 			if sub._v?
 				$.writeln "#{sub.name}: _v = #{sub._v}"
 				sub.visible = sub._v
