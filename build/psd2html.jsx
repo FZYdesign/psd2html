@@ -731,11 +731,13 @@ if (documents.length) {
       savable = false;
     }
     $.level = _level;
-    if (confirm('ドキュメントが保存されていません。\n保存しますか？')) {
-      activeDocument.save();
-      input();
-    } else {
-      alert('保存してください\nドキュメントを保存後に再実行してください。');
+    if (savable) {
+      if (confirm('ドキュメントが保存されていません。\n保存しますか？')) {
+        activeDocument.save();
+        input();
+      } else {
+        alert('保存してください\nドキュメントを保存後に再実行してください。');
+      }
     }
   }
 } else {

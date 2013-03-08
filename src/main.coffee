@@ -513,11 +513,12 @@ if documents.length
 			alert '保存してください\nこのドキュメントは一度も保存されていません。\nドキュメントを保存後に再実行してください。'
 			savable = no
 		$.level = _level
-		if confirm 'ドキュメントが保存されていません。\n保存しますか？'
-			activeDocument.save()
-			input()
-		else
-			alert '保存してください\nドキュメントを保存後に再実行してください。'
+		if savable
+			if confirm 'ドキュメントが保存されていません。\n保存しますか？'
+				activeDocument.save()
+				input()
+			else
+				alert '保存してください\nドキュメントを保存後に再実行してください。'
 else
 	alert 'ドキュメントが開かれていません\nドキュメントが開かれていないので、この処理は中止されました。'
 
