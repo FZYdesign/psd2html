@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r50
+ * psd2html.js - v@1.0.0 r51
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -664,8 +664,8 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
 
 input = function() {
   var $dialog;
-  return $dialog = new DialogUI('PSD to PNG', 700, 400, null, function() {
-    var $gif, $mix, $png, $saveFolder, $types;
+  return $dialog = new DialogUI('PSD to PNG', 700, 430, null, function() {
+    var $gif, $mix, $offsetX, $offsetY, $png, $saveFolder, $types;
     this.addText('書き出しフォルダ', 120, 20, 10, 50);
     $saveFolder = this.addTextbox(540, 20, 60, 70);
     $saveFolder.val(activeDocument.path + '/' + activeDocument.name.replace(/\.[a-z0-9_]+$/i, '') + '/');
@@ -686,6 +686,8 @@ input = function() {
     $mix = this.addCheckbox('背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。', 600, 20, 10, 260);
     $png = this.addRadio('全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290);
     $gif = this.addRadio('全ての画像を強制的にGIFで書き出す。', 600, 20, 10, 320);
+    $offsetX = this.addText('ドキュメントの原点のオフセットX', 300, 20, 10, 350);
+    $offsetY = this.addText('ドキュメントの原点のオフセットX', 300, 20, 310, 350);
     return this.ok(function() {
       var $type, ext, i, saveFolderPath, typeFlag, _i, _len;
       saveFolderPath = encodeURI($saveFolder.val());

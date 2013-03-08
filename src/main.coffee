@@ -455,7 +455,7 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 
 # ## 入力ダイアログの表示
 input = ->
-	$dialog = new DialogUI 'PSD to PNG', 700, 400, null, ->
+	$dialog = new DialogUI 'PSD to PNG', 700, 430, null, ->
 		@addText '書き出しフォルダ', 120, 20, 10, 50
 		$saveFolder = @addTextbox 540, 20, 60, 70
 		$saveFolder.val activeDocument.path + '/' + activeDocument.name.replace(/\.[a-z0-9_]+$/i, '') + '/'
@@ -472,6 +472,8 @@ input = ->
 		$mix = @addCheckbox '背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。', 600, 20, 10, 260
 		$png = @addRadio '全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290
 		$gif = @addRadio '全ての画像を強制的にGIFで書き出す。', 600, 20, 10, 320
+		$offsetX = @addText 'ドキュメントの原点のオフセットX', 300, 20, 10, 350
+		$offsetY = @addText 'ドキュメントの原点のオフセットX', 300, 20, 310, 350
 		@ok ->
 			saveFolderPath = encodeURI $saveFolder.val()
 			typeFlag = 0
