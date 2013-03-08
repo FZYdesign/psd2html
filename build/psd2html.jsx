@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r28
+ * psd2html.js - v@1.0.0 r29
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -622,7 +622,7 @@ extract = function(layer, mix, extFlag) {
   $.gc();
 };
 
-output = function(layers, mix, ext) {
+output = function(layers, ext, mix) {
   var layer, _i, _len;
   for (_i = 0, _len = layers.length; _i < _len; _i++) {
     layer = layers[_i];
@@ -650,7 +650,7 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   currentHeight = originalHeight;
   saveFolder = new Folder(saveFolderPath);
   layers = activeDocument.layers;
-  output(layers, mix, ext);
+  output(layers, ext, mix);
   restoreDimension();
   fileNames = null;
   layers = null;
