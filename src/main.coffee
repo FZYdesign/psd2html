@@ -9,8 +9,8 @@ originalWidth = 0
 originalHeight = 0
 currentWidth = 0
 currentHeight = 0
-offsetX = 0
-offsetY = 0
+boundsOffsetX = 0
+boundsOffsetY = 0
 saveFolder = null
 nameCounter = 0
 structures = []
@@ -114,22 +114,22 @@ enlargeForSelect = (layer) ->
 	bounds = getBounds layer
 	if bounds.x < 0
 		currentWidth -= bounds.x
-		offsetX += bounds.x
+		boundsOffsetX += bounds.x
 		activeDocument.resizeCanvas currentWidth, currentHeight, AnchorPosition.TOPRIGHT
 	if bounds.y < 0
 		currentHeight -= bounds.y
-		offsetY += bounds.y
+		boundsOffsetY += bounds.y
 		activeDocument.resizeCanvas currentWidth, currentHeight, AnchorPosition.BOTTOMLEFT
-	if bounds.x2 > currentWidth + offsetX
-		currentWidth += bounds.x2 + offsetX
+	if bounds.x2 > currentWidth + boundsOffsetX
+		currentWidth += bounds.x2 + boundsOffsetX
 		activeDocument.resizeCanvas currentWidth, currentHeight, AnchorPosition.TOPLEFT
-	if bounds.y2 > currentHeight + offsetY
-		currentHeight += bounds.y2 + offsetY
+	if bounds.y2 > currentHeight + boundsOffsetY
+		currentHeight += bounds.y2 + boundsOffsetY
 		activeDocument.resizeCanvas currentWidth, currentHeight, AnchorPosition.TOPLEFT
 	return bounds
 
 restoreDimension = ->
-	activeDocument.resizeCanvas originalWidth - offsetX, originalHeight - offsetY, AnchorPosition.TOPLEFT
+	activeDocument.resizeCanvas originalWidth - boundsOffsetX, originalHeight - boundsOffsetY, AnchorPosition.TOPLEFT
 	activeDocument.resizeCanvas originalWidth, originalHeight, AnchorPosition.BOTTOMRIGHT
 
 selectAllLayers = ->
@@ -218,8 +218,8 @@ paste = (doc, fillTransparent) ->
 getMetrics = (layer) ->
 	bounds = getBounds layer
 	return {
-		x: bounds.x + offsetX
-		y: bounds.y + offsetY
+		x: bounds.x + boundsOffsetX
+		y: bounds.y + boundsOffsetY
 		width: bounds.x2 - bounds.x
 		height: bounds.y2 - bounds.y
 	}
@@ -473,12 +473,12 @@ input = ->
 		$png = @addRadio '全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290
 		$gif = @addRadio '全ての画像を強制的にGIFで書き出す。', 600, 20, 10, 320
 		@addText 'ドキュメントの原点のオフセットX', 300, 20, 10, 350
-		$offsetX = @addTextbox 40, 20, 190, 350
-		$offsetX.val 0
+		$boundsOffsetX = @addTextbox 40, 20, 190, 350
+		$boundsOffsetX.val 0
 		@addText 'px', 300, 20, 235, 350
 		@addText 'ドキュメントの原点のオフセットY', 300, 20, 310, 350
-		$offsetY = @addTextbox 40, 20, 490, 350
-		$offsetY.val 0
+		$boundsOffsetY = @addTextbox 40, 20, 490, 350
+		$boundsOffsetY.val 0
 		@addText 'px', 300, 20, 535, 350
 		@ok ->
 			saveFolderPath = encodeURI $saveFolder.val()
@@ -488,8 +488,8 @@ input = ->
 					typeFlag += Math.pow 2, i
 			ext = 'png' if $png.val()
 			ext = 'gif' if $gif.val()
-			offsetX = $offsetX.val()
-			offsetY = $offsetY.val()
+			boundsOffsetX = $boundsOffsetX.val()
+			boundsOffsetY = $boundsOffsetY.val()
 			@close()
 			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
 
