@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r21
+ * psd2html.js - v@1.0.0 r22
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -734,10 +734,8 @@ if (documents.length) {
     } else {
       if (confirm('ドキュメントが保存されていません。\n保存しますか？')) {
         activeDocument.save();
-        input();
-      } else {
-        alert('保存してください\nドキュメントを保存後に再実行してください。');
       }
+      input();
     }
   }
 } else {

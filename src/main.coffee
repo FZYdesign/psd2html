@@ -516,9 +516,7 @@ if documents.length
 		else
 			if confirm 'ドキュメントが保存されていません。\n保存しますか？'
 				activeDocument.save()
-				input()
-			else
-				alert '保存してください\nドキュメントを保存後に再実行してください。'
+			input()
 else
 	alert 'ドキュメントが開かれていません\n対象のドキュメントが開かれていません。'
 
