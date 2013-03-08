@@ -220,8 +220,8 @@ paste = (doc, fillTransparent) ->
 getMetrics = (layer) ->
 	bounds = getBounds layer
 	return {
-		x: bounds.x + boundsOffsetX
-		y: bounds.y + boundsOffsetY
+		x: bounds.x + boundsOffsetX + offsetX
+		y: bounds.y + boundsOffsetY + offsetY
 		width: bounds.x2 - bounds.x
 		height: bounds.y2 - bounds.y
 	}

@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r63
+ * psd2html.js - v@1.0.0 r64
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -479,8 +479,8 @@ getMetrics = function(layer) {
   var bounds;
   bounds = getBounds(layer);
   return {
-    x: bounds.x + boundsOffsetX,
-    y: bounds.y + boundsOffsetY,
+    x: bounds.x + boundsOffsetX + offsetX,
+    y: bounds.y + boundsOffsetY + offsetY,
     width: bounds.x2 - bounds.x,
     height: bounds.y2 - bounds.y
   };
