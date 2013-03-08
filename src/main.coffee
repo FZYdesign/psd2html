@@ -325,13 +325,13 @@ outputJSON = (structures) ->
 	return
 
 hideLayerWithoutSelf = (layer) ->
-	layer.visible = on
 	parent = layer.parent
 	if parent and parent.layers
 		for sub in parent.layers
 			sub._v = sub.visible
 			sub.visible = off
 		hideLayerWithoutSelf parent
+	layer.visible = on
 
 showLayer = (layer) ->
 	parent = layer.parent

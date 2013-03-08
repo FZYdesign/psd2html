@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r30
+ * psd2html.js - v@1.0.0 r31
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -548,7 +548,6 @@ outputJSON = function(structures) {
 
 hideLayerWithoutSelf = function(layer) {
   var parent, sub, _i, _len, _ref;
-  layer.visible = true;
   parent = layer.parent;
   if (parent && parent.layers) {
     _ref = parent.layers;
@@ -557,8 +556,9 @@ hideLayerWithoutSelf = function(layer) {
       sub._v = sub.visible;
       sub.visible = false;
     }
-    return hideLayerWithoutSelf(parent);
+    hideLayerWithoutSelf(parent);
   }
+  return layer.visible = true;
 };
 
 showLayer = function(layer) {
