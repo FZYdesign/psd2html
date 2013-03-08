@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r41
+ * psd2html.js - v@1.0.0 r42
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -652,8 +652,6 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   layers = activeDocument.layers;
   output(layers, ext, mix);
   restoreDimension();
-  fileNames = null;
-  layers = null;
   structures.reverse();
   FLAG_CSS = 1;
   FLAG_LESS = 2;
@@ -664,8 +662,6 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   if (typeFlag & FLAG_JSON) {
     outputJSON(structures);
   }
-  structures = null;
-  saveFolder = null;
   alert('Complete!!');
 };
 

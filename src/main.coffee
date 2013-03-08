@@ -440,10 +440,6 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	# ### カンバスサイズをもとに戻す
 	restoreDimension()
 
-	# ### ガーベッジコレクション
-	fileNames = null
-	layers = null
-
 	# **ここまでが画像の出力**
 	# * * *
 
@@ -458,10 +454,6 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 		outputCSS structures
 	if typeFlag & FLAG_JSON
 		outputJSON structures
-
-	# ### ガーベッジコレクション
-	structures = null
-	saveFolder = null
 
 	# ### 完了
 	alert 'Complete!!'
