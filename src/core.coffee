@@ -19,7 +19,10 @@ isNaN = global.isNaN
 # ### 別名で保存
 
 newSave = ->
-	alert DialogModes
+	a = []
+	for k, v of DialogModes
+		a.push k + ': ' + v
+	alert a
 	# desc3 = new ActionDescriptor()
 	# desc4 = new ActionDescriptor()
 	# desc4.putBoolean( stringIDToTypeID( "maximizeCompatibility" ), true )

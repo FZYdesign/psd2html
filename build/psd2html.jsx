@@ -41,7 +41,13 @@ clearInterval = global.clearInterval;
 isNaN = global.isNaN;
 
 newSave = function() {
-  return alert(DialogModes);
+  var a, k, v;
+  a = [];
+  for (k in DialogModes) {
+    v = DialogModes[k];
+    a.push(k + ': ' + v);
+  }
+  return alert(a);
 };
 
 ControlUI = (function() {
