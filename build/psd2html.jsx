@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r47
+ * psd2html.js - v@1.0.0 r48
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -545,7 +545,7 @@ outputJSON = function(structures) {
 hideLayerWithoutSelf = function(layer) {
   var parent, sub, _i, _len, _ref;
   parent = layer.parent;
-  if (parent && parent.layers && parent.visible) {
+  if (parent && parent.layers) {
     _ref = parent.layers;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       sub = _ref[_i];

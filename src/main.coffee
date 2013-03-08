@@ -322,7 +322,7 @@ outputJSON = (structures) ->
 
 hideLayerWithoutSelf = (layer) ->
 	parent = layer.parent
-	if parent and parent.layers and parent.visible # 親の子（自分も含めて兄弟要素）を一度全部隠す
+	if parent and parent.layers # 親の子（自分も含めて兄弟要素）を一度全部隠す
 		for sub in parent.layers
 			if sub.visible
 				sub.name += "__v__"
