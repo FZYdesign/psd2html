@@ -728,7 +728,7 @@ if (documents.length) {
         activeDocument.save();
         input();
       } catch (err) {
-        saved = !!filePutDialog('ドキュメントの保存', 'document.psd', 'Egg psd');
+        saved = !!this.filePutDialog('ドキュメントの保存', 'document.psd', 'Egg psd');
       }
       $.level = _level;
     } else {
