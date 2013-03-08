@@ -276,7 +276,9 @@ outputCSS = (structures) ->
 			<link rel="stylesheet" href="style.css">
 		</haed>
 		<body>
+
 		$
+		
 		</body>
 		</html>
 	"""
