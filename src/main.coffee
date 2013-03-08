@@ -393,10 +393,6 @@ extract = (layer, mix, extFlag) ->
 		# 表示状態を元に戻す
 		showLayer layer
 
-	parent = null
-	sub = null
-	uncle = null
-
 	return
 
 # アウトプット

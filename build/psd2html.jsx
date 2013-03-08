@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r42
+ * psd2html.js - v@1.0.0 r43
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -577,7 +577,7 @@ showLayer = function(layer) {
 };
 
 extract = function(layer, mix, extFlag) {
-  var data, dir, ext, fillTransparent, metrics, name, newDoc, parent, sub, uncle, url;
+  var data, dir, ext, fillTransparent, metrics, name, newDoc, url;
   name = layer.name;
   if (ext = name.match(/(\.(?:jpe?g|gif|png))$/i)) {
     ext = ext[0];
@@ -617,9 +617,6 @@ extract = function(layer, mix, extFlag) {
   if (!mix) {
     showLayer(layer);
   }
-  parent = null;
-  sub = null;
-  uncle = null;
 };
 
 output = function(layers, ext, mix) {
