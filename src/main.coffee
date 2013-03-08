@@ -326,7 +326,6 @@ hideLayerWithoutSelf = (layer) ->
 		for sub in parent.layers
 			if sub.visible
 				sub.name += "__v__"
-				# $.writeln "#{sub.name}._v = #{sub._v}"
 				sub.visible = off
 		hideLayerWithoutSelf parent
 	layer.visible = on # 自分だけ表示させる
@@ -335,12 +334,9 @@ showLayer = (layer) ->
 	parent = layer.parent
 	if parent and parent.layers
 		for sub in parent.layers
-			# $.writeln "#{sub.name}: visible = #{sub.visible}"
-			if sub._v?
-				$.writeln "#{sub.name}: _v = #{sub._v}"
-				sub.visible = sub._v
-			else
-				$.writeln "#{sub.name}: _v = undefined"
+			if /__v__$/i.test sub.name
+				sub.visible = on
+				sub.name = sub.name.replace /__v__$/i, ''
 		showLayer parent
 
 # 抽出
