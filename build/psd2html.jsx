@@ -41,11 +41,7 @@ clearInterval = global.clearInterval;
 isNaN = global.isNaN;
 
 newSave = function() {
-  var desc3, desc4;
-  desc3 = new ActionDescriptor();
-  desc4 = new ActionDescriptor();
-  desc4.putBoolean(stringIDToTypeID("maximizeCompatibility"), true);
-  return executeAction(charIDToTypeID("save"), null, DialogModes.YES);
+  return alert(DialogModes);
 };
 
 ControlUI = (function() {
