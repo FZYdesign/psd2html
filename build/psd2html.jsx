@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r29
+ * psd2html.js - v@1.0.0 r30
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -568,8 +568,9 @@ showLayer = function(layer) {
     _ref = parent.layers;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       sub = _ref[_i];
-      $.writeln(sub._v);
-      sub.visible = sub._v;
+      if (sub._v != null) {
+        sub.visible = sub._v;
+      }
     }
     return showLayer(parent);
   }
