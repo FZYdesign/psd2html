@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r22
+ * psd2html.js - v@1.0.0 r23
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -718,9 +718,9 @@ input = function() {
 };
 
 if (documents.length) {
+  savable = true;
   _level = $.level;
   $.level = 0;
-  savable = true;
   try {
     activeDocument.path;
   } catch (err) {

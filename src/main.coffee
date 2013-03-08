@@ -501,9 +501,9 @@ input = ->
 			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
 
 if documents.length
+	savable = yes
 	_level = $.level
 	$.level = 0
-	savable = yes
 	try
 		activeDocument.path
 	catch err
