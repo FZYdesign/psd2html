@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r65
+ * psd2html.js - v@1.0.0 r66
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -714,8 +714,8 @@ input = function() {
       if ($gif.val()) {
         ext = 'gif';
       }
-      offsetX = parseInt($offsetX.val(), 10) || 0;
-      offsetY = parseInt($offsetY.val(), 10) || 0;
+      offsetX = parseInt($offsetX.val(), 10) * -1 || 0;
+      offsetY = parseInt($offsetY.val(), 10) * -1 || 0;
       this.close();
       return exec(typeFlag, ext, saveFolderPath, $mix.val());
     });
