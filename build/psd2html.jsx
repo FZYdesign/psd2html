@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r23
+ * psd2html.js - v@1.0.0 r24
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -222,7 +222,7 @@ DialogUI = (function(_super) {
 
 })(WindowUI);
 
-$.level = 1;
+$.level = 2;
 
 preferences.rulerUnits = Units.PIXELS;
 
