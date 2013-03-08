@@ -718,20 +718,20 @@ input = function() {
 };
 
 if (documents.length) {
-  if (activeDocument.saved) {
-    input();
-  } else {
-    _level = $.level;
-    $.level = 0;
-    savable = true;
-    try {
-      activeDocument.path;
-    } catch (err) {
-      alert('保存してください\nこのドキュメントは一度も保存されていません。\nドキュメントを保存後に再実行してください。');
-      savable = false;
-    }
-    $.level = _level;
-    if (savable) {
+  _level = $.level;
+  $.level = 0;
+  savable = true;
+  try {
+    activeDocument.path;
+  } catch (err) {
+    alert('保存してください\nこのドキュメントは一度も保存されていません。\nドキュメントを保存後に再実行してください。');
+    savable = false;
+  }
+  $.level = _level;
+  if (savable) {
+    if (activeDocument.saved) {
+      input();
+    } else {
       if (confirm('ドキュメントが保存されていません。\n保存しますか？')) {
         activeDocument.save();
         input();

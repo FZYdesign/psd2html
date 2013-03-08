@@ -501,19 +501,19 @@ input = ->
 			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
 
 if documents.length
-	if activeDocument.saved
-		input()
-	else
-		_level = $.level
-		$.level = 0
-		savable = yes
-		try
-			activeDocument.path
-		catch err
-			alert '保存してください\nこのドキュメントは一度も保存されていません。\nドキュメントを保存後に再実行してください。'
-			savable = no
-		$.level = _level
-		if savable
+	_level = $.level
+	$.level = 0
+	savable = yes
+	try
+		activeDocument.path
+	catch err
+		alert '保存してください\nこのドキュメントは一度も保存されていません。\nドキュメントを保存後に再実行してください。'
+		savable = no
+	$.level = _level
+	if savable
+		if activeDocument.saved
+			input()
+		else
 			if confirm 'ドキュメントが保存されていません。\n保存しますか？'
 				activeDocument.save()
 				input()
