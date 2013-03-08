@@ -329,6 +329,7 @@ hideLayerWithoutSelf = (layer) ->
 				sub.visible = off
 		hideLayerWithoutSelf parent
 	layer.visible = on # 自分だけ表示させる
+	layer.name = layer.name.replace /__v__$/i, ''
 
 showLayer = (layer) ->
 	parent = layer.parent

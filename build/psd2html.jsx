@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r45
+ * psd2html.js - v@1.0.0 r46
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -556,7 +556,8 @@ hideLayerWithoutSelf = function(layer) {
     }
     hideLayerWithoutSelf(parent);
   }
-  return layer.visible = true;
+  layer.visible = true;
+  return layer.name = layer.name.replace(/__v__$/i, '');
 };
 
 showLayer = function(layer) {
