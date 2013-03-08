@@ -35,10 +35,9 @@ module.exports = (grunt) ->
 					'src/DialogUI.class.coffee'
 					'src/main.coffee'
 				]
-		uglify:
+		concat:
 			options:
 				banner: '\uFEFF' + '<%= meta.banner %>' + '\n\n' # add BOM for Photoshop JSX
-				beautify: on
 			dist:
 				src: [
 					'<%= coffee.dist.dest %>'
@@ -57,7 +56,7 @@ module.exports = (grunt) ->
 				files: '<%= coffee.dist.src %>'
 				tasks: [
 					'coffee'
-					'uglify'
+					'concat'
 					'gitcommit'
 					'notifyDone'
 				]
@@ -65,7 +64,7 @@ module.exports = (grunt) ->
 					interrupt: on
 	grunt.registerTask 'default', [
 		'coffee'
-		'uglify'
+		'concat'
 		'update'
 		'docco'
 		'gitcommit'
@@ -77,7 +76,7 @@ module.exports = (grunt) ->
 	proc = require 'child_process'
 	exec = proc.exec
 
-	grunt.loadNpmTasks 'grunt-contrib-uglify'
+	grunt.loadNpmTasks 'grunt-contrib-concat'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
 	grunt.loadNpmTasks 'grunt-contrib-clean'
 	grunt.loadNpmTasks 'grunt-docco'
