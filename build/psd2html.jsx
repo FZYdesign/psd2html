@@ -278,4 +278,5 @@ Number.prototype.fillZero = function(e) {
             return n.val() && (a = "png"), e.val() && (a = "gif"), this.close(), exec(c, a, s, t.val());
         });
     });
-}, documents.length ? activeDocument.saved || alert("ドキュメントが保存されていません。\n保存しますか？") : alert("ドキュメントが開かれていません。\nドキュメントが開かれていないので、この処理は中止されました。");
+}, documents.length ? activeDocument.saved ? input() : prompt("ドキュメントが保存されていません。\n保存しますか？") ? (activeDocument.save(), 
+input()) : alert("保存してください\nドキュメントを保存後に再実行してください。") : alert("ドキュメントが開かれていません\nドキュメントが開かれていないので、この処理は中止されました。");

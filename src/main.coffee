@@ -502,11 +502,15 @@ input = ->
 
 if documents.length
 	if activeDocument.saved
-		
+		input()
 	else
-		alert 'ドキュメントが保存されていません。\n保存しますか？'
+		if prompt 'ドキュメントが保存されていません。\n保存しますか？'
+			activeDocument.save()
+			input()
+		else
+			alert '保存してください\nドキュメントを保存後に再実行してください。'
 else
-	alert 'ドキュメントが開かれていません。\nドキュメントが開かれていないので、この処理は中止されました。'
+	alert 'ドキュメントが開かれていません\nドキュメントが開かれていないので、この処理は中止されました。'
 
 
 
