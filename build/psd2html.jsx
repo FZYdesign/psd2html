@@ -728,7 +728,7 @@ if (documents.length) {
         activeDocument.save();
         input();
       } catch (err) {
-        newSave();
+        alert('保存してください\nこのドキュメントは一度も保存されていません。\nドキュメントを保存後に再実行してください。');
       }
       $.level = _level;
     } else {
