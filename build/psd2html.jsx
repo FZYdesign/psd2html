@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r62
+ * psd2html.js - v@1.0.0 r63
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -669,7 +669,7 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
 input = function() {
   var $dialog;
   return $dialog = new DialogUI('PSD to PNG', 700, 430, null, function() {
-    var $boundsOffsetX, $boundsOffsetY, $gif, $mix, $png, $saveFolder, $types;
+    var $gif, $mix, $offsetX, $offsetY, $png, $saveFolder, $types;
     this.addText('書き出しフォルダ', 120, 20, 10, 50);
     $saveFolder = this.addTextbox(540, 20, 60, 70);
     $saveFolder.val(activeDocument.path + '/' + activeDocument.name.replace(/\.[a-z0-9_]+$/i, '') + '/');
@@ -691,12 +691,12 @@ input = function() {
     $png = this.addRadio('全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290);
     $gif = this.addRadio('全ての画像を強制的にGIFで書き出す。', 600, 20, 10, 320);
     this.addText('ドキュメントの原点のオフセットX', 300, 20, 10, 350);
-    $boundsOffsetX = this.addTextbox(40, 20, 190, 350);
-    $boundsOffsetX.val(0);
+    $offsetX = this.addTextbox(40, 20, 190, 350);
+    $offsetX.val(0);
     this.addText('px', 300, 20, 235, 350);
     this.addText('ドキュメントの原点のオフセットY', 300, 20, 310, 350);
-    $boundsOffsetY = this.addTextbox(40, 20, 490, 350);
-    $boundsOffsetY.val(0);
+    $offsetY = this.addTextbox(40, 20, 490, 350);
+    $offsetY.val(0);
     this.addText('px', 300, 20, 535, 350);
     return this.ok(function() {
       var $type, ext, i, saveFolderPath, typeFlag, _i, _len;
@@ -714,8 +714,8 @@ input = function() {
       if ($gif.val()) {
         ext = 'gif';
       }
-      boundsOffsetX = $boundsOffsetX.val();
-      boundsOffsetY = $boundsOffsetY.val();
+      offsetX = $offsetX.val();
+      offsetY = $offsetY.val();
       this.close();
       return exec(typeFlag, ext, saveFolderPath, $mix.val());
     });

@@ -475,12 +475,12 @@ input = ->
 		$png = @addRadio '全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290
 		$gif = @addRadio '全ての画像を強制的にGIFで書き出す。', 600, 20, 10, 320
 		@addText 'ドキュメントの原点のオフセットX', 300, 20, 10, 350
-		$boundsOffsetX = @addTextbox 40, 20, 190, 350
-		$boundsOffsetX.val 0
+		$offsetX = @addTextbox 40, 20, 190, 350
+		$offsetX.val 0
 		@addText 'px', 300, 20, 235, 350
 		@addText 'ドキュメントの原点のオフセットY', 300, 20, 310, 350
-		$boundsOffsetY = @addTextbox 40, 20, 490, 350
-		$boundsOffsetY.val 0
+		$offsetY = @addTextbox 40, 20, 490, 350
+		$offsetY.val 0
 		@addText 'px', 300, 20, 535, 350
 		@ok ->
 			saveFolderPath = encodeURI $saveFolder.val()
@@ -490,8 +490,8 @@ input = ->
 					typeFlag += Math.pow 2, i
 			ext = 'png' if $png.val()
 			ext = 'gif' if $gif.val()
-			boundsOffsetX = $boundsOffsetX.val()
-			boundsOffsetY = $boundsOffsetY.val()
+			offsetX = $offsetX.val()
+			offsetY = $offsetY.val()
 			@close()
 			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
 
