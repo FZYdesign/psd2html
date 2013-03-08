@@ -718,7 +718,7 @@ input = function() {
 };
 
 if (documents.length) {
-  if (!activeDocument.saved) {
+  if (activeDocument.saved) {
     input();
   } else {
     _level = $.level;

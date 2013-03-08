@@ -501,7 +501,7 @@ input = ->
 			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
 
 if documents.length
-	unless activeDocument.saved
+	if activeDocument.saved
 		input()
 	else
 		_level = $.level
