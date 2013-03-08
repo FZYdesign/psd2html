@@ -45,8 +45,7 @@ newSave = function() {
   desc3 = new ActionDescriptor();
   desc4 = new ActionDescriptor();
   desc4.putBoolean(stringIDToTypeID("maximizeCompatibility"), true);
-  desc3.putObject(charIDToTypeID("As  "), charIDToTypeID("Pht3"), desc4);
-  return executeAction(charIDToTypeID("save"), desc3, DialogModes.NO);
+  return executeAction(charIDToTypeID("save"), null, DialogModes.YES);
 };
 
 ControlUI = (function() {
