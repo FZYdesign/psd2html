@@ -1,7 +1,7 @@
 {
   "name": "psd2html",
   "version": "1.0.0",
-  "revision": 34,
+  "revision": 35,
   "description": "HTML&CSS, JSON form PSD",
   "repository": {
     "type": "git",
