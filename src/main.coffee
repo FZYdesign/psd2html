@@ -504,15 +504,18 @@ if documents.length
 	unless activeDocument.saved
 		input()
 	else
+		_level = $.level
+		$.level = 0
+		savable = yes
+		try
+			activeDocument.path
+		catch err
+			alert '保存してください\nこのドキュメントは一度も保存されていません。\nドキュメントを保存後に再実行してください。'
+			savable = no
+		$.level = _level
 		if confirm 'ドキュメントが保存されていません。\n保存しますか？'
-			_level = $.level
-			$.level = 0
-			try
-				activeDocument.save()
-				input()
-			catch err
-				alert '保存してください\nこのドキュメントは一度も保存されていません。\nドキュメントを保存後に再実行してください。'
-			$.level = _level
+			activeDocument.save()
+			input()
 		else
 			alert '保存してください\nドキュメントを保存後に再実行してください。'
 else
