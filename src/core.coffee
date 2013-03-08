@@ -17,6 +17,7 @@ isNaN = global.isNaN
 
 # ## Functions
 # ### 別名で保存
+
 idsave = charIDToTypeID( "save" )
 desc3 = new ActionDescriptor()
 idAs = charIDToTypeID( "As  " )
