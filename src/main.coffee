@@ -476,7 +476,7 @@ if documents.length
 		@addText '書き出しフォルダ', 120, 20, 10, 50
 		$saveFolder = @addTextbox 540, 20, 60, 70
 		if activeDocument.saved # ドキュメントが保存されていれば、そのフォルダをデフォルトにする
-			$saveFolder.val activeDocument.path + '/'
+			$saveFolder.val activeDocument.path + '/' + activeDocument.name + '/'
 		@addButton '選択', 80, 20, 610, 70,
 			click: ->
 				saveFolder = Folder.selectDialog '保存先のフォルダを選択してください'
