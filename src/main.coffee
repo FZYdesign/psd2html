@@ -459,7 +459,7 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 
 # ## 入力ダイアログの表示
 input = ->
-	$dialog = new DialogUI 'PSD to PNG', 700, 430, null, ->
+	$dialog = new DialogUI 'PSD to HTML', 700, 430, null, ->
 		@addText '書き出しフォルダ', 120, 20, 10, 50
 		$saveFolder = @addTextbox 540, 20, 60, 70
 		$saveFolder.val activeDocument.path + '/' + activeDocument.name.replace(/\.[a-z0-9_]+$/i, '') + '/'

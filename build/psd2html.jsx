@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r69
+ * psd2html.js - v@1.0.0 r70
  * update: 2013-03-08
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -668,7 +668,7 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
 
 input = function() {
   var $dialog;
-  return $dialog = new DialogUI('PSD to PNG', 700, 430, null, function() {
+  return $dialog = new DialogUI('PSD to HTML', 700, 430, null, function() {
     var $gif, $mix, $offsetX, $offsetY, $png, $saveFolder, $types;
     this.addText('書き出しフォルダ', 120, 20, 10, 50);
     $saveFolder = this.addTextbox(540, 20, 60, 70);
