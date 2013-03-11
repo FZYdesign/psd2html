@@ -321,10 +321,10 @@ input = ->
 		$offsetY = @addTextbox 40, 20, 490, 350
 		$offsetY.val 0
 		@addText 'px', 300, 20, 535, 350
-		@addText 'ドキュメントの原点のオフセットX', 300, 20, 10, 350
-		$offsetX = @addTextbox 40, 20, 190, 350
+		@addText 'ドキュメントの原点のオフセットX', 300, 20, 10, 380
+		$offsetX = @addTextbox 40, 20, 190, 380
 		$offsetX.val 0
-		@addText 'px', 300, 20, 235, 350
+		@addText 'px', 300, 20, 235, 380
 		@ok ->
 			saveFolderPath = encodeURI $saveFolder.val()
 			typeFlag = 0

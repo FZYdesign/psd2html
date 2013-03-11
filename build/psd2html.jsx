@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r172
+ * psd2html.js - v@1.1.0 r173
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -877,10 +877,10 @@ input = function() {
     $offsetY = this.addTextbox(40, 20, 490, 350);
     $offsetY.val(0);
     this.addText('px', 300, 20, 535, 350);
-    this.addText('ドキュメントの原点のオフセットX', 300, 20, 10, 350);
-    $offsetX = this.addTextbox(40, 20, 190, 350);
+    this.addText('ドキュメントの原点のオフセットX', 300, 20, 10, 380);
+    $offsetX = this.addTextbox(40, 20, 190, 380);
     $offsetX.val(0);
-    this.addText('px', 300, 20, 235, 350);
+    this.addText('px', 300, 20, 235, 380);
     return this.ok(function() {
       var $type, ext, i, saveFolderPath, typeFlag, _i, _len;
       saveFolderPath = encodeURI($saveFolder.val());
