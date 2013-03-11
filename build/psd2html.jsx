@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r74
+ * psd2html.js - v@1.1.0 r75
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -756,11 +756,11 @@ input = function() {
     });
     this.addText('書き出し形式', 120, 20, 10, 160);
     $types = [];
-    $types.push(this.addCheckbox('HTML&CSS', 220, 20, 10, 190));
-    $types.push(this.addCheckbox('JSON', 220, 20, 450, 190));
-    $types.push(this.addCheckbox('LESS&SASS', 220, 20, 230, 190));
-    $types.push(this.addCheckbox('jQuery', 220, 20, 230, 190));
-    $types.push(this.addCheckbox('JSFL', 220, 20, 230, 190));
+    $types.push(this.addCheckbox('HTML&CSS', 180, 20, 10, 190));
+    $types.push(this.addCheckbox('JSON', 180, 20, 190, 190));
+    $types.push(this.addCheckbox('LESS&SASS', 180, 20, 190, 190));
+    $types.push(this.addCheckbox('jQuery', 180, 20, 230, 190));
+    $types.push(this.addCheckbox('JSFL', 180, 20, 230, 190));
     this.addText('オプション', 120, 20, 10, 230);
     $mix = this.addCheckbox('背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。', 600, 20, 10, 260);
     $png = this.addRadio('全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290);

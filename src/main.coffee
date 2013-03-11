@@ -442,11 +442,11 @@ input = ->
 				$saveFolder.val decodeURI saveFolder.getRelativeURI '/' if saveFolder
 		@addText '書き出し形式', 120, 20, 10, 160
 		$types = []
-		$types.push @addCheckbox 'HTML&CSS', 220, 20, 10, 190
-		$types.push @addCheckbox 'JSON', 220, 20, 450, 190
-		$types.push @addCheckbox 'LESS&SASS', 220, 20, 230, 190
-		$types.push @addCheckbox 'jQuery', 220, 20, 230, 190
-		$types.push @addCheckbox 'JSFL', 220, 20, 230, 190
+		$types.push @addCheckbox 'HTML&CSS', 180, 20, 10, 190
+		$types.push @addCheckbox 'JSON', 180, 20, 190, 190
+		$types.push @addCheckbox 'LESS&SASS', 180, 20, 190, 190
+		$types.push @addCheckbox 'jQuery', 180, 20, 230, 190
+		$types.push @addCheckbox 'JSFL', 180, 20, 230, 190
 		@addText 'オプション', 120, 20, 10, 230
 		$mix = @addCheckbox '背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。', 600, 20, 10, 260
 		$png = @addRadio '全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290
