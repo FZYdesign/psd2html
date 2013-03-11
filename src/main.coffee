@@ -218,6 +218,7 @@ output = (layers, ext, mix) ->
 		else if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
 			do ->
 				newLayer = cloneLayer layer
+				toSmartObject newLayer
 		# スマートオブジェクトであり、且つ表示状態であれば抽出する
 		else if layer.visible and layer.kind is LayerKind.SMARTOBJECT
 			extract layer, mix, ext
