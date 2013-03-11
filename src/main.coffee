@@ -19,23 +19,6 @@ structures = []
 fileNames = {} # ファイル名重複対策
 fileNameCounter = 0 # ファイル名重複対策
 
-# ## Utility Function
-# ### 数値処理拡張
-Number::fillZero = (n) ->
-  zeros = new Array n + 1 - @toString(10).length
-  zeros.join('0') + @
-
-# ## Debug Function
-# ### ハッシュの出力用（再帰なし）
-varDump = (obj) ->
-	_rlt = []
-	for own _key of obj
-		try
-			_val = obj[_key]
-			unless _val instanceof Function then _rlt.push _key + ': ' + _val
-		catch error
-	alert _rlt.join '\n'
-
 # ## Functions
 getLayerPath = (layer) ->
 	path = []
@@ -50,50 +33,6 @@ getLayerPath = (layer) ->
 	path.pop()
 	path.reverse()
 	encodeURI '/' + path.join '/'
-
-# 保存
-saveJPEG = (fileName, dir = '', quality = 80) ->
-	folder = new Folder saveFolder + dir + '/'
-	unless folder.exists
-		folder.create()
-	filePath = folder + '/' + fileName + '.jpg'
-	file = new File filePath
-	jpegOpt = new JPEGSaveOptions()
-	jpegOpt.embedColorProfile = false
-	jpegOpt.quality = parseInt(12 * (quality / 100), 10)
-	jpegOpt.formatOptions = FormatOptions.OPTIMIZEDBASELINE
-	jpegOpt.scans = 3
-	jpegOpt.matte = MatteType.NONE
-	activeDocument.saveAs file, jpegOpt, true, Extension.LOWERCASE
-	file.getRelativeURI saveFolder
-
-saveGIF = (fileName, dir = '') ->
-	folder = new Folder saveFolder + dir + '/'
-	unless folder.exists
-		folder.create()
-	filePath = folder + '/' + fileName + '.gif'
-	file = new File filePath
-	gifOpt = new GIFSaveOptions()
-	gifOpt.colors = 32
-	gifOpt.dither = Dither.NONE
-	gifOpt.interlacted = on
-	gifOpt.matte = MatteType.WHITE
-	gifOpt.palette = Palette.EXACT
-	gifOpt.preserveExactColors = off
-	gifOpt.transparency = on
-	activeDocument.saveAs file, gifOpt, on, Extension.LOWERCASE
-	file.getRelativeURI saveFolder
-
-savePNG = (fileName, dir = '') ->
-	folder = new Folder saveFolder + dir + '/'
-	unless folder.exists
-		folder.create()
-	filePath = folder + '/' + fileName + '.png'
-	file = new File filePath
-	pngOpt = new PNGSaveOptions
-	pngOpt.interlaced = off
-	activeDocument.saveAs file, pngOpt, on, Extension.LOWERCASE
-	file.getRelativeURI saveFolder
 
 # 閉じる
 close = (showDialog = false) ->
@@ -134,14 +73,6 @@ restoreDimension = ->
 	activeDocument.resizeCanvas originalWidth - boundsOffsetX, originalHeight - boundsOffsetY, AnchorPosition.TOPLEFT
 	activeDocument.resizeCanvas originalWidth, originalHeight, AnchorPosition.BOTTOMRIGHT
 
-selectAllLayers = ->
-	ref = new ActionReference()
-	ref.putEnumerated charIDToTypeID('Lyr '), charIDToTypeID('Ordn'), charIDToTypeID('Trgt')
-	desc = new ActionDescriptor()
-	desc.putReference charIDToTypeID('null'), ref
-	executeAction stringIDToTypeID('selectAllLayers'), desc, DialogModes.NO
-	return
-
 isSelect = ->
 	flag = true
 	_level = $.level
@@ -175,33 +106,24 @@ copy = (layer) ->
 		activeDocument.activeLayer = dot
 		activeDocument.selection.fill black, ColorBlendMode.NORMAL, 100, false
 		fillTransparent = true
-
 	activeDocument.selection.deselect()
-
 	selectAllLayers()
-
 	activeDocument.selection.select [
 		[bounds.x,  bounds.y]
 		[bounds.x2, bounds.y]
 		[bounds.x2, bounds.y2]
 		[bounds.x,  bounds.y2]
 	]
-
 	activeDocument.selection.copy true
 	activeDocument.selection.deselect()
-
 	activeDocument.activeLayer = layer
-
 	if dot
 		dot.remove()
-
 	dot = null
-
 	fillTransparent
 
 paste = (doc, fillTransparent) ->
 	doc.paste()
-
 	layer = activeDocument.activeLayer
 	layer.translate -layer.bounds[0], -layer.bounds[1]
 	if fillTransparent
@@ -213,7 +135,6 @@ paste = (doc, fillTransparent) ->
 		]
 		activeDocument.selection.clear()
 	activeDocument.selection.deselect();
-
 	doc = null
 	return
 
@@ -232,12 +153,12 @@ createDocument = (width, height, name) ->
 outputCSS = (structures) ->
 	cssText = []
 	for layer, i in structures
-		# z = 10000 - i * 10
 		z = i * 10
 		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
 		text =
 			"""
 			.#{className} \{
+				overflow: hidden;
 				position: absolute;
 				top: #{layer.y}px;
 				left: #{layer.x}px;
@@ -253,10 +174,6 @@ outputCSS = (structures) ->
 	cssFile.encoding = 'utf-8'
 	cssFile.write cssText.join '\n'
 	cssFile.close()
-
-	cssText = null
-	cssFile = null
-
 	htmlTags = []
 	for layer, i in structures
 		z = i * 10
@@ -287,15 +204,6 @@ outputCSS = (structures) ->
 	htmlFile.encoding = 'utf-8'
 	htmlFile.write html.replace '$', htmlTags.join '\n'
 	htmlFile.close()
-
-	htmlTags = null
-	html = null
-	htmlFile = null
-
-	return
-
-outputLESS = (structures) ->
-	alert 'LESSはまだつくってない'
 	return
 
 outputJSON = (structures) ->
@@ -320,7 +228,91 @@ outputJSON = (structures) ->
 	outputFile.encoding = 'utf-8'
 	outputFile.write '[' + outputText.join(',\n') + ']'
 	outputFile.close()
+	return
 
+outputLESS = (structures) ->
+	cssText = []
+	for layer, i in structures
+		z = i * 10
+		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
+		text =
+			"""
+			.#{className} \{
+				overflow: hidden;
+				position: absolute;
+				top: #{layer.y}px;
+				left: #{layer.x}px;
+				z-index: #{z};
+				width: #{layer.width}px;
+				height: #{layer.height}px;
+				background: url(#{layer.url}) no-repeat scroll 0 0;
+			\}
+			"""
+		cssText.push text
+	lessFile = new File saveFolder + '/' + 'position.css'
+	lessFile.open 'w'
+	lessFile.encoding = 'utf-8'
+	lessFile.write cssText.join '\n'
+	lessFile.close()
+	scssFile = new FIle saveFolder + '/' + '_position.scss'
+	lessFile.copy scssFile
+	cssText = []
+	for layer, i in structures
+		z = i * 10
+		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
+		text =
+			"""
+			.#{className}
+				overflow: hidden
+				position: absolute
+				top: #{layer.y}px
+				left: #{layer.x}px
+				z-index: #{z}
+				width: #{layer.width}px
+				height: #{layer.height}px
+				background: url(#{layer.url}) no-repeat scroll 0 0
+			"""
+		cssText.push text
+	sassFile = new File saveFolder + '/' + '_position.sass'
+	sassFile.open 'w'
+	sassFile.encoding = 'utf-8'
+	sassFile.write cssText.join '\n'
+	sassFile.close()
+	return
+
+outputJQUERY = (structures) ->
+	jsvText = []
+	jsjText = []
+	for layer, i in structures
+		z = i * 10
+		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
+		variableName = className.replace /_([a-z])/g, ($0, $1) -> $1.toUpperCase()
+		vtext = "$#{variableName}"
+		jsvText.push vtext
+		jtext = "$#{variableName} = $('.#{className}')"
+		jsjText.push jtext
+	jsFile = new File saveFolder + '/' + 'position.js'
+	jsFile.open 'w'
+	jsFile.encoding = 'utf-8'
+	jsFile.writeln 'var\n\t' + jsvText.join(',\n\t') + '\n\n'
+	jsFile.write jsjText.join ';\n'
+	jsFile.close()
+	cfvText = []
+	cfjText = []
+	for layer, i in structures
+		z = i * 10
+		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
+		variableName = className.replace /_([a-z])/g, ($0, $1) -> $1.toUpperCase()
+		vtext = "$#{variableName}"
+		cfvText.push vtext
+		jtext = "$#{variableName} = $ '.#{className}'"
+		cfjText.push jtext
+	cfFile = new File saveFolder + '/' + 'position.coffee'
+	cfFile.open 'w'
+	cfFile.encoding = 'utf-8'
+	cfFile.writeln '\n' + cfvText.join(' =\n') + ' = undefined\n\n'
+	cfFile.write cfjText.join '\n'
+	cfFile.close()
 	return
 
 hideLayerWithoutSelf = (layer) ->
@@ -346,54 +338,39 @@ showLayer = (layer) ->
 # 抽出
 extract = (layer, mix, extFlag) ->
 	name = layer.name
-
 	# 拡張子の分離
 	if ext = name.match /(\.(?:jpe?g|gif|png))$/i
 		ext = ext[0]
 		name = name.replace ext, ''
-
 	ext = '.' + extFlag if extFlag
-
 	unless mix
 		# 自分以外を隠す
 		hideLayerWithoutSelf layer
-
 	dir = getLayerPath layer
-
 	name = name.replace(/^[0-9]/, 'image$0').replace(/[^a-z0-9_\.:-]/gi, '')
 	if name is 'image'
 		name = 'image_' + nameCounter++
 	if fileNames[dir + name]
 		name += fileNameCounter++
 	fileNames[dir + name] = on
-
 	fillTransparent = copy layer
-
 	metrics = getMetrics layer
-
 	newDoc = createDocument metrics.width, metrics.height, layer.name
-
 	paste newDoc, fillTransparent
-
 	if ext is '.jpeg' or ext is '.jpg'
 		url = saveJPEG name, dir
 	else if ext is '.gif'
 		url = saveGIF name, dir
 	else
 		url = savePNG name, dir
-
 	newDoc.close SaveOptions.DONOTSAVECHANGES
-
 	data = metrics
 	data.name = name
 	data.url = url
-
 	structures.push data
-
 	unless mix
 		# 表示状態を元に戻す
 		showLayer layer
-
 	return
 
 # アウトプット
@@ -418,43 +395,39 @@ output = (layers, ext, mix) ->
 # @param {Boolean} mix 背景を含めるかどうか
 #
 exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
-
 	# カンバスサイズをメモ
 	originalWidth = activeDocument.width
 	originalHeight = activeDocument.height
 	currentWidth = originalWidth
 	currentHeight = originalHeight
-
 	# フォルダインスタンス
 	saveFolder = new Folder saveFolderPath
-
 	# レイヤーの取得
 	layers = activeDocument.layers
-
 	# **画像の出力** レイヤーの数だけ再帰
 	output layers, ext, mix
-
 	# ### カンバスサイズをもとに戻す
 	restoreDimension()
-
 	# **ここまでが画像の出力**
 	# * * *
-
 	# 取得したレイヤーを逆にする
 	structures.reverse()
-
 	# ### 出力タイプにより出力
 	FLAG_CSS = 1
-	FLAG_LESS = 2
-	FLAG_JSON = 4
+	FLAG_JSON = 2
+	FLAG_LESS = 4
+	FLAG_JQUERY = 8
+	FLAG_JSFL = 16
 	if typeFlag & FLAG_CSS
 		outputCSS structures
+	if typeFlag & FLAG_LESS
+		outputLESS structures
+	if typeFlag & FLAG_JQUERY
+		outputJQUERY structures
 	if typeFlag & FLAG_JSON
 		outputJSON structures
-
 	# ### 完了
 	alert 'Complete!!\nお待たせしました。終了です。'
-
 	return
 
 # ## 入力ダイアログの表示
@@ -470,8 +443,10 @@ input = ->
 		@addText '書き出し形式', 120, 20, 10, 160
 		$types = []
 		$types.push @addCheckbox 'HTML&CSS', 220, 20, 10, 190
-		$types.push @addCheckbox 'LESS', 220, 20, 230, 190
 		$types.push @addCheckbox 'JSON', 220, 20, 450, 190
+		$types.push @addCheckbox 'LESS&SASS', 220, 20, 230, 190
+		$types.push @addCheckbox 'jQuery', 220, 20, 230, 190
+		$types.push @addCheckbox 'JSFL', 220, 20, 230, 190
 		@addText 'オプション', 120, 20, 10, 230
 		$mix = @addCheckbox '背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。', 600, 20, 10, 260
 		$png = @addRadio '全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290
@@ -516,7 +491,3 @@ if documents.length
 			input()
 else
 	alert 'ドキュメントが開かれていません\n対象のドキュメントが開かれていません。'
-
-
-
-
