@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r178
+ * psd2html.js - v@1.1.0 r179
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
