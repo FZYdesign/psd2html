@@ -210,6 +210,7 @@ outputJSON = (structures) ->
 	outputText = []
 	for layer, i in structures
 		z = i * 10
+		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
 		text = """
 			\{
 				"name": "#{layer.name}",
