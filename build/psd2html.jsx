@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r109
+ * psd2html.js - v@1.1.0 r110
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -711,9 +711,10 @@ extract = function(layer, mix, extFlag) {
 };
 
 output = function(layers, ext, mix) {
-  var layer, _i, _len;
-  for (_i = 0, _len = layers.length; _i < _len; _i++) {
-    layer = layers[_i];
+  var layer, _i, _len, _ref;
+  _ref = activeDocument.layers;
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    layer = _ref[_i];
     if (layer.typename === 'LayerSet' && layer.visible) {
       output(layer.layers, mix, ext);
     } else if (layer.visible && layer.kind !== LayerKind.SMARTOBJECT && /^o:/.test(layer.name)) {
@@ -732,7 +733,7 @@ output = function(layers, ext, mix) {
 };
 
 exec = function(typeFlag, ext, saveFolderPath, mix) {
-  var FLAG_CSS, FLAG_JQUERY, FLAG_JSFL, FLAG_JSON, FLAG_LESS, layers;
+  var FLAG_CSS, FLAG_JQUERY, FLAG_JSFL, FLAG_JSON, FLAG_LESS;
   if (saveFolderPath == null) {
     saveFolderPath = '~/';
   }
@@ -744,8 +745,7 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   currentWidth = originalWidth;
   currentHeight = originalHeight;
   saveFolder = new Folder(saveFolderPath);
-  layers = activeDocument.layers;
-  output(layers, ext, mix);
+  output(ext, mix);
   restoreDimension();
   structures.reverse();
   FLAG_CSS = 1;
