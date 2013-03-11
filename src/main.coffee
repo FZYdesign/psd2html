@@ -215,6 +215,7 @@ output = (layers, ext, mix) ->
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
 		if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
 			do ->
+				alert layer.name + ' is スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する'
 				newLayer = cloneLayer layer
 				newLayer = toSmartObject newLayer
 				layer.visible = off
