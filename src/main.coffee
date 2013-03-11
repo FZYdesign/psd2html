@@ -211,6 +211,7 @@ extract = (layer, mix, extFlag) ->
 # アウトプット
 output = (layers, ext, mix) ->
 	for layer in layers
+		alert layer.name
 		# 表示状態であり、フォルダレイヤーであれば再帰する
 		if layer.typename is 'LayerSet' and layer.visible
 			output layer.layers, mix, ext
@@ -225,7 +226,6 @@ output = (layers, ext, mix) ->
 		# スマートオブジェクトであり、且つ表示状態であれば抽出する
 		else if layer.visible and layer.kind is LayerKind.SMARTOBJECT
 			extract layer, mix, ext
-		alert layer.name
 	return
 
 # ## exec
