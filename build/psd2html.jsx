@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r153
+ * psd2html.js - v@1.1.0 r154
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -205,7 +205,7 @@ outputCSS = function(structures) {
     layer = structures[i];
     z = i * 10;
     className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
-    p = layer.text ? '<p>' + layer.text.join('</p><p>') + '</p>' : '';
+    p = layer.text.length ? '<p>' + layer.text.join('</p><p>') + '</p>' : '';
     text = "<div class=\"" + className + "\">\n	" + p + "\n	<!-- <img class=\"" + className + "\" src=\"" + layer.url + "\" alt=\"" + layer.name + "\" width=\"" + layer.width + "\" height=\"" + layer.height + "\"> -->\n	<!-- <div class=\"" + className + "\" data-src=\"" + layer.url + "\" data-width=\"" + layer.width + "\" data-height=\"" + layer.height + "\" data-x=\"" + layer.x + "\" data-y=\"" + layer.y + "\" data-z=\"" + z + "\">" + layer.name + "</div> -->\n</div>";
     htmlTags.push(text);
   }
