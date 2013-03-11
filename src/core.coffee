@@ -46,7 +46,11 @@ selectAllLayers = ->
 	return
 
 cloneLayer = (layer) ->
-
+	removeCOPY = (layer) ->
+	layer.name = layer.name.replace /\s+のコピー(?:\s+\d+)?$/, ''
+	if layer.layers
+		for child in layer.layers
+			removeCOPY child
 
 # #### スマートオブジェクトに変更
 toSmartObject = (layer) ->
