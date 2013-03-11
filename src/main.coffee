@@ -444,7 +444,7 @@ input = ->
 		$types = []
 		$types.push @addCheckbox 'HTML\&CSS', 180, 20, 10, 190
 		$types.push @addCheckbox 'JSON', 180, 20, 190, 190
-		$types.push @addCheckbox 'LESS&SASS', 180, 20, 380, 190
+		$types.push @addCheckbox 'LESS\&SASS', 180, 20, 380, 190
 		$types.push @addCheckbox 'jQuery', 180, 20, 570, 190
 		$types.push @addCheckbox 'JSFL', 180, 20, 660, 190
 		@addText 'オプション', 120, 20, 10, 230
