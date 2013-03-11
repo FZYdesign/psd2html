@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r165
+ * psd2html.js - v@1.1.0 r166
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -753,7 +753,6 @@ output = function(layers, ext, mix) {
     if (layer.visible && layer.kind !== LayerKind.SMARTOBJECT && /^o:/.test(layer.name)) {
       (function() {
         var newLayer, originalText;
-        alert(layer.name + ' is スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する');
         newLayer = cloneLayer(layer);
         newLayer = toSmartObject(newLayer);
         layer.visible = false;
@@ -764,13 +763,9 @@ output = function(layers, ext, mix) {
         return layer.visible = true;
       })();
     } else if (layer.typename === 'LayerSet' && layer.visible) {
-      alert(layer.name + ' is 表示状態であり、フォルダレイヤーであれば再帰する');
       output(layer.layers, mix, ext);
     } else if (layer.visible && layer.kind === LayerKind.SMARTOBJECT) {
-      alert(layer.name + ' is スマートオブジェクトであり、且つ表示状態であれば抽出する');
       extract(layer, mix, ext);
-    } else {
-      alert(layer.name + ' is どれでもない');
     }
   }
 };
