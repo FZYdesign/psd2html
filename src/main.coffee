@@ -210,7 +210,7 @@ extract = (layer, mix, extFlag) ->
 
 # アウトプット
 output = (layers, ext, mix) ->
-	for layer in activeDocument.layers
+	for layer in layers
 		# 表示状態であり、フォルダレイヤーであれば再帰する
 		if layer.typename is 'LayerSet' and layer.visible
 			output layer.layers, mix, ext
@@ -244,8 +244,10 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	currentHeight = originalHeight
 	# フォルダインスタンス
 	saveFolder = new Folder saveFolderPath
+	# レイヤーの取得
+	layers = activeDocument.layers
 	# **画像の出力** レイヤーの数だけ再帰
-	output ext, mix
+	output layers, ext, mix
 	# ### カンバスサイズをもとに戻す
 	restoreDimension()
 	# **ここまでが画像の出力**
