@@ -53,6 +53,12 @@ toSmartObject = (layer) ->
 	layer
 
 # ### FileSystem Function
+
+# #### Revert
+# 復帰 (前回の保存時に戻す。)
+revert = ->
+	executeAction charIDToTypeID('Rvrt'), undefined, DialogModes.NO
+
 saveJPEG = (fileName, dir = '', quality = 80) ->
 	folder = new Folder saveFolder + dir + '/'
 	unless folder.exists
