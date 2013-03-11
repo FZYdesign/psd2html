@@ -131,7 +131,7 @@ outputCSS = (structures) ->
 	cssText = [
 		"""
 		#wrapper {
-			/* width: 800px; */
+			width: #{pageWidth}px;
 			margin: 0 auto;
 		}
 		"""

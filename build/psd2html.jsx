@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r176
+ * psd2html.js - v@1.1.0 r177
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -187,7 +187,7 @@ savePNG = function(fileName, dir) {
 
 outputCSS = function(structures) {
   var className, cssFile, cssText, html, htmlFile, htmlTags, i, layer, p, text, z, _i, _j, _len, _len1;
-  cssText = ["#wrapper {\n	/* width: 800px; */\n	margin: 0 auto;\n}"];
+  cssText = ["#wrapper {\n	width: " + pageWidth + "px;\n	margin: 0 auto;\n}"];
   for (i = _i = 0, _len = structures.length; _i < _len; i = ++_i) {
     layer = structures[i];
     z = i * 10;
