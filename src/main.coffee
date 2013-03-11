@@ -222,6 +222,8 @@ output = (layers, ext, mix) ->
 				newLayer.name = newLayer.name.replace /^o:/, ''
 				originalText = getText layer
 				extract newLayer, mix, ext, originalText
+				newLayer.remove()
+				layer.visible = on
 		# 表示状態であり、フォルダレイヤーであれば再帰する
 		else if layer.typename is 'LayerSet' and layer.visible
 			alert layer.name + ' is 表示状態であり、フォルダレイヤーであれば再帰する'

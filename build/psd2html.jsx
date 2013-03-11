@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r164
+ * psd2html.js - v@1.1.0 r165
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -759,7 +759,9 @@ output = function(layers, ext, mix) {
         layer.visible = false;
         newLayer.name = newLayer.name.replace(/^o:/, '');
         originalText = getText(layer);
-        return extract(newLayer, mix, ext, originalText);
+        extract(newLayer, mix, ext, originalText);
+        newLayer.remove();
+        return layer.visible = true;
       })();
     } else if (layer.typename === 'LayerSet' && layer.visible) {
       alert(layer.name + ' is 表示状態であり、フォルダレイヤーであれば再帰する');
