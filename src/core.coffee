@@ -45,6 +45,9 @@ selectAllLayers = ->
 	executeAction stringIDToTypeID('selectAllLayers'), desc, DialogModes.NO
 	return
 
+cloneLayer = (layer) ->
+
+
 # #### スマートオブジェクトに変更
 toSmartObject = (layer) ->
 	if layer?
