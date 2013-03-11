@@ -57,14 +57,22 @@ cloneLayer = (layer, removeCOPYText) ->
 	activeDocument.activeLayer = newLayer
 	newLayer
 
-
-
 # #### スマートオブジェクトに変更
 toSmartObject = (layer) ->
 	if layer?
 		activeDocument.activeLayer = layer
 	executeAction stringIDToTypeID('newPlacedLayer'), undefined, DialogModes.NO
 	activeDocument.activeLayer
+
+# #### テキストの抽出
+getText = (layer = activeDocument.layers[0]) ->
+	text = []
+	extructText = (layer) ->
+		if layer.layers
+			for child in layer.layers
+				extructText child
+		else if layer.kind is LayerKind.TEXT
+			text.push LEST
 
 # ### FileSystem Function
 
