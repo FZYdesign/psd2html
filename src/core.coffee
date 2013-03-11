@@ -47,10 +47,10 @@ selectAllLayers = ->
 
 cloneLayer = (layer) ->
 	removeCOPY = (layer) ->
-	layer.name = layer.name.replace /\s+のコピー(?:\s+\d+)?$/, ''
-	if layer.layers
-		for child in layer.layers
-			removeCOPY child
+		layer.name = layer.name.replace /\s+のコピー(?:\s+\d+)?$/, ''
+		if layer.layers
+			for child in layer.layers
+				removeCOPY child
 	newLayer = layer.duplicate()
 	removeCOPY newLayer
 	activeDocument.activeLayer = newLayer
