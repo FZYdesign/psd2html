@@ -133,6 +133,9 @@ outputCSS = (structures) ->
 		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
 		text =
 			"""
+			/*
+			 * #{layer.text.join(' ')}
+			 */
 			.#{className} \{
 				overflow: hidden;
 				position: absolute;
