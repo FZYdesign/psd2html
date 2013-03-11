@@ -215,7 +215,7 @@ output = (layers, ext, mix) ->
 		if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
 			do ->
 				newLayer = cloneLayer layer
-				toSmartObject newLayer
+				newLayer = toSmartObject newLayer
 				layer.visible = off
 				newLayer.name = newLayer.name.replace /^o:/, ''
 				extract newLayer, mix, ext
