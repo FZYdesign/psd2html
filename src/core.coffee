@@ -61,7 +61,7 @@ toSmartObject = (layer) ->
 	if layer?
 		activeDocument.activeLayer = layer
 	executeAction stringIDToTypeID('newPlacedLayer'), undefined, DialogModes.NO
-	layer
+	activeDocument.activeLayer
 
 # ### FileSystem Function
 

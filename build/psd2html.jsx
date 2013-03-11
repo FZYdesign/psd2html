@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r125
+ * psd2html.js - v@1.1.0 r126
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -88,7 +88,7 @@ toSmartObject = function(layer) {
     activeDocument.activeLayer = layer;
   }
   executeAction(stringIDToTypeID('newPlacedLayer'), void 0, DialogModes.NO);
-  return layer;
+  return activeDocument.activeLayer;
 };
 
 revert = function() {
