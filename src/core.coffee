@@ -141,9 +141,7 @@ outputCSS = (structures) ->
 			''
 		text =
 			"""
-			/*
-			 * #{p}
-			 */
+			#{p}
 			.#{className} \{
 				overflow: hidden;
 				position: absolute;
