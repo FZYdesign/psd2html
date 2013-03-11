@@ -444,9 +444,9 @@ input = ->
 		$types = []
 		$types.push @addCheckbox 'HTML&CSS', 180, 20, 10, 190
 		$types.push @addCheckbox 'JSON', 180, 20, 190, 190
-		$types.push @addCheckbox 'LESS&SASS', 180, 20, 190, 190
-		$types.push @addCheckbox 'jQuery', 180, 20, 230, 190
-		$types.push @addCheckbox 'JSFL', 180, 20, 230, 190
+		$types.push @addCheckbox 'LESS&SASS', 180, 20, 380, 190
+		$types.push @addCheckbox 'jQuery', 180, 20, 570, 190
+		$types.push @addCheckbox 'JSFL', 180, 20, 660, 190
 		@addText 'オプション', 120, 20, 10, 230
 		$mix = @addCheckbox '背景やバウンディングボックスの範囲に入るオブジェクトも含めて書きだす。', 600, 20, 10, 260
 		$png = @addRadio '全ての画像を強制的にPNGで書き出す。', 600, 20, 10, 290
