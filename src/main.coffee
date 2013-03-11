@@ -209,11 +209,21 @@ extract = (layer, mix, extFlag, originalText = []) ->
 		showLayer layer
 	return
 
+hideIgnoreLayers = (layer) ->
+	hide = (layer) ->
+		if layer.visible and not /^_:/.test(layer.name)
+			if layer.layers
+				for child in layer.layers
+					hide child
+		else
+			layer.visible = off
+	hide layer
 # アウトプット
 output = (layers, ext, mix) ->
 	for layer in layers
 		# なにもしないレイヤー
 		if /^_:/.test(layer.name)
+			continue
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
 		else if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
 			do ->
