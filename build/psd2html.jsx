@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r82
+ * psd2html.js - v@1.1.0 r83
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -758,7 +758,7 @@ input = function() {
     $types = [];
     $types.push(this.addCheckbox('HTML＆CSS', 180, 20, 10, 190));
     $types.push(this.addCheckbox('JSON', 180, 20, 190, 190));
-    $types.push(this.addCheckbox('LESS\\&SASS', 180, 20, 380, 190));
+    $types.push(this.addCheckbox('LESS＆SASS', 180, 20, 380, 190));
     $types.push(this.addCheckbox('jQuery', 180, 20, 570, 190));
     $types.push(this.addCheckbox('JSFL', 180, 20, 660, 190));
     this.addText('オプション', 120, 20, 10, 230);
