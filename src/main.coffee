@@ -295,7 +295,7 @@ outputJQUERY = (structures) ->
 	jsFile.open 'w'
 	jsFile.encoding = 'utf-8'
 	jsFile.writeln 'var\n\t' + jsvText.join(',\n\t') + ';\n\n'
-	jsFile.write jsjText.join ';\n'
+	jsFile.write jsjText.join(';\n') + ';'
 	jsFile.close()
 	cfvText = []
 	cfjText = []
