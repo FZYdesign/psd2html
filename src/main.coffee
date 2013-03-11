@@ -218,6 +218,7 @@ hideIgnoreLayers = (layer) ->
 		else
 			layer.visible = off
 	hide layer
+
 # アウトプット
 output = (layers, ext, mix) ->
 	for layer in layers
