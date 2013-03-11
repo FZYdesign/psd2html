@@ -219,6 +219,7 @@ output = (layers, ext, mix) ->
 			do ->
 				newLayer = cloneLayer layer
 				toSmartObject newLayer
+				layer.visible = off
 		# スマートオブジェクトであり、且つ表示状態であれば抽出する
 		else if layer.visible and layer.kind is LayerKind.SMARTOBJECT
 			extract layer, mix, ext
