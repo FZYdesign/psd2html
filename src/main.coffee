@@ -19,6 +19,7 @@ nameCounter = 0
 structures = []
 fileNames = {} # ファイル名重複対策
 fileNameCounter = 0 # ファイル名重複対策
+startTime = 0
 
 # ## Functions
 getLayerPath = (layer) ->
@@ -257,6 +258,8 @@ output = (layers, ext, mix) ->
 # @param {Boolean} mix 背景を含めるかどうか
 #
 exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
+	# タイマースタート
+	startTime = new Date()
 	# カンバスサイズをメモ
 	originalWidth = activeDocument.width
 	originalHeight = activeDocument.height
@@ -289,6 +292,10 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	if typeFlag & FLAG_JSON
 		outputJSON structures
 	# ### 完了
+	endTime = (new Date) - startTime
+	period = do ->
+		endTimeDate = new Date
+
 	if confirm 'Complete!!\nお待たせしました。終了です。\nレイヤーの状態を元に戻しますか?'
 		revert()
 	return
