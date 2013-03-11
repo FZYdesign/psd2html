@@ -310,7 +310,7 @@ outputJQUERY = (structures) ->
 	cfFile = new File saveFolder + '/' + 'position.coffee'
 	cfFile.open 'w'
 	cfFile.encoding = 'utf-8'
-	cfFile.writeln '\n' + cfvText.join(' =\n') + ' = undefined\n\n'
+	cfFile.writeln cfvText.join(' =\n') + ' = undefined\n\n'
 	cfFile.write cfjText.join '\n'
 	cfFile.close()
 	return

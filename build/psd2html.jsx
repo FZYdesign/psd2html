@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r89
+ * psd2html.js - v@1.1.0 r90
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -606,7 +606,7 @@ outputJQUERY = function(structures) {
   cfFile = new File(saveFolder + '/' + 'position.coffee');
   cfFile.open('w');
   cfFile.encoding = 'utf-8';
-  cfFile.writeln('\n' + cfvText.join(' =\n') + ' = undefined\n\n');
+  cfFile.writeln(cfvText.join(' =\n') + ' = undefined\n\n');
   cfFile.write(cfjText.join('\n'));
   cfFile.close();
 };
