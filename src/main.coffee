@@ -219,6 +219,7 @@ output = (layers, ext, mix) ->
 			do ->
 				newLayer = cloneLayer layer
 				toSmartObject newLayer
+				alert 123
 				layer.visible = off
 				newLayer = newLayer.replace /^o:/, ''
 				extract newLayer, mix, ext
