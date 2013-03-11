@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r156
+ * psd2html.js - v@1.1.0 r157
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -187,13 +187,13 @@ savePNG = function(fileName, dir) {
 
 outputCSS = function(structures) {
   var className, cssFile, cssText, html, htmlFile, htmlTags, i, layer, p, text, z, _i, _j, _len, _len1;
-  cssText = ["#wrapper {\n	\n}"];
+  cssText = ["#wrapper {\n\n}"];
   for (i = _i = 0, _len = structures.length; _i < _len; i = ++_i) {
     layer = structures[i];
     z = i * 10;
     className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
     p = layer.text.length ? "/*\n * " + (layer.text.join(' ')) + "\n */" : '';
-    text = "" + p + "\n." + className + " \{\n	overflow: hidden;\n	position: absolute;\n	top: " + layer.y + "px;\n	left: " + layer.x + "px;\n	z-index: " + z + ";\n	width: " + layer.width + "px;\n	height: " + layer.height + "px;\n	background: url(" + layer.url + ") no-repeat scroll 0 0;\n\}";
+    text = "" + p + "\n." + className + " \{\n	text-indent: 100%;\n	white-space: nowrap;\n	overflow: hidden;\n	position: absolute;\n	top: " + layer.y + "px;\n	left: " + layer.x + "px;\n	z-index: " + z + ";\n	width: " + layer.width + "px;\n	height: " + layer.height + "px;\n	background: url(" + layer.url + ") no-repeat scroll 0 0;\n\}";
     cssText.push(text);
   }
   cssFile = new File(saveFolder + '/' + 'style.css');

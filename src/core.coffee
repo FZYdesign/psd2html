@@ -131,7 +131,7 @@ outputCSS = (structures) ->
 	cssText = [
 		"""
 		#wrapper {
-			
+
 		}
 		"""
 	]
@@ -150,6 +150,8 @@ outputCSS = (structures) ->
 			"""
 			#{p}
 			.#{className} \{
+				text-indent: 100%;
+				white-space: nowrap;
 				overflow: hidden;
 				position: absolute;
 				top: #{layer.y}px;
