@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r92
+ * psd2html.js - v@1.1.0 r93
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -526,7 +526,7 @@ outputJSON = function(structures) {
     layer = structures[i];
     z = i * 10;
     className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
-    text = "\{\n	\"name\": \"" + layer.name + "\",\n	\"className\": \"" + layer.name + "\",\n	\"x\": " + layer.x + ",\n	\"y\": " + layer.y + ",\n	\"z\": " + z + ",\n	\"width\": " + layer.width + ",\n	\"height\": " + layer.height + ",\n	\"url\": \"" + layer.url + "\"\n\}";
+    text = "\{\n	\"name\": \"" + layer.name + "\",\n	\"className\": \"" + className + "\",\n	\"x\": " + layer.x + ",\n	\"y\": " + layer.y + ",\n	\"z\": " + z + ",\n	\"width\": " + layer.width + ",\n	\"height\": " + layer.height + ",\n	\"url\": \"" + layer.url + "\"\n\}";
     outputText.push(text);
   }
   outputFile = new File(saveFolder + '/' + 'structures.json');

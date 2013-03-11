@@ -214,7 +214,7 @@ outputJSON = (structures) ->
 		text = """
 			\{
 				"name": "#{layer.name}",
-				"className": "#{layer.name}",
+				"className": "#{className}",
 				"x": #{layer.x},
 				"y": #{layer.y},
 				"z": #{z},
