@@ -211,7 +211,6 @@ extract = (layer, mix, extFlag) ->
 # アウトプット
 output = (layers, ext, mix) ->
 	for layer in layers
-		alert layer.name
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
 		if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
 			do ->
