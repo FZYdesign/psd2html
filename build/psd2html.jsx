@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r140
+ * psd2html.js - v@1.1.0 r141
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -211,7 +211,7 @@ outputCSS = function(structures) {
   htmlFile = new File(saveFolder + '/' + 'index.html');
   htmlFile.open('w');
   htmlFile.encoding = 'utf-8';
-  htmlFile.write(html.replace('$', htmlTags.join('\n')));
+  htmlFile.write(html.replace('$', htmlTags.reverse().join('\n')));
   htmlFile.close();
 };
 

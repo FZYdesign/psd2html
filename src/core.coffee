@@ -181,7 +181,7 @@ outputCSS = (structures) ->
 	htmlFile = new File saveFolder + '/' + 'index.html'
 	htmlFile.open 'w'
 	htmlFile.encoding = 'utf-8'
-	htmlFile.write html.replace '$', htmlTags.join '\n'
+	htmlFile.write html.replace '$', htmlTags.reverse().join '\n'
 	htmlFile.close()
 	return
 
