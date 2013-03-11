@@ -247,8 +247,7 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	# フォルダインスタンス
 	saveFolder = new Folder saveFolderPath
 	# レイヤーの取得
-	layers = for layer in activeDocument.layers
-		layer
+	layers = for layer in activeDocument.layers then layer
 	# **画像の出力** レイヤーの数だけ再帰
 	output layers, ext, mix
 	# ### カンバスサイズをもとに戻す
