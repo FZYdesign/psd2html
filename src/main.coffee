@@ -212,17 +212,17 @@ extract = (layer, mix, extFlag) ->
 output = (layers, ext, mix) ->
 	for layer in layers
 		alert layer.name
-		# 表示状態であり、フォルダレイヤーであれば再帰する
-		if layer.typename is 'LayerSet' and layer.visible
-			output layer.layers, mix, ext
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
-		else if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
+		if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
 			do ->
 				newLayer = cloneLayer layer
 				toSmartObject newLayer
 				layer.visible = off
 				newLayer = newLayer.replace /^o:/, ''
 				extract newLayer, mix, ext
+		# 表示状態であり、フォルダレイヤーであれば再帰する
+		else if layer.typename is 'LayerSet' and layer.visible
+			output layer.layers, mix, ext
 		# スマートオブジェクトであり、且つ表示状態であれば抽出する
 		else if layer.visible and layer.kind is LayerKind.SMARTOBJECT
 			extract layer, mix, ext
