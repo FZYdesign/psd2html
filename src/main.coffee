@@ -442,7 +442,7 @@ input = ->
 				$saveFolder.val decodeURI saveFolder.getRelativeURI '/' if saveFolder
 		@addText '書き出し形式', 120, 20, 10, 160
 		$types = []
-		$types.push @addCheckbox 'HTML&amp;CSS', 180, 20, 10, 190
+		$types.push @addCheckbox 'HTML\&CSS', 180, 20, 10, 190
 		$types.push @addCheckbox 'JSON', 180, 20, 190, 190
 		$types.push @addCheckbox 'LESS&SASS', 180, 20, 380, 190
 		$types.push @addCheckbox 'jQuery', 180, 20, 570, 190
