@@ -157,8 +157,13 @@ outputCSS = (structures) ->
 	for layer, i in structures
 		z = i * 10
 		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
+		p = if layer.text
+			'<p>' + layer.text.join('</p><p>') + '</p>'
+		else
+			''
 		text = """
 			<div class="#{className}">
+				#{p}
 				<!-- <img class="#{className}" src="#{layer.url}" alt="#{layer.name}" width="#{layer.width}" height="#{layer.height}"> -->
 				<!-- <div class="#{className}" data-src="#{layer.url}" data-width="#{layer.width}" data-height="#{layer.height}" data-x="#{layer.x}" data-y="#{layer.y}" data-z="#{z}">#{layer.name}</div> -->
 			</div>
