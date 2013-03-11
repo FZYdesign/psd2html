@@ -1,6 +1,6 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r171
- * update: 2013-03-11
+ * psd2html.js - v@1.1.0 r172
+ * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
  * License: Licensed under the MIT License
@@ -845,7 +845,7 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
 
 input = function() {
   var $dialog;
-  return $dialog = new DialogUI('PSD to HTML', 700, 430, null, function() {
+  return $dialog = new DialogUI('PSD to HTML', 700, 480, null, function() {
     var $gif, $mix, $offsetX, $offsetY, $png, $saveFolder, $types;
     this.addText('書き出しフォルダ', 120, 20, 10, 50);
     $saveFolder = this.addTextbox(540, 20, 60, 70);
@@ -877,6 +877,10 @@ input = function() {
     $offsetY = this.addTextbox(40, 20, 490, 350);
     $offsetY.val(0);
     this.addText('px', 300, 20, 535, 350);
+    this.addText('ドキュメントの原点のオフセットX', 300, 20, 10, 350);
+    $offsetX = this.addTextbox(40, 20, 190, 350);
+    $offsetX.val(0);
+    this.addText('px', 300, 20, 235, 350);
     return this.ok(function() {
       var $type, ext, i, saveFolderPath, typeFlag, _i, _len;
       saveFolderPath = encodeURI($saveFolder.val());
