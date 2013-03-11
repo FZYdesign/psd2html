@@ -220,6 +220,7 @@ output = (layers, ext, mix) ->
 				newLayer = cloneLayer layer
 				toSmartObject newLayer
 				layer.visible = off
+				newLayer = newLayer.replace /^o:/, ''
 				extract newLayer, mix, ext
 		# スマートオブジェクトであり、且つ表示状態であれば抽出する
 		else if layer.visible and layer.kind is LayerKind.SMARTOBJECT
