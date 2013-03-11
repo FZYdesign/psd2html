@@ -1,4 +1,4 @@
-$.level = 1
+$.level = 0
 
 # ## Global Settings
 # 単位をピクセルに
