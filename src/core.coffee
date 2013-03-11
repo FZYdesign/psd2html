@@ -142,7 +142,7 @@ outputCSS = (structures) ->
 		text =
 			"""
 			/*
-			 * #{layer.text.join(' ')}
+			 * #{p}
 			 */
 			.#{className} \{
 				overflow: hidden;
