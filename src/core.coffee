@@ -128,7 +128,13 @@ savePNG = (fileName, dir = '') ->
 
 # ### Output Function
 outputCSS = (structures) ->
-	cssText = []
+	cssText = [
+		"""
+		#wrapper {
+			
+		}
+		"""
+	]
 	for layer, i in structures
 		z = i * 10
 		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
@@ -185,7 +191,11 @@ outputCSS = (structures) ->
 		</haed>
 		<body>
 
+		<div id="wrapper">
+
 		$
+
+		</div>
 
 		</body>
 		</html>

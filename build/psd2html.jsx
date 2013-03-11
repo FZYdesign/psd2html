@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r155
+ * psd2html.js - v@1.1.0 r156
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -187,7 +187,7 @@ savePNG = function(fileName, dir) {
 
 outputCSS = function(structures) {
   var className, cssFile, cssText, html, htmlFile, htmlTags, i, layer, p, text, z, _i, _j, _len, _len1;
-  cssText = [];
+  cssText = ["#wrapper {\n	\n}"];
   for (i = _i = 0, _len = structures.length; _i < _len; i = ++_i) {
     layer = structures[i];
     z = i * 10;
@@ -210,7 +210,7 @@ outputCSS = function(structures) {
     text = "<div class=\"" + className + "\">\n	" + p + "\n	<!-- <img class=\"" + className + "\" src=\"" + layer.url + "\" alt=\"" + layer.name + "\" width=\"" + layer.width + "\" height=\"" + layer.height + "\"> -->\n	<!-- <div class=\"" + className + "\" data-src=\"" + layer.url + "\" data-width=\"" + layer.width + "\" data-height=\"" + layer.height + "\" data-x=\"" + layer.x + "\" data-y=\"" + layer.y + "\" data-z=\"" + z + "\">" + layer.name + "</div> -->\n</div>";
     htmlTags.push(text);
   }
-  html = "<!doctype html>\n<html>\n<head>\n	<meta charset=\"utf-8\">\n	<link rel=\"stylesheet\" href=\"style.css\">\n</haed>\n<body>\n\n$\n\n</body>\n</html>";
+  html = "<!doctype html>\n<html>\n<head>\n	<meta charset=\"utf-8\">\n	<link rel=\"stylesheet\" href=\"style.css\">\n</haed>\n<body>\n\n<div id=\"wrapper\">\n\n$\n\n</div>\n\n</body>\n</html>";
   htmlFile = new File(saveFolder + '/' + 'index.html');
   htmlFile.open('w');
   htmlFile.encoding = 'utf-8';
