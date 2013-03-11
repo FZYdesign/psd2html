@@ -171,7 +171,7 @@ showLayer = (layer) ->
 		showLayer parent
 
 # 抽出
-extract = (layer, mix, extFlag, originalLayer) ->
+extract = (layer, mix, extFlag, originalText) ->
 	name = layer.name
 	# 拡張子の分離
 	if ext = name.match /(\.(?:jpe?g|gif|png))$/i
