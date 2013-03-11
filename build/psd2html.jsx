@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r147
+ * psd2html.js - v@1.1.0 r148
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -191,7 +191,8 @@ outputCSS = function(structures) {
     layer = structures[i];
     z = i * 10;
     className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
-    p = text = "/*\n * " + (layer.text.join(' ')) + "\n */\n." + className + " \{\n	overflow: hidden;\n	position: absolute;\n	top: " + layer.y + "px;\n	left: " + layer.x + "px;\n	z-index: " + z + ";\n	width: " + layer.width + "px;\n	height: " + layer.height + "px;\n	background: url(" + layer.url + ") no-repeat scroll 0 0;\n\}";
+    p = layer.text ? "/*\n * " + (layer.text.join(' ')) + "\n */" : '';
+    text = "/*\n * " + (layer.text.join(' ')) + "\n */\n." + className + " \{\n	overflow: hidden;\n	position: absolute;\n	top: " + layer.y + "px;\n	left: " + layer.x + "px;\n	z-index: " + z + ";\n	width: " + layer.width + "px;\n	height: " + layer.height + "px;\n	background: url(" + layer.url + ") no-repeat scroll 0 0;\n\}";
     cssText.push(text);
   }
   cssFile = new File(saveFolder + '/' + 'style.css');
