@@ -51,6 +51,10 @@ cloneLayer = (layer) ->
 	if layer.layers
 		for child in layer.layers
 			removeCOPY child
+	newLayer = layer.duplicate()
+	removeCOPY newLayer
+	activeDocument.activeLayer = newLayer
+	newLayer
 
 # #### スマートオブジェクトに変更
 toSmartObject = (layer) ->
