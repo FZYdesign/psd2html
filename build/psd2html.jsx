@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r174
+ * psd2html.js - v@1.1.0 r175
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -846,7 +846,7 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
 input = function() {
   var $dialog;
   return $dialog = new DialogUI('PSD to HTML', 700, 480, null, function() {
-    var $docWidth, $gif, $mix, $offsetX, $offsetY, $png, $saveFolder, $types;
+    var $gif, $mix, $offsetX, $offsetY, $pageWidth, $png, $saveFolder, $types;
     this.addText('書き出しフォルダ', 120, 20, 10, 50);
     $saveFolder = this.addTextbox(540, 20, 60, 70);
     $saveFolder.val(activeDocument.path + '/' + activeDocument.name.replace(/\.[a-z0-9_]+$/i, '') + '/');
@@ -877,9 +877,9 @@ input = function() {
     $offsetY = this.addTextbox(40, 20, 490, 350);
     $offsetY.val(0);
     this.addText('px', 300, 20, 535, 350);
-    this.addText('ドキュメントの幅', 300, 20, 10, 380);
-    $docWidth = this.addTextbox(40, 20, 190, 380);
-    $docWidth.val(0);
+    this.addText('ページの幅', 300, 20, 10, 380);
+    $pageWidth = this.addTextbox(40, 20, 190, 380);
+    $pageWidth.val(0);
     this.addText('px', 300, 20, 235, 380);
     return this.ok(function() {
       var $type, ext, i, saveFolderPath, typeFlag, _i, _len;

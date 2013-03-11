@@ -321,9 +321,9 @@ input = ->
 		$offsetY = @addTextbox 40, 20, 490, 350
 		$offsetY.val 0
 		@addText 'px', 300, 20, 535, 350
-		@addText 'ドキュメントの幅', 300, 20, 10, 380
-		$docWidth = @addTextbox 40, 20, 190, 380
-		$docWidth.val 0
+		@addText 'ページの幅', 300, 20, 10, 380
+		$pageWidth = @addTextbox 40, 20, 190, 380
+		$pageWidth.val 0
 		@addText 'px', 300, 20, 235, 380
 		@ok ->
 			saveFolderPath = encodeURI $saveFolder.val()
