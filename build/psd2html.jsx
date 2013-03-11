@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r131
+ * psd2html.js - v@1.1.0 r132
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -62,7 +62,7 @@ selectAllLayers = function() {
   executeAction(stringIDToTypeID('selectAllLayers'), desc, DialogModes.NO);
 };
 
-cloneLayer = function(layer) {
+cloneLayer = function(layer, removeCOPYText) {
   var newLayer, removeCOPY;
   removeCOPY = function(layer) {
     var child, _i, _len, _ref, _results;
@@ -78,7 +78,9 @@ cloneLayer = function(layer) {
     }
   };
   newLayer = layer.duplicate();
-  removeCOPY(newLayer);
+  if (removeCOPYText) {
+    removeCOPY(newLayer);
+  }
   activeDocument.activeLayer = newLayer;
   return newLayer;
 };

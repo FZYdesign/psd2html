@@ -45,16 +45,19 @@ selectAllLayers = ->
 	executeAction stringIDToTypeID('selectAllLayers'), desc, DialogModes.NO
 	return
 
-cloneLayer = (layer) ->
+# #### レイヤーのコピー
+cloneLayer = (layer, removeCOPYText) ->
 	removeCOPY = (layer) ->
 		layer.name = layer.name.replace /\s+のコピー(?:\s+\d+)?$/, ''
 		if layer.layers
 			for child in layer.layers
 				removeCOPY child
 	newLayer = layer.duplicate()
-	removeCOPY newLayer
+	removeCOPY newLayer if removeCOPYText
 	activeDocument.activeLayer = newLayer
 	newLayer
+
+
 
 # #### スマートオブジェクトに変更
 toSmartObject = (layer) ->
