@@ -254,7 +254,7 @@ outputLESS = (structures) ->
 	lessFile.encoding = 'utf-8'
 	lessFile.write cssText.join '\n'
 	lessFile.close()
-	scssFile = new FIle saveFolder + '/' + '_position.scss'
+	scssFile = new File saveFolder + '/' + '_position.scss'
 	lessFile.copy scssFile
 	cssText = []
 	for layer, i in structures

@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r85
+ * psd2html.js - v@1.1.0 r86
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -550,7 +550,7 @@ outputLESS = function(structures) {
   lessFile.encoding = 'utf-8';
   lessFile.write(cssText.join('\n'));
   lessFile.close();
-  scssFile = new FIle(saveFolder + '/' + '_position.scss');
+  scssFile = new File(saveFolder + '/' + '_position.scss');
   lessFile.copy(scssFile);
   cssText = [];
   for (i = _j = 0, _len1 = structures.length; _j < _len1; i = ++_j) {
