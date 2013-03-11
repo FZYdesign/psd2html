@@ -249,7 +249,7 @@ outputLESS = (structures) ->
 			\}
 			"""
 		cssText.push text
-	lessFile = new File saveFolder + '/' + 'position.css'
+	lessFile = new File saveFolder + '/' + 'position.less'
 	lessFile.open 'w'
 	lessFile.encoding = 'utf-8'
 	lessFile.write cssText.join '\n'

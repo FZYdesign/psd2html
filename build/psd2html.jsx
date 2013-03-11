@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r87
+ * psd2html.js - v@1.1.0 r88
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -545,7 +545,7 @@ outputLESS = function(structures) {
     text = "." + className + " \{\n	overflow: hidden;\n	position: absolute;\n	top: " + layer.y + "px;\n	left: " + layer.x + "px;\n	z-index: " + z + ";\n	width: " + layer.width + "px;\n	height: " + layer.height + "px;\n	background: url(" + layer.url + ") no-repeat scroll 0 0;\n\}";
     cssText.push(text);
   }
-  lessFile = new File(saveFolder + '/' + 'position.css');
+  lessFile = new File(saveFolder + '/' + 'position.less');
   lessFile.open('w');
   lessFile.encoding = 'utf-8';
   lessFile.write(cssText.join('\n'));
