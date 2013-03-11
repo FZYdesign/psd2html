@@ -202,6 +202,7 @@ extract = (layer, mix, extFlag, originalText) ->
 	data = metrics
 	data.name = name
 	data.url = url
+	data.text = originalText
 	structures.push data
 	unless mix
 		# 表示状態を元に戻す

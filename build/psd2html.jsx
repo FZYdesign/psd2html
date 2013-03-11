@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r138
+ * psd2html.js - v@1.1.0 r139
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -733,6 +733,7 @@ extract = function(layer, mix, extFlag, originalText) {
   data = metrics;
   data.name = name;
   data.url = url;
+  data.text = originalText;
   structures.push(data);
   if (!mix) {
     showLayer(layer);
