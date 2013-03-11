@@ -223,6 +223,7 @@ output = (layers, ext, mix) ->
 				extract newLayer, mix, ext, originalText
 				newLayer.remove()
 				layer.visible = on
+				$.gc()
 		# 表示状態であり、フォルダレイヤーであれば再帰する
 		else if layer.typename is 'LayerSet' and layer.visible
 			output layer.layers, mix, ext
