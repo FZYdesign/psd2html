@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r133
+ * psd2html.js - v@1.1.0 r134
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -110,7 +110,7 @@ getText = function(layer) {
       }
       return _results;
     } else if (layer.kind === LayerKind.TEXT) {
-      return text.push(LEST);
+      return text.push(layer.textItem.contents);
     }
   };
 };

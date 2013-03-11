@@ -72,7 +72,7 @@ getText = (layer = activeDocument.layers[0]) ->
 			for child in layer.layers
 				extructText child
 		else if layer.kind is LayerKind.TEXT
-			text.push LEST
+			text.push layer.textItem.contents
 
 # ### FileSystem Function
 
