@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r94
+ * psd2html.js - v@1.1.0 r95
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -132,6 +132,130 @@ savePNG = function(fileName, dir) {
   pngOpt.interlaced = false;
   activeDocument.saveAs(file, pngOpt, true, Extension.LOWERCASE);
   return file.getRelativeURI(saveFolder);
+};
+
+outputCSS = function(structures) {
+  var className, cssFile, cssText, html, htmlFile, htmlTags, i, layer, text, z, _i, _j, _len, _len1;
+  cssText = [];
+  for (i = _i = 0, _len = structures.length; _i < _len; i = ++_i) {
+    layer = structures[i];
+    z = i * 10;
+    className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
+    text = "." + className + " \{\n	overflow: hidden;\n	position: absolute;\n	top: " + layer.y + "px;\n	left: " + layer.x + "px;\n	z-index: " + z + ";\n	width: " + layer.width + "px;\n	height: " + layer.height + "px;\n	background: url(" + layer.url + ") no-repeat scroll 0 0;\n\}";
+    cssText.push(text);
+  }
+  cssFile = new File(saveFolder + '/' + 'style.css');
+  cssFile.open('w');
+  cssFile.encoding = 'utf-8';
+  cssFile.write(cssText.join('\n'));
+  cssFile.close();
+  htmlTags = [];
+  for (i = _j = 0, _len1 = structures.length; _j < _len1; i = ++_j) {
+    layer = structures[i];
+    z = i * 10;
+    className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
+    text = "<div class=\"" + className + "\">\n	<!-- <img class=\"" + className + "\" src=\"" + layer.url + "\" alt=\"" + layer.name + "\" width=\"" + layer.width + "\" height=\"" + layer.height + "\"> -->\n	<!-- <div class=\"" + className + "\" data-src=\"" + layer.url + "\" data-width=\"" + layer.width + "\" data-height=\"" + layer.height + "\" data-x=\"" + layer.x + "\" data-y=\"" + layer.y + "\" data-z=\"" + z + "\">" + layer.name + "</div> -->\n</div>";
+    htmlTags.push(text);
+  }
+  html = "<!doctype html>\n<html>\n<head>\n	<meta charset=\"utf-8\">\n	<link rel=\"stylesheet\" href=\"style.css\">\n</haed>\n<body>\n\n$\n\n</body>\n</html>";
+  htmlFile = new File(saveFolder + '/' + 'index.html');
+  htmlFile.open('w');
+  htmlFile.encoding = 'utf-8';
+  htmlFile.write(html.replace('$', htmlTags.join('\n')));
+  htmlFile.close();
+};
+
+outputJSON = function(structures) {
+  var className, i, layer, outputFile, outputText, text, z, _i, _len;
+  outputText = [];
+  for (i = _i = 0, _len = structures.length; _i < _len; i = ++_i) {
+    layer = structures[i];
+    z = i * 10;
+    className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
+    text = "\{\n	\"name\": \"" + layer.name + "\",\n	\"className\": \"" + className + "\",\n	\"x\": " + layer.x + ",\n	\"y\": " + layer.y + ",\n	\"z\": " + z + ",\n	\"width\": " + layer.width + ",\n	\"height\": " + layer.height + ",\n	\"url\": \"" + layer.url + "\"\n\}";
+    outputText.push(text);
+  }
+  outputFile = new File(saveFolder + '/' + 'structures.json');
+  outputFile.open('w');
+  outputFile.encoding = 'utf-8';
+  outputFile.write('[' + outputText.join(',\n') + ']');
+  outputFile.close();
+};
+
+outputLESS = function(structures) {
+  var className, cssText, i, layer, lessFile, sassFile, scssFile, text, z, _i, _j, _len, _len1;
+  cssText = [];
+  for (i = _i = 0, _len = structures.length; _i < _len; i = ++_i) {
+    layer = structures[i];
+    z = i * 10;
+    className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
+    text = "." + className + " \{\n	overflow: hidden;\n	position: absolute;\n	top: " + layer.y + "px;\n	left: " + layer.x + "px;\n	z-index: " + z + ";\n	width: " + layer.width + "px;\n	height: " + layer.height + "px;\n	background: url(" + layer.url + ") no-repeat scroll 0 0;\n\}";
+    cssText.push(text);
+  }
+  lessFile = new File(saveFolder + '/' + 'position.less');
+  lessFile.open('w');
+  lessFile.encoding = 'utf-8';
+  lessFile.write(cssText.join('\n'));
+  lessFile.close();
+  scssFile = new File(saveFolder + '/' + '_position.scss');
+  lessFile.copy(scssFile);
+  cssText = [];
+  for (i = _j = 0, _len1 = structures.length; _j < _len1; i = ++_j) {
+    layer = structures[i];
+    z = i * 10;
+    className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
+    text = "." + className + "\n	overflow: hidden\n	position: absolute\n	top: " + layer.y + "px\n	left: " + layer.x + "px\n	z-index: " + z + "\n	width: " + layer.width + "px\n	height: " + layer.height + "px\n	background: url(" + layer.url + ") no-repeat scroll 0 0";
+    cssText.push(text);
+  }
+  sassFile = new File(saveFolder + '/' + '_position.sass');
+  sassFile.open('w');
+  sassFile.encoding = 'utf-8';
+  sassFile.write(cssText.join('\n'));
+  sassFile.close();
+};
+
+outputJQUERY = function(structures) {
+  var cfFile, cfjText, cfvText, className, i, jsFile, jsjText, jsvText, jtext, layer, variableName, vtext, z, _i, _j, _len, _len1;
+  jsvText = [];
+  jsjText = [];
+  for (i = _i = 0, _len = structures.length; _i < _len; i = ++_i) {
+    layer = structures[i];
+    z = i * 10;
+    className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
+    variableName = className.replace(/_([a-z])/g, function($0, $1) {
+      return $1.toUpperCase();
+    });
+    vtext = "$" + variableName;
+    jsvText.push(vtext);
+    jtext = "$" + variableName + " = $('." + className + "')";
+    jsjText.push(jtext);
+  }
+  jsFile = new File(saveFolder + '/' + 'position.js');
+  jsFile.open('w');
+  jsFile.encoding = 'utf-8';
+  jsFile.writeln('var\n\t' + jsvText.join(',\n\t') + ';\n\n');
+  jsFile.write(jsjText.join(';\n') + ';');
+  jsFile.close();
+  cfvText = [];
+  cfjText = [];
+  for (i = _j = 0, _len1 = structures.length; _j < _len1; i = ++_j) {
+    layer = structures[i];
+    z = i * 10;
+    className = layer.url.replace(/\//g, '_').replace(/\.[a-z]+$/i, '');
+    variableName = className.replace(/_([a-z])/g, function($0, $1) {
+      return $1.toUpperCase();
+    });
+    vtext = "$" + variableName;
+    cfvText.push(vtext);
+    jtext = "$" + variableName + " = $ '." + className + "'";
+    cfjText.push(jtext);
+  }
+  cfFile = new File(saveFolder + '/' + 'position.coffee');
+  cfFile.open('w');
+  cfFile.encoding = 'utf-8';
+  cfFile.writeln(cfvText.join(' =\n') + ' = undefined\n\n');
+  cfFile.write(cfjText.join('\n'));
+  cfFile.close();
 };
 
 ControlUI = (function() {
