@@ -218,7 +218,8 @@ output = (layers, ext, mix) ->
 				newLayer = toSmartObject newLayer
 				layer.visible = off
 				newLayer.name = newLayer.name.replace /^o:/, ''
-				extract newLayer, mix, ext, layer
+				originalText = undefined
+				extract newLayer, mix, ext, originalText
 		# 表示状態であり、フォルダレイヤーであれば再帰する
 		else if layer.typename is 'LayerSet' and layer.visible
 			output layer.layers, mix, ext
