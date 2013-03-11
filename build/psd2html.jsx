@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r154
+ * psd2html.js - v@1.1.0 r155
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -113,6 +113,7 @@ getText = function(layer) {
       return text.push(layer.textItem.contents);
     }
   };
+  extructText(layer);
   return text;
 };
 
