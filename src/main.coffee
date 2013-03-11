@@ -224,10 +224,14 @@ output = (layers, ext, mix) ->
 				extract newLayer, mix, ext, originalText
 		# 表示状態であり、フォルダレイヤーであれば再帰する
 		else if layer.typename is 'LayerSet' and layer.visible
+			alert layer.name + ' is 表示状態であり、フォルダレイヤーであれば再帰する'
 			output layer.layers, mix, ext
 		# スマートオブジェクトであり、且つ表示状態であれば抽出する
 		else if layer.visible and layer.kind is LayerKind.SMARTOBJECT
+			alert layer.name + ' is スマートオブジェクトであり、且つ表示状態であれば抽出する'
 			extract layer, mix, ext
+		else
+			alert layer.name + ' is どれでもない'
 	return
 
 # ## exec

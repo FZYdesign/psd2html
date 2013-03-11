@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r163
+ * psd2html.js - v@1.1.0 r164
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -762,9 +762,13 @@ output = function(layers, ext, mix) {
         return extract(newLayer, mix, ext, originalText);
       })();
     } else if (layer.typename === 'LayerSet' && layer.visible) {
+      alert(layer.name + ' is 表示状態であり、フォルダレイヤーであれば再帰する');
       output(layer.layers, mix, ext);
     } else if (layer.visible && layer.kind === LayerKind.SMARTOBJECT) {
+      alert(layer.name + ' is スマートオブジェクトであり、且つ表示状態であれば抽出する');
       extract(layer, mix, ext);
+    } else {
+      alert(layer.name + ' is どれでもない');
     }
   }
 };
