@@ -11,6 +11,7 @@ currentWidth = 0
 currentHeight = 0
 boundsOffsetX = 0
 boundsOffsetY = 0
+pageWidth = 0
 offsetX = 0
 offsetY = 0
 saveFolder = null
@@ -335,6 +336,7 @@ input = ->
 			ext = 'gif' if $gif.val()
 			offsetX = parseInt($offsetX.val(), 10) * -1 or 0
 			offsetY = parseInt($offsetY.val(), 10) * -1 or 0
+			pageWidth = parseInt($pageWidth.val(), 10) or 0
 			@close()
 			exec typeFlag, ext, saveFolderPath, $mix.val() # 実行
 
