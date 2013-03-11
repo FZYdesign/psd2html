@@ -214,10 +214,13 @@ output = (layers, ext, mix) ->
 		# 表示状態であり、フォルダレイヤーであれば再帰する
 		if layer.typename is 'LayerSet' and layer.visible
 			output layer.layers, mix, ext
-		else
-			# スマートオブジェクトであり、且つ表示状態であれば抽出する
-			if layer.visible and layer.kind is LayerKind.SMARTOBJECT
-				extract layer, mix, ext
+		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
+		else if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
+			do ->
+				newLayer = cloneLayer layer
+		# スマートオブジェクトであり、且つ表示状態であれば抽出する
+		else if layer.visible and layer.kind is LayerKind.SMARTOBJECT
+			extract layer, mix, ext
 	return
 
 # ## exec
