@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.0.0 r73
+ * psd2html.js - v@1.1.0 r74
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -14,7 +14,7 @@ var ControlUI, DialogUI, Math, NAMESPACE, VERSION, WindowUI, boundsOffsetX, boun
 
 NAMESPACE = 'psd2html';
 
-VERSION = '1.0.0';
+VERSION = '1.1.0';
 
 global = this;
 

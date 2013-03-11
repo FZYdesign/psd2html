@@ -2,7 +2,7 @@
 
 # ## Constants
 NAMESPACE = 'psd2html'
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 
 # ## Alias
 global = @
