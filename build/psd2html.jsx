@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r160
+ * psd2html.js - v@1.1.0 r161
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -769,7 +769,7 @@ output = function(layers, ext, mix) {
 };
 
 exec = function(typeFlag, ext, saveFolderPath, mix) {
-  var FLAG_CSS, FLAG_JQUERY, FLAG_JSFL, FLAG_JSON, FLAG_LESS, layers;
+  var FLAG_CSS, FLAG_JQUERY, FLAG_JSFL, FLAG_JSON, FLAG_LESS, layer, layers;
   if (saveFolderPath == null) {
     saveFolderPath = '~/';
   }
@@ -781,7 +781,16 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   currentWidth = originalWidth;
   currentHeight = originalHeight;
   saveFolder = new Folder(saveFolderPath);
-  layers = activeDocument.layers.slice();
+  layers = (function() {
+    var _i, _len, _ref, _results;
+    _ref = activeDocument.layers;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      layer = _ref[_i];
+      _results.push(layer);
+    }
+    return _results;
+  })();
   output(layers, ext, mix);
   restoreDimension();
   structures.reverse();
