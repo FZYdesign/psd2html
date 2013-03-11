@@ -212,8 +212,10 @@ extract = (layer, mix, extFlag, originalText = []) ->
 # アウトプット
 output = (layers, ext, mix) ->
 	for layer in layers
+		# なにもしないレイヤー
+		if /^_:/.test(layer.name)
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
-		if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
+		else if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
 			do ->
 				newLayer = cloneLayer layer
 				newLayer = toSmartObject newLayer

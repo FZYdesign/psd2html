@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r167
+ * psd2html.js - v@1.1.0 r168
  * update: 2013-03-11
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -750,7 +750,9 @@ output = function(layers, ext, mix) {
   var layer, _i, _len;
   for (_i = 0, _len = layers.length; _i < _len; _i++) {
     layer = layers[_i];
-    if (layer.visible && layer.kind !== LayerKind.SMARTOBJECT && /^o:/.test(layer.name)) {
+    if (/^_:/.test(layer.name)) {
+
+    } else if (layer.visible && layer.kind !== LayerKind.SMARTOBJECT && /^o:/.test(layer.name)) {
       (function() {
         var newLayer, originalText;
         newLayer = cloneLayer(layer);
