@@ -131,6 +131,7 @@ outputCSS = (structures) ->
 	for layer, i in structures
 		z = i * 10
 		className = layer.url.replace(/\//g, '_').replace /\.[a-z]+$/i, ''
+		p = 
 		text =
 			"""
 			/*
