@@ -225,7 +225,7 @@ output = (layers, ext, mix) ->
 		# スマートオブジェクトであり、且つ表示状態であれば抽出する
 		else if layer.visible and layer.kind is LayerKind.SMARTOBJECT
 			extract layer, mix, ext
-		alert 123
+		alert layer.name
 	return
 
 # ## exec
