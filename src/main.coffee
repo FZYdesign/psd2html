@@ -271,7 +271,8 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	if typeFlag & FLAG_JSON
 		outputJSON structures
 	# ### 完了
-	alert 'Complete!!\nお待たせしました。終了です。'
+	if confirm 'Complete!!\nお待たせしました。終了です。\nレイヤーの状態を元に戻しますか?'
+		revert()
 	return
 
 # ## 入力ダイアログの表示
