@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r202
+ * psd2html.js - v@1.1.0 r203
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -741,7 +741,7 @@ output = function(layers, ext) {
     layer = layers[_i];
     if (/^_:/.test(layer.name)) {
       continue;
-    } else if (layer.typename === 'LayerSet' && !/^o:/.test(layer.name)) {
+    } else if (layer.layers && !/^o:/.test(layer.name)) {
       output(layer.layers, ext);
       $.gc();
     } else {

@@ -203,7 +203,7 @@ output = (layers, ext) ->
 		if /^_:/.test(layer.name)
 			continue
 		# フォルダレイヤーであり、スマートオブジェクト化対象外の場合は子レイヤーを再帰処理する
-		else if layer.typename is 'LayerSet' and not /^o:/.test(layer.name)
+		else if layer.layers and not /^o:/.test(layer.name)
 			output layer.layers, ext
 			$.gc()
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
