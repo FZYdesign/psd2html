@@ -227,8 +227,11 @@ output = (layers, ext, mix) ->
 		# なにもしないレイヤー
 		if /^_:/.test(layer.name)
 			continue
+		# 表示状態であり、フォルダレイヤーであれば再帰する
+		else if layer.typename is 'LayerSet' and not /^o:/.test(layer.name)
+			output layer.layers, mix, ext
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
-		else if layer.visible and layer.kind isnt LayerKind.SMARTOBJECT and /^o:/.test(layer.name)
+		else
 			do ->
 				newLayer = cloneLayer layer
 				hideIgnoreLayers newLayer
@@ -239,13 +242,8 @@ output = (layers, ext, mix) ->
 				extract newLayer, mix, ext, originalText
 				newLayer.remove()
 				layer.visible = on
+				newLayer = null
 				$.gc()
-		# 表示状態であり、フォルダレイヤーであれば再帰する
-		else if layer.typename is 'LayerSet' and layer.visible
-			output layer.layers, mix, ext
-		# スマートオブジェクトであり、且つ表示状態であれば抽出する
-		else if layer.visible and layer.kind is LayerKind.SMARTOBJECT
-			extract layer, mix, ext
 	return
 
 # ## 非表示レイヤーに対象外マークをつけて、全レイヤーを非表示にする
