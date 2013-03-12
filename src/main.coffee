@@ -227,7 +227,7 @@ output = (layers, ext, mix) ->
 		# なにもしないレイヤー
 		if /^_:/.test(layer.name)
 			continue
-		# 表示状態であり、フォルダレイヤーであれば再帰する
+		# フォルダレイヤーであり、スマートオブジェクト化対象外の場合は子レイヤーを再帰処理する
 		else if layer.typename is 'LayerSet' and not /^o:/.test(layer.name)
 			output layer.layers, mix, ext
 			$.gc()
@@ -243,7 +243,7 @@ output = (layers, ext, mix) ->
 				originalText = getText layer
 				extract newLayer, mix, ext, originalText
 				newLayer.remove()
-				layer.visible = on
+				layer.visible = off
 				newLayer = null
 				$.gc()
 	return

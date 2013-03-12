@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r185
+ * psd2html.js - v@1.1.0 r186
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -792,7 +792,7 @@ output = function(layers, ext, mix) {
         originalText = getText(layer);
         extract(newLayer, mix, ext, originalText);
         newLayer.remove();
-        layer.visible = true;
+        layer.visible = false;
         newLayer = null;
         return $.gc();
       })();
