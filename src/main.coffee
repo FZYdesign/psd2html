@@ -248,11 +248,12 @@ output = (layers, ext, mix) ->
 			extract layer, mix, ext
 	return
 
-# ## 非表示レイヤーに対象外マークをつける
-markupIgnore = () ->
+# ## 非表示レイヤーに対象外マークをつけて、全レイヤーを非表示にする
+markupIgnoreAndHide = () ->
 	for layer in activeDocument.layers
 		if layer.visible is off and not /^_:/.test(layer.name)
 			layer.name = '_:' + layer.name
+		layer.visible = off
 
 # ## exec
 #
