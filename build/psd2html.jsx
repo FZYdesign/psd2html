@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r188
+ * psd2html.js - v@1.1.0 r189
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -774,7 +774,7 @@ markupIgnoreAndHide = function() {
 };
 
 exec = function(typeFlag, ext, saveFolderPath, mix) {
-  var FLAG_CSS, FLAG_JQUERY, FLAG_JSFL, FLAG_JSON, FLAG_LESS, endTime, layer, layers, period;
+  var FLAG_CSS, FLAG_JQUERY, FLAG_JSFL, FLAG_JSON, FLAG_LESS, endTime, period;
   if (saveFolderPath == null) {
     saveFolderPath = '~/';
   }
@@ -787,17 +787,7 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   currentWidth = originalWidth;
   currentHeight = originalHeight;
   saveFolder = new Folder(saveFolderPath);
-  layers = (function() {
-    var _i, _len, _ref, _results;
-    _ref = activeDocument.layers;
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      layer = _ref[_i];
-      _results.push(layer);
-    }
-    return _results;
-  })();
-  output(layers, ext, mix);
+  output(activeDocument.layers, ext, mix);
   restoreDimension();
   structures.reverse();
   FLAG_CSS = 1;
