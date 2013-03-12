@@ -152,26 +152,6 @@ getMetrics = (layer) ->
 createDocument = (width, height, name) ->
 	return documents.add(width, height, 72, name, NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
 
-hideLayerWithoutSelf = (layer) ->
-	parent = layer.parent
-	if parent and parent.layers # 親の子（自分も含めて兄弟要素）を一度全部隠す
-		for sub in parent.layers
-			if sub.visible
-				sub.name += "__v__"
-				sub.visible = off
-		hideLayerWithoutSelf parent
-	layer.visible = on # 自分だけ表示させる
-	layer.name = layer.name.replace /__v__$/i, ''
-
-showLayer = (layer) ->
-	parent = layer.parent
-	if parent and parent.layers
-		for sub in parent.layers
-			if /__v__$/i.test sub.name
-				sub.visible = on
-				sub.name = sub.name.replace /__v__$/i, ''
-		showLayer parent
-
 # 抽出
 extract = (layer, mix, extFlag, originalText = []) ->
 	name = layer.name
@@ -180,9 +160,6 @@ extract = (layer, mix, extFlag, originalText = []) ->
 		ext = ext[0]
 		name = name.replace ext, ''
 	ext = '.' + extFlag if extFlag
-	unless mix
-		# 自分以外を隠す
-		hideLayerWithoutSelf layer
 	dir = getLayerPath layer
 	name = name.replace(/^[0-9]/, 'image$0').replace(/[^a-z0-9_\.:-]/gi, '')
 	if name is 'image'
@@ -206,9 +183,6 @@ extract = (layer, mix, extFlag, originalText = []) ->
 	data.url = url
 	data.text = originalText
 	structures.push data
-	unless mix
-		# 表示状態を元に戻す
-		showLayer layer
 	return
 
 hideIgnoreLayers = (layer) ->
