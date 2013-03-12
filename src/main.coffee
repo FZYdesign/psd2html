@@ -224,10 +224,12 @@ output = (layers, ext) ->
 
 # ## 非表示レイヤーに対象外マークをつけて、全レイヤーを非表示にする
 markupIgnoreAndHide = () ->
-	for layer in activeDocument.layers
-		if layer.visible is off and not /^_:/.test(layer.name)
-			layer.name = '_:' + layer.name
-		layer.visible = off
+	markupIgnoreAndHideLoop = (layers) ->
+		for layer in layers
+			if not layer.visible and not /^_:/.test(layer.name)
+				layer.name = '_:' + layer.name
+			layer.visible = off
+	markupIgnoreAndHideLoop activeDocument.layers
 
 # ## exec
 #

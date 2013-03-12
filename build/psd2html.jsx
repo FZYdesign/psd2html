@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r194
+ * psd2html.js - v@1.1.0 r195
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -764,17 +764,20 @@ output = function(layers, ext) {
 };
 
 markupIgnoreAndHide = function() {
-  var layer, _i, _len, _ref, _results;
-  _ref = activeDocument.layers;
-  _results = [];
-  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-    layer = _ref[_i];
-    if (layer.visible === false && !/^_:/.test(layer.name)) {
-      layer.name = '_:' + layer.name;
+  var markupIgnoreAndHideLoop;
+  markupIgnoreAndHideLoop = function(layers) {
+    var layer, _i, _len, _results;
+    _results = [];
+    for (_i = 0, _len = layers.length; _i < _len; _i++) {
+      layer = layers[_i];
+      if (!layer.visible && !/^_:/.test(layer.name)) {
+        layer.name = '_:' + layer.name;
+      }
+      _results.push(layer.visible = false);
     }
-    _results.push(layer.visible = false);
-  }
-  return _results;
+    return _results;
+  };
+  return markupIgnoreAndHideLoop(activeDocument.layers);
 };
 
 exec = function(typeFlag, ext, saveFolderPath, mix) {
