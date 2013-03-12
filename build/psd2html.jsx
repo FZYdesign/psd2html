@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r192
+ * psd2html.js - v@1.1.0 r193
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -695,12 +695,16 @@ extract = function(layer, extFlag, originalText) {
   metrics = getMetrics(layer);
   newDoc = createDocument(metrics.width, metrics.height, layer.name);
   paste(newDoc, fillTransparent);
-  if (ext === '.jpeg' || ext === '.jpg') {
-    url = saveJPEG(name, dir);
-  } else if (ext === '.gif') {
-    url = saveGIF(name, dir);
-  } else {
-    url = savePNG(name, dir);
+  switch (ext) {
+    case '.jpg':
+    case 'jpeg':
+      url = saveJPEG(name, dir);
+      break;
+    case '.gif':
+      url = saveGIF(name, dir);
+      break;
+    default:
+      url = savePNG(name, dir);
   }
   newDoc.close(SaveOptions.DONOTSAVECHANGES);
   data = metrics;

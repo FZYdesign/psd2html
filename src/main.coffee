@@ -171,12 +171,13 @@ extract = (layer, extFlag, originalText = []) ->
 	metrics = getMetrics layer
 	newDoc = createDocument metrics.width, metrics.height, layer.name
 	paste newDoc, fillTransparent
-	if ext is '.jpeg' or ext is '.jpg'
-		url = saveJPEG name, dir
-	else if ext is '.gif'
-		url = saveGIF name, dir
-	else
-		url = savePNG name, dir
+	switch ext
+		when '.jpg', 'jpeg'
+			url = saveJPEG name, dir
+		when '.gif'
+			url = saveGIF name, dir
+		else
+			url = savePNG name, dir
 	newDoc.close SaveOptions.DONOTSAVECHANGES
 	data = metrics
 	data.name = name
