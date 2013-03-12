@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r205
+ * psd2html.js - v@1.1.0 r206
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -722,13 +722,13 @@ output = function(layers, ext) {
       continue;
     } else if (layer.layers && !/^o:/.test(layer.name)) {
       output(layer.layers, ext);
+      app.purge(PurgeTarget.ALLCACHES);
       $.gc();
     } else {
       (function() {
         var newLayer, originalText;
         layer.visible = true;
         newLayer = cloneLayer(layer);
-        hideIgnoreLayers(newLayer);
         newLayer = toSmartObject(newLayer);
         layer.visible = false;
         newLayer.name = newLayer.name.replace(/^o:/, '');
@@ -736,6 +736,7 @@ output = function(layers, ext) {
         extract(newLayer, ext, originalText);
         newLayer.remove();
         newLayer = null;
+        app.purge(PurgeTarget.ALLCACHES);
         return $.gc();
       })();
     }

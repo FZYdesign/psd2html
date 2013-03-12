@@ -195,13 +195,14 @@ output = (layers, ext) ->
 		# フォルダレイヤーであり、スマートオブジェクト化対象外の場合は子レイヤーを再帰処理する
 		else if layer.layers and not /^o:/.test(layer.name)
 			output layer.layers, ext
+			app.purge(PurgeTarget.ALLCACHES);
 			$.gc()
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
 		else
 			do ->
 				layer.visible = on
 				newLayer = cloneLayer layer
-				hideIgnoreLayers newLayer
+				# hideIgnoreLayers newLayer
 				newLayer = toSmartObject newLayer
 				layer.visible = off
 				newLayer.name = newLayer.name.replace /^o:/, ''
@@ -209,6 +210,7 @@ output = (layers, ext) ->
 				extract newLayer, ext, originalText
 				newLayer.remove()
 				newLayer = null
+				app.purge(PurgeTarget.ALLCACHES);
 				$.gc()
 	return
 
