@@ -204,6 +204,7 @@ output = (layers, ext) ->
 				newLayer = cloneLayer layer
 				# hideIgnoreLayers newLayer
 				newLayer = toSmartObject newLayer
+				newLayer.visible = on
 				layer.visible = off
 				newLayer.name = newLayer.name.replace /^o:/, ''
 				originalText = getText layer
