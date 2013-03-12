@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r190
+ * psd2html.js - v@1.1.0 r191
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -731,14 +731,14 @@ hideIgnoreLayers = function(layer) {
   return hide(layer);
 };
 
-output = function(layers, ext, mix) {
+output = function(layers, ext) {
   var layer, _i, _len;
   for (_i = 0, _len = layers.length; _i < _len; _i++) {
     layer = layers[_i];
     if (/^_:/.test(layer.name)) {
       continue;
     } else if (layer.typename === 'LayerSet' && !/^o:/.test(layer.name)) {
-      output(layer.layers, mix, ext);
+      output(layer.layers, ext);
       $.gc();
     } else {
       (function() {
@@ -750,7 +750,7 @@ output = function(layers, ext, mix) {
         layer.visible = false;
         newLayer.name = newLayer.name.replace(/^o:/, '');
         originalText = getText(layer);
-        extract(newLayer, mix, ext, originalText);
+        extract(newLayer, ext, originalText);
         newLayer.remove();
         newLayer = null;
         return $.gc();

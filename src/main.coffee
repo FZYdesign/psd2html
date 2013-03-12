@@ -196,14 +196,14 @@ hideIgnoreLayers = (layer) ->
 	hide layer
 
 # アウトプット
-output = (layers, ext, mix) ->
+output = (layers, ext) ->
 	for layer in layers
 		# なにもしないレイヤー
 		if /^_:/.test(layer.name)
 			continue
 		# フォルダレイヤーであり、スマートオブジェクト化対象外の場合は子レイヤーを再帰処理する
 		else if layer.typename is 'LayerSet' and not /^o:/.test(layer.name)
-			output layer.layers, mix, ext
+			output layer.layers, ext
 			$.gc()
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
 		else
@@ -215,7 +215,7 @@ output = (layers, ext, mix) ->
 				layer.visible = off
 				newLayer.name = newLayer.name.replace /^o:/, ''
 				originalText = getText layer
-				extract newLayer, mix, ext, originalText
+				extract newLayer, ext, originalText
 				newLayer.remove()
 				newLayer = null
 				$.gc()
