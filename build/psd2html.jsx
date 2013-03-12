@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r209
+ * psd2html.js - v@1.1.0 r210
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -720,6 +720,7 @@ output = function(layers, ext) {
     layer = layers[_i];
     layer.visible = true;
     if (/^_:/.test(layer.name)) {
+      layer.visible = false;
       continue;
     } else if (layer.layers && !/^o:/.test(layer.name)) {
       output(layer.layers, ext);
@@ -739,6 +740,7 @@ output = function(layers, ext) {
         return $.gc();
       })();
     }
+    layer.visible = false;
   }
 };
 

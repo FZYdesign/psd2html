@@ -192,6 +192,7 @@ output = (layers, ext) ->
 		layer.visible = on
 		# なにもしないレイヤー
 		if /^_:/.test(layer.name)
+			layer.visible = off
 			continue
 		# フォルダレイヤーであり、スマートオブジェクト化対象外の場合は子レイヤーを再帰処理する
 		else if layer.layers and not /^o:/.test(layer.name)
@@ -211,6 +212,7 @@ output = (layers, ext) ->
 				newLayer = null
 				app.purge(PurgeTarget.ALLCACHES);
 				$.gc()
+		layer.visible = off
 	return
 
 # ## 全レイヤーを非表示にする
