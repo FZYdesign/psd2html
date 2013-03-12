@@ -234,6 +234,7 @@ output = (layers, ext, mix) ->
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
 		else
 			do ->
+				layer.visible = on
 				newLayer = cloneLayer layer
 				hideIgnoreLayers newLayer
 				newLayer = toSmartObject newLayer
