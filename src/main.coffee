@@ -231,7 +231,7 @@ markupIgnoreAndHide = () ->
 				layer.name = '_:' + layer.name
 			# 非表示
 			layer.visible = off
-			# 再帰
+			# 再帰（フォルダレイヤー且つスマートオブジェクト化対象外→スマートオブジェクト化対象の中身は表示のまま）
 			if not /^_:/.test(layer.name)
 				if layer.layers
 					markupIgnoreAndHideLoop layer.layers
