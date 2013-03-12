@@ -230,6 +230,7 @@ output = (layers, ext, mix) ->
 		# 表示状態であり、フォルダレイヤーであれば再帰する
 		else if layer.typename is 'LayerSet' and not /^o:/.test(layer.name)
 			output layer.layers, mix, ext
+			$.gc()
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
 		else
 			do ->
