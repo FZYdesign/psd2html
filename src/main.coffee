@@ -223,8 +223,8 @@ output = (layers, ext) ->
 	return
 
 # ## 非表示レイヤーに対象外マークをつけて、全レイヤーを非表示にする
-markupIgnoreAndHide = () ->
-	markupIgnoreAndHideLoop = (layers) ->
+markupIgnoreAndHide = (layers) ->
+	if layers
 		for layer in layers
 			# 対象外マーク付け
 			if not layer.visible and not /^_:/.test(layer.name)
@@ -233,9 +233,7 @@ markupIgnoreAndHide = () ->
 			layer.visible = off
 			# 再帰（フォルダレイヤー且つスマートオブジェクト化対象外→スマートオブジェクト化対象の中身は表示のまま）
 			if not /^_:/.test(layer.name)
-				if layer.layers
-					markupIgnoreAndHideLoop layer.layers
-	markupIgnoreAndHideLoop activeDocument.layers
+				markupIgnoreAndHide layer.layers
 
 # ## exec
 #
@@ -257,7 +255,7 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	# フォルダインスタンス
 	saveFolder = new Folder saveFolderPath
 	# 非表示レイヤーに対象外マークをつけて、全レイヤーを非表示にする
-	markupIgnoreAndHide()
+	markupIgnoreAndHide activeDocument.layers
 	# **画像の出力** レイヤーの数だけ再帰
 	output activeDocument.layers, ext
 	# ### カンバスサイズをもとに戻す

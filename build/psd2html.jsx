@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r197
+ * psd2html.js - v@1.1.0 r198
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -763,10 +763,9 @@ output = function(layers, ext) {
   }
 };
 
-markupIgnoreAndHide = function() {
-  var markupIgnoreAndHideLoop;
-  markupIgnoreAndHideLoop = function(layers) {
-    var layer, _i, _len, _results;
+markupIgnoreAndHide = function(layers) {
+  var layer, _i, _len, _results;
+  if (layers) {
     _results = [];
     for (_i = 0, _len = layers.length; _i < _len; _i++) {
       layer = layers[_i];
@@ -775,18 +774,13 @@ markupIgnoreAndHide = function() {
       }
       layer.visible = false;
       if (!/^_:/.test(layer.name)) {
-        if (layer.layers) {
-          _results.push(markupIgnoreAndHideLoop(layer.layers));
-        } else {
-          _results.push(void 0);
-        }
+        _results.push(markupIgnoreAndHide(layer.layers));
       } else {
         _results.push(void 0);
       }
     }
     return _results;
-  };
-  return markupIgnoreAndHideLoop(activeDocument.layers);
+  }
 };
 
 exec = function(typeFlag, ext, saveFolderPath, mix) {
@@ -803,7 +797,7 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   currentWidth = originalWidth;
   currentHeight = originalHeight;
   saveFolder = new Folder(saveFolderPath);
-  markupIgnoreAndHide();
+  markupIgnoreAndHide(activeDocument.layers);
   output(activeDocument.layers, ext);
   restoreDimension();
   structures.reverse();
