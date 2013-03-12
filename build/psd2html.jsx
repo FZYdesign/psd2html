@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r210
+ * psd2html.js - v@1.1.0 r211
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -631,13 +631,13 @@ copy = function(layer) {
   activeDocument.selection.deselect();
   selectAllLayers();
   activeDocument.selection.select([[bounds.x, bounds.y], [bounds.x2, bounds.y], [bounds.x2, bounds.y2], [bounds.x, bounds.y2]]);
-  activeDocument.selection.copy(true);
-  activeDocument.selection.deselect();
-  activeDocument.activeLayer = layer;
   if (dot) {
     dot.remove();
   }
   dot = null;
+  activeDocument.selection.copy(true);
+  activeDocument.selection.deselect();
+  activeDocument.activeLayer = layer;
   return fillTransparent;
 };
 

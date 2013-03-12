@@ -116,12 +116,12 @@ copy = (layer) ->
 		[bounds.x2, bounds.y2]
 		[bounds.x,  bounds.y2]
 	]
-	activeDocument.selection.copy true
-	activeDocument.selection.deselect()
-	activeDocument.activeLayer = layer
 	if dot
 		dot.remove()
 	dot = null
+	activeDocument.selection.copy true
+	activeDocument.selection.deselect()
+	activeDocument.activeLayer = layer
 	fillTransparent
 
 paste = (doc, fillTransparent) ->
