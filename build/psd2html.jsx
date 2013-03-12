@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r193
+ * psd2html.js - v@1.1.0 r194
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -791,6 +791,7 @@ exec = function(typeFlag, ext, saveFolderPath, mix) {
   currentWidth = originalWidth;
   currentHeight = originalHeight;
   saveFolder = new Folder(saveFolderPath);
+  markupIgnoreAndHide();
   output(activeDocument.layers, ext);
   restoreDimension();
   structures.reverse();

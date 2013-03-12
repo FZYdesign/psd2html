@@ -248,6 +248,8 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	currentHeight = originalHeight
 	# フォルダインスタンス
 	saveFolder = new Folder saveFolderPath
+	# 非表示レイヤーに対象外マークをつけて、全レイヤーを非表示にする
+	markupIgnoreAndHide()
 	# **画像の出力** レイヤーの数だけ再帰
 	output activeDocument.layers, ext
 	# ### カンバスサイズをもとに戻す
