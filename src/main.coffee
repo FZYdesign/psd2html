@@ -248,6 +248,12 @@ output = (layers, ext, mix) ->
 			extract layer, mix, ext
 	return
 
+# ## 非表示レイヤーに対象外マークをつける
+markupIgnore = () ->
+	for layer in activeDocument.layers
+		if layer.visible is off and not /^_:/.test(layer.name)
+			layer.name = '_:' + layer.name
+
 # ## exec
 #
 # 実行
