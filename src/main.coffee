@@ -229,7 +229,7 @@ hideAllLayers = (layers) ->
 			# 非表示
 			layer.visible = off
 			# 再帰（フォルダレイヤー且つスマートオブジェクト化対象外→スマートオブジェクト化対象の中身は表示のまま）
-			if not /^_:/.test(layer.name)
+			if not /^o:/.test(layer.name)
 				hideAllLayers layer.layers
 
 # ## exec

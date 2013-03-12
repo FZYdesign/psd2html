@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r201
+ * psd2html.js - v@1.1.0 r202
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -770,7 +770,7 @@ hideAllLayers = function(layers) {
     for (_i = 0, _len = layers.length; _i < _len; _i++) {
       layer = layers[_i];
       layer.visible = false;
-      if (!/^_:/.test(layer.name)) {
+      if (!/^o:/.test(layer.name)) {
         _results.push(hideAllLayers(layer.layers));
       } else {
         _results.push(void 0);
