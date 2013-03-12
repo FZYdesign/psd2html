@@ -200,12 +200,9 @@ output = (layers, ext) ->
 		# スマートオブジェクト化対象のレイヤーをスマートオブジェクト化して抽出する
 		else
 			do ->
-				layer.visible = on
 				newLayer = cloneLayer layer
 				# hideIgnoreLayers newLayer
 				newLayer = toSmartObject newLayer
-				newLayer.visible = on
-				layer.visible = off
 				newLayer.name = newLayer.name.replace /^o:/, ''
 				originalText = getText layer
 				extract newLayer, ext, originalText

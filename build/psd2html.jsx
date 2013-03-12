@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r207
+ * psd2html.js - v@1.1.0 r208
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -727,11 +727,8 @@ output = function(layers, ext) {
     } else {
       (function() {
         var newLayer, originalText;
-        layer.visible = true;
         newLayer = cloneLayer(layer);
         newLayer = toSmartObject(newLayer);
-        newLayer.visible = true;
-        layer.visible = false;
         newLayer.name = newLayer.name.replace(/^o:/, '');
         originalText = getText(layer);
         extract(newLayer, ext, originalText);
