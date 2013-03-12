@@ -243,7 +243,6 @@ output = (layers, ext, mix) ->
 				originalText = getText layer
 				extract newLayer, mix, ext, originalText
 				newLayer.remove()
-				layer.visible = off
 				newLayer = null
 				$.gc()
 	return
