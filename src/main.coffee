@@ -186,16 +186,6 @@ extract = (layer, extFlag, originalText = []) ->
 	structures.push data
 	return
 
-hideIgnoreLayers = (layer) ->
-	hide = (layer) ->
-		if layer.visible and not /^_:/.test(layer.name)
-			if layer.layers
-				for child in layer.layers
-					hide child
-		else
-			layer.visible = off
-	hide layer
-
 # アウトプット
 output = (layers, ext) ->
 	for layer in layers
@@ -223,14 +213,18 @@ output = (layers, ext) ->
 	return
 
 # ## 全レイヤーを非表示にする
-hideAllLayers = (layers) ->
+hideAllLayers = (layers, parentIsSmartObject) ->
 	if layers
 		for layer in layers
-			# 非表示
-			layer.visible = off
+			# 親レイヤーがスマートオブジェクト対象
+			if parentIsSmartObject
+
+			else
+				# 非表示
+				layer.visible = off
 			# 再帰（フォルダレイヤー且つスマートオブジェクト化対象外→スマートオブジェクト化対象の中身は表示のまま）
-			if not /^o:/.test(layer.name)
-				hideAllLayers layer.layers
+			isSmartObject = not /^o:/.test(layer.name) or parentIsSmartObject
+			hideAllLayers layer.layers, isSmartObject
 
 # ## exec
 #
