@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r195
+ * psd2html.js - v@1.1.0 r196
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -773,7 +773,16 @@ markupIgnoreAndHide = function() {
       if (!layer.visible && !/^_:/.test(layer.name)) {
         layer.name = '_:' + layer.name;
       }
-      _results.push(layer.visible = false);
+      layer.visible = false;
+      if (!/^_:/.test(layer.name)) {
+        if (layer.layers) {
+          _results.push(markupIgnoreAndHideLoop(layer.layers));
+        } else {
+          _results.push(void 0);
+        }
+      } else {
+        _results.push(void 0);
+      }
     }
     return _results;
   };

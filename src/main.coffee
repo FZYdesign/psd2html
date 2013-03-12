@@ -226,9 +226,15 @@ output = (layers, ext) ->
 markupIgnoreAndHide = () ->
 	markupIgnoreAndHideLoop = (layers) ->
 		for layer in layers
+			# 対象外マーク付け
 			if not layer.visible and not /^_:/.test(layer.name)
 				layer.name = '_:' + layer.name
+			# 非表示
 			layer.visible = off
+			# 再帰
+			if not /^_:/.test(layer.name)
+				if layer.layers
+					markupIgnoreAndHideLoop layer.layers
 	markupIgnoreAndHideLoop activeDocument.layers
 
 # ## exec
