@@ -189,6 +189,7 @@ extract = (layer, extFlag, originalText = []) ->
 # アウトプット
 output = (layers, ext) ->
 	for layer in layers
+		layer.visible = on
 		# なにもしないレイヤー
 		if /^_:/.test(layer.name)
 			continue
