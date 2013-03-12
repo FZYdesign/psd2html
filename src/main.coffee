@@ -218,7 +218,8 @@ hideAllLayers = (layers, parentIsSmartObject) ->
 		for layer in layers
 			# 親レイヤーがスマートオブジェクト対象
 			if parentIsSmartObject
-
+				if /^_:/.test(layer.name)
+					layer.visible = off
 			else
 				# 非表示
 				layer.visible = off
