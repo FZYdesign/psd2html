@@ -248,7 +248,7 @@ exec = (typeFlag, ext, saveFolderPath = '~/', mix = false) ->
 	# フォルダインスタンス
 	saveFolder = new Folder saveFolderPath
 	# **画像の出力** レイヤーの数だけ再帰
-	output activeDocument.layers, ext, mix
+	output activeDocument.layers, ext
 	# ### カンバスサイズをもとに戻す
 	restoreDimension()
 	# **ここまでが画像の出力**
