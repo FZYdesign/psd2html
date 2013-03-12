@@ -227,6 +227,9 @@ hideAllLayers = (layers, parentIsSmartObject) ->
 					layer.visible = off
 			else
 				# 非表示
+				$.writeln layer.name
+				$.writeln layer.layer
+				$.writeln '* * *'
 				layer.visible = off
 			# 再帰（フォルダレイヤー且つスマートオブジェクト化対象外→スマートオブジェクト化対象の中身は表示のまま）
 			isSmartObject = not /^o:/.test(layer.name) or parentIsSmartObject
