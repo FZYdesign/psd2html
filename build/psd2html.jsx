@@ -1,5 +1,5 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r191
+ * psd2html.js - v@1.1.0 r192
  * update: 2013-03-12
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
@@ -669,7 +669,7 @@ createDocument = function(width, height, name) {
   return documents.add(width, height, 72, name, NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
 };
 
-extract = function(layer, mix, extFlag, originalText) {
+extract = function(layer, extFlag, originalText) {
   var data, dir, ext, fillTransparent, metrics, name, newDoc, url;
   if (originalText == null) {
     originalText = [];
