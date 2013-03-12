@@ -226,9 +226,6 @@ output = (layers, ext) ->
 hideAllLayers = (layers) ->
 	if layers
 		for layer in layers
-			# 対象外マーク付け
-			if not layer.visible and not /^_:/.test(layer.name)
-				layer.name = '_:' + layer.name
 			# 非表示
 			layer.visible = off
 			# 再帰（フォルダレイヤー且つスマートオブジェクト化対象外→スマートオブジェクト化対象の中身は表示のまま）
