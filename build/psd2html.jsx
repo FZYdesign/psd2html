@@ -1,6 +1,6 @@
 ﻿/**
- * psd2html.js - v@1.1.0 r215
- * update: 2013-03-12
+ * psd2html.js - v@1.1.0 r216
+ * update: 2013-03-14
  * Author: Yusuke Hirao [http://www.yusukehirao.com]
  * Github: https://github.com/YusukeHirao/psd2html
  * License: Licensed under the MIT License
@@ -493,7 +493,7 @@ DialogUI = (function(_super) {
 
 })(WindowUI);
 
-$.level = 1;
+$.level = 0;
 
 preferences.rulerUnits = Units.PIXELS;
 
